@@ -1,4 +1,4 @@
-﻿using SwimmingClubApp.Data.Models.Enums;
+﻿using SwimmingClubApp.Models.About;
 using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.Coach;
 
@@ -16,7 +16,8 @@ namespace SwimmingClubApp.Data.Models
         public string Image { get; set; } = null!;
 
         [Required]
-        public Squad Squad { get; set; }
+        public int SquadId { get; set; }
+        public Squad Squads { get; set; } = null!;
 
         [Required]
         [MaxLength(EmailMaxLength)]

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwimmingClubApp.Data;
 
@@ -11,9 +12,10 @@ using SwimmingClubApp.Data;
 namespace SwimmingClubApp.Data.Migrations
 {
     [DbContext(typeof(SimmingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131123151_ListsAdded")]
+    partial class ListsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,23 +274,6 @@ namespace SwimmingClubApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Squads");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            SquadName = "Beginner"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            SquadName = "Professional"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            SquadName = "Fithness"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

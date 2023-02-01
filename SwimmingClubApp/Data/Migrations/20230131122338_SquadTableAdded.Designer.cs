@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwimmingClubApp.Data;
 
@@ -11,9 +12,10 @@ using SwimmingClubApp.Data;
 namespace SwimmingClubApp.Data.Migrations
 {
     [DbContext(typeof(SimmingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131122338_SquadTableAdded")]
+    partial class SquadTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,8 +253,6 @@ namespace SwimmingClubApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SquadId");
-
                     b.ToTable("Coaches");
                 });
 
@@ -272,23 +272,28 @@ namespace SwimmingClubApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Squads");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            SquadName = "Beginner"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            SquadName = "Professional"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            SquadName = "Fithness"
-                        });
+            modelBuilder.Entity("SwimmingClubApp.Models.About.CoachSquadViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SquadName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("CoachSquadViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -342,20 +347,16 @@ namespace SwimmingClubApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Coach", b =>
+            modelBuilder.Entity("SwimmingClubApp.Models.About.CoachSquadViewModel", b =>
                 {
-                    b.HasOne("SwimmingClubApp.Data.Models.Squad", "Squads")
-                        .WithMany("Coaches")
-                        .HasForeignKey("SquadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Squads");
+                    b.HasOne("SwimmingClubApp.Data.Models.Coach", null)
+                        .WithMany("Squads")
+                        .HasForeignKey("CoachId");
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Squad", b =>
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.Coach", b =>
                 {
-                    b.Navigation("Coaches");
+                    b.Navigation("Squads");
                 });
 #pragma warning restore 612, 618
         }

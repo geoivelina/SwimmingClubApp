@@ -9,6 +9,12 @@
 
             public const int EmailMinLength = 10;
             public const int EmailMaxLength = 50;
-        }                    
+        }
+
+        public class Squad
+        {
+            public const int SquadNameMinLength = 5;
+            public const int SquadNameMaxLength = 15;
+        }
     }
 }
