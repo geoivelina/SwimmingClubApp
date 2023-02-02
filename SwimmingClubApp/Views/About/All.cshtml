@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CoachListingViewModel>
+
+<div class="row">
+    @foreach (var coach in Model)
+    {
+        <div class="row">
+
+            <div class="card" style="width: 16rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@coach.FullName</h5>
+                    <p class="card-text">@coach.JobPosition</p>
+                    <p class="card-text">Squad: @coach.Squad</p>
+                    <br>
+                    <p class="card-text">Contact coach @coach.FullName: @coach.Email</p>
+                </div>
+            </div>
+            <div class="card" style="width: 16rem;">
+                <div class="card-body">
+                    <img class="card-img-top" src="@coach.Image" alt="">
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

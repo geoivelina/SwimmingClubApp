@@ -1,8 +1,45 @@
-﻿@{
+﻿@model IEnumerable<NewsViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome To Stars Swimming Club </h1>
+    <div class="row">
+        <img class="card-img-top" src="/img/swiming_lap_pool.jpg" alt="">
+        <div>
+            <h3>Latest News</h3>
+            @*<div class="row" asp-area="" asp-controller="Home" asp-action="LatestNews">
+                @foreach (var news in Model)
+                {
+                    <div class="row">
+                        <div class="card" style="width: 16rem;">
+                            <div class="card-body">
+                                <img class="card-img-top" src="@news.Image" alt="">
+                            </div>
+                        </div>
+                        <div class="card" style="width: 16rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@news.Title</h5>
+                                <p class="card-text">@news.DateCreated</p>
+                                <p class="card-text">Each month the coaching staff will be recognizing one male and one female athlete from each training group as a Swimmer-of-the-Month. These swimmers will be selected based on the display of the ideals the staff feel are vital to long-term development. These items include ATTITUDE, EFFORT, COURAGE, PERSEVERANCE, and a FOR THE TEAM approach.</p>
+                            </div>
+                            <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="" class="btn btn-success">See More</a>
+                        </div>
+                    </div>
+                }
+
+            </div>*@
+
+        </div>
+        <div>
+            <h3>About us</h3>
+
+        </div>
+        <div>
+            <h3>Traning Equipment</h3>
+
+        </div>
+    </div>
+
 </div>

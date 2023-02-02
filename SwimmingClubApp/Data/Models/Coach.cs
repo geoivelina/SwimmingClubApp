@@ -16,8 +16,12 @@ namespace SwimmingClubApp.Data.Models
         public string Image { get; set; } = null!;
 
         [Required]
+        [MaxLength(JobPOsiotionMaxLength)]
+        public string JobPosition { get; set; }
+
+        [Required]
         public int SquadId { get; set; }
-        public Squad Squads { get; set; } = null!;
+        public Squad Squad { get; set; } = null!;
 
         [Required]
         [MaxLength(EmailMaxLength)]

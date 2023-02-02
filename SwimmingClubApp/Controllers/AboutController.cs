@@ -45,13 +45,31 @@ namespace SwimmingClubApp.Controllers
                 FullName = coach.FullName,
                 Image = coach.Image,
                 Email = coach.Email,
-                SquadId = coach.SquadId
+                SquadId = coach.SquadId,
+                JobPosition = coach.JobPosition
             };
 
             this.data.Coaches.Add(newCoach);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult All()
+        {
+            var coaches = this.data
+                .Coaches
+                .Select(c => new CoachListingViewModel
+                {
+                    FullName = c.FullName,
+                    Email = c.Email,
+                    Image = c.Image,
+                    Squad = c.Squad.SquadName,
+                    JobPosition = c.JobPosition
+                })
+                .ToList();
+
+            return View(coaches);
         }
         private IEnumerable<CoachSquadViewModel> GetSquads()
         {

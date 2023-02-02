@@ -14,6 +14,7 @@ namespace SwimmingClubApp.Data
 
         public DbSet<Coach> Coaches { get; set; } = null!;
         public DbSet<Squad> Squads { get; set; } = null!;
+        public DbSet<News> Newses { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
