@@ -52,9 +52,9 @@ namespace SwimmingClubApp.Controllers
         }
 
 
-        public IEnumerable<NewsViewModel> LatestNews()
+        public IActionResult LatestNews()
         {
-            return this.data
+            var newses = this.data
                 .Newses
                 .OrderBy(n => n.Id)
                 .Select(n => new NewsViewModel()
@@ -65,7 +65,7 @@ namespace SwimmingClubApp.Controllers
                 })
                 .Take(3)
                 .ToList();
-
+            return View(newses);
         }
         //public IActionResult Details()
         //{

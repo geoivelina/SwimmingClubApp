@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewsViewModel>
+﻿@model NewsViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,36 +8,113 @@
     <div class="row">
         <img class="card-img-top" src="/img/swiming_lap_pool.jpg" alt="">
         <div>
-            <h3>Latest News</h3>
-            @*<div class="row" asp-area="" asp-controller="Home" asp-action="LatestNews">
-                @foreach (var news in Model)
-                {
-                    <div class="row">
-                        <div class="card" style="width: 16rem;">
-                            <div class="card-body">
-                                <img class="card-img-top" src="@news.Image" alt="">
-                            </div>
-                        </div>
-                        <div class="card" style="width: 16rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">@news.Title</h5>
-                                <p class="card-text">@news.DateCreated</p>
-                                <p class="card-text">Each month the coaching staff will be recognizing one male and one female athlete from each training group as a Swimmer-of-the-Month. These swimmers will be selected based on the display of the ideals the staff feel are vital to long-term development. These items include ATTITUDE, EFFORT, COURAGE, PERSEVERANCE, and a FOR THE TEAM approach.</p>
-                            </div>
-                            <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="" class="btn btn-success">See More</a>
+
+            <div class="row">
+                <div class="card" style="width: 16rem;">
+                    <div class="card-body">
+                        @*<img class="card-img-top" src="@Model.Image" alt="">*@
+                    </div>
+                </div>
+                <div class="card" style="width: 16rem;">
+                    <div class="card-body">
+                        <h3>Latest News</h3>
+                       @* <h5 class="card-title">@Model.Title</h5>
+                        <p class="card-text">@Model.DateCreated</p>
+                        <p class="card-text">Each month the coaching staff will be recognizing one male and one 
+                            female athlete from each training group as a Swimmer-of-the-Month. These swimmers will 
+                            be selected based on the display of the ideals the staff feel are vital to long-term 
+                            development. These items include ATTITUDE, EFFORT, COURAGE, PERSEVERANCE, and a FOR 
+                            THE TEAM approach.</p>*@
+                    </div>
+                    <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="" class="btn btn-dark">See More</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+
+                <div class="card" style="width: 40rem; height:30rem;">
+                    <div class="card-body">
+                        <img class="card-img-top" src="/img/image-silhouette-group.png" alt="">
+                    </div>
+                </div>
+                <div class="card" style="width: 40rem;  background-color:lightgray">
+                    <h3 class="text-center">About us</h3>
+                    <div class="font_9 color_11" style="text-align:left; font-size:22px;">
+                        &nbsp;
+                        <div style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;">
+
+                            <p style="font-size:18px;">
+                                Star Swimming Club provides training, with the aim of encouraging
+                                competitive swimming, is provided by qualified coaches to swimmers ranging from 7 years to
+                                70 years.
+                            </p>
+                            <br />
+                            <p>
+                                We run over 60 weekly ‘learn to swim lessons’ for children from 7 years old, catering
+                                for all abilities in small groups and led by fully qualified teachers.
+                            </p>
+
                         </div>
                     </div>
-                }
+                    <br />
+                    <br />
+                    <button class="btn btn-dark" asp-area="" asp-controller="About" asp-action="History">Learn More</button>
+                    <br />
+                    <button class="btn btn-dark" asp-area="" asp-controller="Join" asp-action="Index">Join Us</button>
+                </div>
 
-            </div>*@
-
+            </div>
         </div>
         <div>
-            <h3>About us</h3>
 
-        </div>
-        <div>
-            <h3>Traning Equipment</h3>
+            <div class="row">
+
+                <div class="card" style="width: 40rem;  background-color:lightgray">
+                    <h3>Traning Equipment</h3>
+                    <ul class="font_9 color_11" style="text-align:left; font-size:22px;">
+                        &nbsp;
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;">
+                                <span style="font-weight:bold;">Water Bottle</span>.
+                                <br />
+                                <span style="font-size:18px;">We recommend a 1ltr water bottle to ensure you have enough fluids for a full training session or day at competition.</span>
+                            </p>
+                        </li>
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;">
+                                <span style="font-weight:bold;">Swim Hat x 2.</span>
+                                <br />
+                                <span style="font-size:18px;"> Always always have a spare swim cap.&nbsp; You receive one free when you become a member, additional caps can be purchased from our online shop</span>
+                            </p>
+                        </li>
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;">
+                                <span style="font-weight:bold;">Goggles x 2.</span>
+                                <br />
+                                <span style="font-size:18px;"> Likewise, please always have a spare pair of goggles with you when training or at competitions.&nbsp;</span>
+                            </p>
+                        </li>
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Kickboard.&nbsp;</span></span></p>
+                        </li>
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Fins. &nbsp;</span></span></p>
+                        </li>
+                        <li style="font-size:18px;">
+                            <p class="font_8" style="font-size:18px;"><span style="font-size:18px;"><span style="font-weight:bold;">Towel.</span>&nbsp; </span></p>
+                        </li>
+                    </ul>
+                    <button class="btn btn-dark" asp-area="" asp-controller="ClubShop" asp-action="Index">Buy Now</button>
+
+                </div>
+                <div class="card" style="width: 40rem; height:38rem;">
+                    <div class="card-body">
+                        <img class="card-img-top" src="/img/equipment.png" alt="">
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
