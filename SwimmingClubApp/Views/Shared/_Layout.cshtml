@@ -18,19 +18,19 @@
                 </button>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                       @* <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        @* <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>*@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 About Us
                             </a>
-                            <ul class="dropdown-menu"aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" asp-controller="About" asp-action="History">History</a></li>
-                                <li><a class="dropdown-item"asp-controller="About" asp-action="All">Coaches</a></li>
-                                <li><a class="dropdown-item" href="#">Sponsors</a></li>
-                                <li><a class="dropdown-item" href="#">Fundrising</a></li>
+                                <li><a class="dropdown-item" asp-controller="About" asp-action="AllCoaches">Coaches</a></li>
+                                <li><a class="dropdown-item" asp-controller="About" asp-action="Sponsors">Sponsors</a></li>
+                                <li><a class="dropdown-item" asp-controller="About" asp-action="Fundrising">Fundrising</a></li>
                             </ul>
                         </li>
 
@@ -38,7 +38,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Trials
                             </a>
-                            <ul class="dropdown-menu"aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Past</a></li>
                                 <li><a class="dropdown-item" href="#">Future</a></li>
                             </ul>
@@ -57,16 +57,19 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Competiotions
                             </a>
-                            <ul class="dropdown-menu"aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Past</a></li>
                                 <li><a class="dropdown-item" href="#">Future</a></li>
                             </ul>
                         </li>
 
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" asp-controller="About" asp-action="AddCoach">Add Coach</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-controller="About" asp-action="AddSponsor">Add Sponsor</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="AddNews">Add News</a>
                         </li>
                         @*

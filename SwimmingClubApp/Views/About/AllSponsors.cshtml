@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SponsorViewModel>
+
+<div class="row">
+    @foreach (var sponsor in Model)
+    {
+        <div class="row">
+             <div class="card" style="width: 16rem;">
+                <a src="@sponsor.HomePageLink">
+                    <img class="card-img-top" src="@sponsor.Logo" alt="">
+                </a>
+            </div>
+
+        </div>
+    }
+</div>
+

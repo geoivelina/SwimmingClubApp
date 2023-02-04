@@ -27,5 +27,12 @@
             public const int DescriptionMinLenth = 200;
             public const int DescriptionMaxLenth = 2500;
         }
+
+        public class Sponsor
+        {
+            public const int NameMinLenth = 3;
+            public const int NameMaxLenth = 25;
+
+        }
     }
 }

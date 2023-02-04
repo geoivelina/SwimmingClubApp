@@ -19,6 +19,11 @@ namespace SwimmingClubApp.Controllers
             return View();
         }
 
+        public IActionResult Sponsors()
+        {
+            return View();
+        }
+
         public IActionResult AddCoach()
         {
             return View(new AddCoachFormModel
@@ -52,10 +57,50 @@ namespace SwimmingClubApp.Controllers
             this.data.Coaches.Add(newCoach);
             this.data.SaveChanges();
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(AllCoaches));
         }
 
-        public IActionResult All()
+        public IActionResult AddSponsor()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public IActionResult AddSponsor(AddSponsorFormModel sponsor)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+
+            }
+            var newSponsor = new Sponsor
+            {
+                Name = sponsor.Name,
+                Link = sponsor.Link,
+                Logo = sponsor.Logo
+            };
+
+            this.data.Sponsors.Add(newSponsor);
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(AllSponsors));
+        }
+
+        public IActionResult AllSponsors()
+        {
+            var sponsors = this.data
+                .Sponsors
+                .Select(c => new SponsorViewModel
+                {
+                    Logo = c.Logo
+                })
+                .ToList();
+
+            return View(sponsors);
+        }
+
+        public IActionResult AllCoaches()
         {
             var coaches = this.data
                 .Coaches
