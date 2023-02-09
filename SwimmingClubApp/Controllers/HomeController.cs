@@ -71,10 +71,10 @@ namespace SwimmingClubApp.Controllers
         //{
 
         //}
-        //public IActionResult Schedule()
-        //{
-
-        //}
+        public IActionResult Schedule()
+        {
+            return View()
+;        }
 
         public IActionResult More()
         {
