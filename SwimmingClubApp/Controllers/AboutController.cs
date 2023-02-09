@@ -19,7 +19,7 @@ namespace SwimmingClubApp.Controllers
             return View();
         }
 
-        public IActionResult Sponsors()
+        public IActionResult Fundrising()
         {
             return View();
         }
@@ -93,7 +93,8 @@ namespace SwimmingClubApp.Controllers
                 .Sponsors
                 .Select(c => new SponsorViewModel
                 {
-                    Logo = c.Logo
+                    Logo = c.Logo,
+                    HomePageLink = c.Link
                 })
                 .ToList();
 

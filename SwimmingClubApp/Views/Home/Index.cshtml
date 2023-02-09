@@ -47,11 +47,11 @@
 
                             <p style="font-size:18px;">
                                 Star Swimming Club provides training, with the aim of encouraging
-                                competitive swimming, is provided by qualified coaches to swimmers ranging from 7 years to
+                                competitive swimming, is provided by qualified coaches to swimmers ranging from 6 years to
                                 70 years.
                             </p>
                             <br />
-                            <p>
+                            <p style="font-size:18px;">
                                 We run over 60 weekly ‘learn to swim lessons’ for children from 7 years old, catering
                                 for all abilities in small groups and led by fully qualified teachers.
                             </p>
@@ -60,9 +60,9 @@
                     </div>
                     <br />
                     <br />
-                    <button class="btn btn-dark" asp-area="" asp-controller="About" asp-action="History">Learn More</button>
+                    <a asp-controller="About" asp-action="History" class="btn btn-dark" asp-area="">Learn More</a>
                     <br />
-                    <button class="btn btn-dark" asp-area="" asp-controller="Join" asp-action="Index">Join Us</button>
+                    <a asp-controller="Join" asp-action="Index" class="btn btn-dark" asp-area="">Join Us</a>
                 </div>
 
             </div>
@@ -105,7 +105,7 @@
                             <p class="font_8" style="font-size:18px;"><span style="font-size:18px;"><span style="font-weight:bold;">Towel.</span>&nbsp; </span></p>
                         </li>
                     </ul>
-                    <button class="btn btn-dark" asp-area="" asp-controller="ClubShop" asp-action="Index">Buy Now</button>
+                    <a asp-controller="ClubShop" asp-action="Index" class="btn btn-dark" asp-area="">Buy Now</a>
 
                 </div>
                 <div class="card" style="width: 40rem; height:38rem;">
@@ -117,14 +117,14 @@
 
             <div>
                 <div class="row">
-                    <h5>HELP FUNDRAISE</h5>
-                    <div class="card" style="width: 40rem; height:30rem;">
+                    <h5>Fundrising for Star Swimming Club</h5>
+                    <div class="card" style="width: 40rem; height:28rem;">
                         <div class="card-body">
                             <div>Imagine some company logos here</div>
                         </div>
                     </div>
                     <div class="card" style="width: 40rem;  background-color:lightgray">
-                        <h3 class="text-center">Fundrising for Star Swimming Club</h3>
+                        <h3 class="text-center">HELP FUNDRAISE</h3>
                         <div class="font_9 color_11" style="text-align:left; font-size:22px;">
                             &nbsp;
                             <div style="font-size:18px;">
@@ -136,15 +136,46 @@
                                     organisation than it already is. We are always looking for new and creative ways to raise
                                     funds for the Swimming Club.
                                 </p>
-                                </div>
+                            </div>
                         </div>
                         <br />
                         <br />
-                          <button class="btn btn-dark" asp-area="" asp-controller="About" asp-action="Sponsors">See All Our Sponsors</button>
+                        <a asp-controller="About" asp-action="Fundrising" class="btn btn-dark" asp-area="">Learn More</a>
+                        <br />
+                        <a asp-controller="About" asp-action="AllSponsors" class="btn btn-dark" asp-area="">See All Our Sponsors</a>
                     </div>
-
                 </div>
             </div>
+            <div>
+                <div class="row">
+                    <div class="card" style="width: 40rem; height:20rem; background-color:lightgray">
+                        <h3 class="text-center">Trials</h3>
+                        <div class="font_9 color_11" style="text-align:left; font-size:22px;">
+                            &nbsp;
+                            <div style="font-size:18px;">
+                                <p class="font_8" style="font-size:18px;">
+
+                                <p style="font-size:18px;">
+                                    New swimmer trials are regularly being arranged. Swimmers are welcomed and assessed
+                                    on ability by our coaches during the trials and allocated to squads ranging from
+                                    formative to performance abilities. 
+                                </p>
+                                <p style="font-size:18px;">
+                                    For juniors and professionals trials are mandatory.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+                        <a class="btn btn-dark" href="mailto:trials@mail.com" target="_self">Book your trial </a>
+                    </div>
+                    <div class="card" style="width: 40rem; height:20rem;">
+                        <div class="card-body">
+                            <img class="card-img-top" src="/img/trial.jfif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

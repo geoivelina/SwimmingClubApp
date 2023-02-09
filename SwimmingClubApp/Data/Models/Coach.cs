@@ -17,7 +17,7 @@ namespace SwimmingClubApp.Data.Models
 
         [Required]
         [MaxLength(JobPOsiotionMaxLength)]
-        public string JobPosition { get; set; }
+        public string JobPosition { get; set; } = null!;
 
         [Required]
         public int SquadId { get; set; }

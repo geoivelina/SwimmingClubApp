@@ -71,7 +71,15 @@ namespace SwimmingClubApp.Controllers
         //{
 
         //}
+        //public IActionResult Schedule()
+        //{
 
+        //}
+
+        public IActionResult More()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
