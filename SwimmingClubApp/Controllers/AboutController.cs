@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.About;
@@ -24,6 +25,7 @@ namespace SwimmingClubApp.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult AddCoach()
         {
             return View(new AddCoachFormModel
@@ -65,7 +67,9 @@ namespace SwimmingClubApp.Controllers
             return View();
 
         }
+
         [HttpPost]
+        [Authorize]
         public IActionResult AddSponsor(AddSponsorFormModel sponsor)
         {
 

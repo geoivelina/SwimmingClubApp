@@ -11,7 +11,7 @@
             public const int EmailMaxLength = 50;
 
             public const int JobPOsiotionMinLength = 5;
-            public const int JobPOsiotionMaxLength = 20;
+            public const int JobPOsiotionMaxLength = 30;
         }
 
         public class Squad

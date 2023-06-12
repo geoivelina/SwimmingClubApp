@@ -33,16 +33,6 @@
                                 <li><a class="dropdown-item" asp-controller="About" asp-action="Fundrising">Fundrising</a></li>
                             </ul>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Trials
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Past</a></li>
-                                <li><a class="dropdown-item" href="#">Future</a></li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
                             
                             <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Schedule">Schedule</a>
@@ -50,10 +40,13 @@
                           <li class="nav-item">
                             <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="More">More Information</a>
                         </li>
-                      
+                      <li class="nav-item">
+                            
+                            <a class="nav-link active" aria-current="page" asp-controller="News" asp-action="All">News</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Competiotions
+                                Competitions
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Past</a></li>
@@ -74,7 +67,7 @@
                             <a class="nav-link active" aria-current="page" asp-controller="About" asp-action="AddSponsor">Add Sponsor</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="AddNews">Add News</a>
+                            <a class="nav-link active" aria-current="page" asp-controller="News" asp-action="AddNews">Add News</a>
                         </li>
                         @*
                         <li class="nav-item">

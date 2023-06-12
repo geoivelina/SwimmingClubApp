@@ -1,0 +1,19 @@
+﻿@model NewsDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;" src="@Model.Image" alt="News Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+        </div>
+
+    </div>
+</div>

@@ -4,13 +4,13 @@ using SwimmingClubApp.Data.Models;
 
 namespace SwimmingClubApp.Infrastructure
 {
-    public class SquadsConfiguration : IEntityTypeConfiguration<Squad>
+    internal class SquadsConfiguration : IEntityTypeConfiguration<Squad>
     {
         public void Configure(EntityTypeBuilder<Squad> builder)
         {
-            builder.HasData(CreatSquads());
+            builder.HasData(CreateSquads());
         }
-        private List<Squad> CreatSquads()
+        private List<Squad> CreateSquads()
         {
             List<Squad> squads = new List<Squad>()
             {

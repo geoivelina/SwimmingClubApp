@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<CoachListingViewModel>
 
+    @{
+    ViewData["Title"] = "Coaches";
+}
+
 <div class="row">
+
     @foreach (var coach in Model)
     {
         <div class="row">
@@ -11,7 +16,7 @@
                     <p class="card-text">@coach.JobPosition</p>
                     <p class="card-text">Squad: @coach.Squad</p>
                     <br>
-                    <p class="card-text">Contact coach @coach.FullName: @coach.Email</p>
+                    <a class="btn btn-dark" href="mailto:@coach.Email" target="_self">Contact Now</a>
                 </div>
             </div>
             <div class="card" style="width: 16rem;">
@@ -21,5 +26,6 @@
             </div>
         </div>
     }
+        <br />
 </div>
 

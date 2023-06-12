@@ -1,182 +1,163 @@
-﻿@model NewsViewModel
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center" style="width: 80rem;">
     <h1 class="display-4">Welcome To Stars Swimming Club </h1>
-    <div class="row">
-        <img class="card-img-top" src="/img/swiming_lap_pool.jpg" alt="">
-        <div>
+    <div>
+        <div class="row">
 
-            <div class="row">
-                <div class="card" style="width: 16rem;">
-                    <div class="card-body">
-                        @*<img class="card-img-top" src="@Model.Image" alt="">*@
+            <img class="card-img-top" src="/img/swiming_lap_pool.jpg" alt="">
+        </div>
+        <br />
+    </div>
+    <div id="News">
+    </div>
+    <div id="AboutUs">
+        <div class="row">
+
+            <div class="card" style="width: 40rem; height:30rem;">
+                <div class="card-body">
+                    <img class="card-img-top" src="/img/image-silhouette-group.png" alt="">
+                </div>
+            </div>
+            <div class="card" style="width: 40rem;  background-color:lightgray">
+                <h3 class="text-center">About us</h3>
+                <div class="font_9 color_11" style="text-align:left; font-size:22px;">
+                    &nbsp;
+                    <div style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;">
+
+                        <p style="font-size:18px;">
+                            Star Swimming Club provides training, with the aim of encouraging
+                            competitive swimming, is provided by qualified coaches to swimmers ranging from 6 years to
+                            70 years.
+                        </p>
+                        <br />
+                        <p style="font-size:18px;">
+                            We run over 60 weekly ‘learn to swim lessons’ for children from 7 years old, catering
+                            for all abilities in small groups and led by fully qualified teachers.
+                        </p>
+
                     </div>
                 </div>
-                <div class="card" style="width: 16rem;">
-                    <div class="card-body">
-                        <h3>Latest News</h3>
-                        @* <h5 class="card-title">@Model.Title</h5>
-                        <p class="card-text">@Model.DateCreated</p>
-                        <p class="card-text">Each month the coaching staff will be recognizing one male and one
-                        female athlete from each training group as a Swimmer-of-the-Month. These swimmers will
-                        be selected based on the display of the ideals the staff feel are vital to long-term
-                        development. These items include ATTITUDE, EFFORT, COURAGE, PERSEVERANCE, and a FOR
-                        THE TEAM approach.</p>*@
-                    </div>
-                    <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="" class="btn btn-dark">See More</a>
+                <br />
+                <br />
+                <a asp-controller="About" asp-action="History" class="btn btn-dark" asp-area="">Learn More</a>
+                <br />
+                <a asp-controller="Join" asp-action="Index" class="btn btn-dark" asp-area="">Join Us</a>
+            </div>
+
+        </div>
+    </div>
+    <div id="TraningEquipment">
+        <div class="row">
+
+            <div class="card" style="width: 40rem;  background-color:lightgray">
+                <h3>Traning Equipment</h3>
+                <ul class="font_9 color_11" style="text-align:left; font-size:22px;">
+                    &nbsp;
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;">
+                            <span style="font-weight:bold;">Water Bottle</span>.
+                            <br />
+                            <span style="font-size:18px;">We recommend a 1ltr water bottle to ensure you have enough fluids for a full training session or day at competition.</span>
+                        </p>
+                    </li>
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;">
+                            <span style="font-weight:bold;">Swim Hat x 2.</span>
+                            <br />
+                            <span style="font-size:18px;"> Always always have a spare swim cap.&nbsp; You receive one free when you become a member, additional caps can be purchased from our online shop</span>
+                        </p>
+                    </li>
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;">
+                            <span style="font-weight:bold;">Goggles x 2.</span>
+                            <br />
+                            <span style="font-size:18px;"> Likewise, please always have a spare pair of goggles with you when training or at competitions.&nbsp;</span>
+                        </p>
+                    </li>
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Kickboard.&nbsp;</span></span></p>
+                    </li>
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Fins. &nbsp;</span></span></p>
+                    </li>
+                    <li style="font-size:18px;">
+                        <p class="font_8" style="font-size:18px;"><span style="font-size:18px;"><span style="font-weight:bold;">Towel.</span>&nbsp; </span></p>
+                    </li>
+                </ul>
+                <a asp-controller="ClubShop" asp-action="Index" class="btn btn-dark" asp-area="">Buy Now</a>
+
+            </div>
+            <div class="card" style="width: 40rem; height:38rem;">
+                <div class="card-body">
+                    <img class="card-img-top" src="/img/equipment.png" alt="">
                 </div>
             </div>
         </div>
-        <div>
-            <div class="row">
 
-                <div class="card" style="width: 40rem; height:30rem;">
+        <div id="Fundrаising">
+            <div class="row">
+                <h5>Fundrаising for Star Swimming Club</h5>
+                <div class="card" style="width: 40rem; height:28rem;">
                     <div class="card-body">
-                        <img class="card-img-top" src="/img/image-silhouette-group.png" alt="">
+                        <img class="card-img-top" src="/img/sponsor.jfif" alt="">
                     </div>
                 </div>
                 <div class="card" style="width: 40rem;  background-color:lightgray">
-                    <h3 class="text-center">About us</h3>
+                    <h3 class="text-center">HELP FUNDRAISE</h3>
                     <div class="font_9 color_11" style="text-align:left; font-size:22px;">
                         &nbsp;
                         <div style="font-size:18px;">
                             <p class="font_8" style="font-size:18px;">
 
                             <p style="font-size:18px;">
-                                Star Swimming Club provides training, with the aim of encouraging
-                                competitive swimming, is provided by qualified coaches to swimmers ranging from 6 years to
-                                70 years.
+                                Star Swimming Club always appreciates the generosity and involvement of people like you,
+                                with every contribution going towards making Hart Swimming Club an even better non-profit
+                                organisation than it already is. We are always looking for new and creative ways to raise
+                                funds for the Swimming Club.
                             </p>
-                            <br />
-                            <p style="font-size:18px;">
-                                We run over 60 weekly ‘learn to swim lessons’ for children from 7 years old, catering
-                                for all abilities in small groups and led by fully qualified teachers.
-                            </p>
-
                         </div>
                     </div>
                     <br />
                     <br />
-                    <a asp-controller="About" asp-action="History" class="btn btn-dark" asp-area="">Learn More</a>
+                    <a asp-controller="About" asp-action="Fundrising" class="btn btn-dark" asp-area="">Learn More</a>
                     <br />
-                    <a asp-controller="Join" asp-action="Index" class="btn btn-dark" asp-area="">Join Us</a>
+                    <a asp-controller="About" asp-action="AllSponsors" class="btn btn-dark" asp-area="">See All Our Sponsors</a>
                 </div>
-
             </div>
         </div>
-        <div>
+
+        <div id="Trials">
             <div class="row">
-
-                <div class="card" style="width: 40rem;  background-color:lightgray">
-                    <h3>Traning Equipment</h3>
-                    <ul class="font_9 color_11" style="text-align:left; font-size:22px;">
+                <div class="card" style="width: 40rem; height:20rem; background-color:lightgray">
+                    <h3 class="text-center">Trials</h3>
+                    <div class="font_9 color_11" style="text-align:left; font-size:22px;">
                         &nbsp;
-                        <li style="font-size:18px;">
+                        <div style="font-size:18px;">
                             <p class="font_8" style="font-size:18px;">
-                                <span style="font-weight:bold;">Water Bottle</span>.
-                                <br />
-                                <span style="font-size:18px;">We recommend a 1ltr water bottle to ensure you have enough fluids for a full training session or day at competition.</span>
-                            </p>
-                        </li>
-                        <li style="font-size:18px;">
-                            <p class="font_8" style="font-size:18px;">
-                                <span style="font-weight:bold;">Swim Hat x 2.</span>
-                                <br />
-                                <span style="font-size:18px;"> Always always have a spare swim cap.&nbsp; You receive one free when you become a member, additional caps can be purchased from our online shop</span>
-                            </p>
-                        </li>
-                        <li style="font-size:18px;">
-                            <p class="font_8" style="font-size:18px;">
-                                <span style="font-weight:bold;">Goggles x 2.</span>
-                                <br />
-                                <span style="font-size:18px;"> Likewise, please always have a spare pair of goggles with you when training or at competitions.&nbsp;</span>
-                            </p>
-                        </li>
-                        <li style="font-size:18px;">
-                            <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Kickboard.&nbsp;</span></span></p>
-                        </li>
-                        <li style="font-size:18px;">
-                            <p class="font_8" style="font-size:18px;"><span style="font-weight:bold;"><span style="font-size:18px;">Fins. &nbsp;</span></span></p>
-                        </li>
-                        <li style="font-size:18px;">
-                            <p class="font_8" style="font-size:18px;"><span style="font-size:18px;"><span style="font-weight:bold;">Towel.</span>&nbsp; </span></p>
-                        </li>
-                    </ul>
-                    <a asp-controller="ClubShop" asp-action="Index" class="btn btn-dark" asp-area="">Buy Now</a>
 
+                            <p style="font-size:18px;">
+                                New swimmer trials are regularly being arranged. Swimmers are welcomed and assessed
+                                on ability by our coaches during the trials and allocated to squads ranging from
+                                formative to performance abilities.
+                            </p>
+                            <p style="font-size:18px;">
+                                For juniors and professionals trials are mandatory.
+                            </p>
+                        </div>
+                    </div>
+                    <br />
+                    <a class="btn btn-dark" href="mailto:trials@mail.com" target="_self">Book your trial </a>
                 </div>
-                <div class="card" style="width: 40rem; height:38rem;">
+                <div class="card" style="width: 40rem; height:20rem;">
                     <div class="card-body">
-                        <img class="card-img-top" src="/img/equipment.png" alt="">
+                        <img class="card-img-top" src="/img/trial.jfif" alt="">
                     </div>
                 </div>
             </div>
-
-            <div>
-                <div class="row">
-                    <h5>Fundrising for Star Swimming Club</h5>
-                    <div class="card" style="width: 40rem; height:28rem;">
-                        <div class="card-body">
-                           <img class="card-img-top" src="/img/sponsor.jfif" alt="">
-                        </div>
-                    </div>
-                    <div class="card" style="width: 40rem;  background-color:lightgray">
-                        <h3 class="text-center">HELP FUNDRAISE</h3>
-                        <div class="font_9 color_11" style="text-align:left; font-size:22px;">
-                            &nbsp;
-                            <div style="font-size:18px;">
-                                <p class="font_8" style="font-size:18px;">
-
-                                <p style="font-size:18px;">
-                                    Star Swimming Club always appreciates the generosity and involvement of people like you,
-                                    with every contribution going towards making Hart Swimming Club an even better non-profit
-                                    organisation than it already is. We are always looking for new and creative ways to raise
-                                    funds for the Swimming Club.
-                                </p>
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <a asp-controller="About" asp-action="Fundrising" class="btn btn-dark" asp-area="">Learn More</a>
-                        <br />
-                        <a asp-controller="About" asp-action="AllSponsors" class="btn btn-dark" asp-area="">See All Our Sponsors</a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="card" style="width: 40rem; height:20rem; background-color:lightgray">
-                        <h3 class="text-center">Trials</h3>
-                        <div class="font_9 color_11" style="text-align:left; font-size:22px;">
-                            &nbsp;
-                            <div style="font-size:18px;">
-                                <p class="font_8" style="font-size:18px;">
-
-                                <p style="font-size:18px;">
-                                    New swimmer trials are regularly being arranged. Swimmers are welcomed and assessed
-                                    on ability by our coaches during the trials and allocated to squads ranging from
-                                    formative to performance abilities. 
-                                </p>
-                                <p style="font-size:18px;">
-                                    For juniors and professionals trials are mandatory.
-                                </p>
-                            </div>
-                        </div>
-                        <br />
-                        <a class="btn btn-dark" href="mailto:trials@mail.com" target="_self">Book your trial </a>
-                    </div>
-                    <div class="card" style="width: 40rem; height:20rem;">
-                        <div class="card-body">
-                            <img class="card-img-top" src="/img/trial.jfif" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-
 </div>

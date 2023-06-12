@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.News;
 
-namespace SwimmingClubApp.Models.About
+namespace SwimmingClubApp.Models.News
 {
     public class AddNewsFormModel
     {
 
         [Required]
-        [StringLength(TitleMaxLenth, MinimumLength = TitleMinLenth, ErrorMessage = "The Full Name feild must be between {2} and {1} symbols")]
+        [StringLength(TitleMaxLenth, MinimumLength = TitleMinLenth, ErrorMessage = "The Title feild must be between {2} and {1} symbols")]
         public string Title { get; set; } = null!;
 
         [Required]
@@ -17,7 +17,7 @@ namespace SwimmingClubApp.Models.About
         public string Image { get; set; } = null!;
 
         [Required]
-        [StringLength(DescriptionMaxLenth, MinimumLength = DescriptionMinLenth, ErrorMessage = "The Full Name feild must be between {2} and {1} symbols")]
+        [StringLength(DescriptionMaxLenth, MinimumLength = DescriptionMinLenth, ErrorMessage = "The Description feild must be between {2} and {1} symbols")]
         public string Desctioption { get; set; } = null!;
     }
 }
