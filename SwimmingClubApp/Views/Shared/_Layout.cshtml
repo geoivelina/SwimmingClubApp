@@ -18,10 +18,7 @@
                 </button>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        @* <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>*@
-
+                       
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 About Us
@@ -44,7 +41,7 @@
                             
                             <a class="nav-link active" aria-current="page" asp-controller="News" asp-action="All">News</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        @*<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Competitions
                             </a>
@@ -52,9 +49,9 @@
                                 <li><a class="dropdown-item" href="#">Past</a></li>
                                 <li><a class="dropdown-item" href="#">Future</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                           <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Join Now</a>
+                            <a class="nav-link active" aria-current="page" asp-controller="Joinus" asp-action="EntryForm">Join Now</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Club Shop</a>

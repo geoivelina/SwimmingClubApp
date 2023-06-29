@@ -20,24 +20,8 @@ namespace SwimmingClubApp.Infrastructure
                     Id = 1,
                     DateCreated =DateTime.Now,
                     Title = "January Swimmers of the Month",
-                    Desctioption = "Here are our athletes for the month of January." +
-                    "Begginer 1: Levi Miller & Lena Yang" +
-
-                    "Begginer 2: Leah Jin & Alex Xiao" +
-
-                    "Begginer 3: Karim Belal & Angela Xiao" +
-
-                    "Fithness 1: Austin Ouyang & Ava Senn" +
-
-                    "Fithness 2: Brock Sever & Lucy Bojrab" +
-
-                    "Fithness 3: Flynn Keyser & Ella Harrity" +
-
-                    "Professional 1: Adam Smith & Maggie Welsh" +
-
-                    "Professional 2: Chis Martin & Nina Simone" +
-
-                    "Professionals 3: Sam Burg & Ava Max",
+                    Desctioption = "Here are our athletes for the month of January. " +
+                    "Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                     Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg"
                 },
                 new News()
@@ -45,24 +29,7 @@ namespace SwimmingClubApp.Infrastructure
                     Id=2,
                     DateCreated =DateTime.Now,
                     Title = "February Swimmers of the Month",
-                    Desctioption = "Here are our athletes for the month of February." +
-                    "Begginer 1: Levi Miller & Lena Yang" +
-
-                    "Begginer 2: Leah Jin & Alex Xiao" +
-
-                    "Begginer 3: Karim Belal & Angela Xiao" +
-
-                    "Fithness 1: Austin Ouyang & Ava Senn" +
-
-                    "Fithness 2: Brock Sever & Lucy Bojrab" +
-
-                    "Fithness 3: Flynn Keyser & Ella Harrity" +
-
-                    "Professional 1: Adam Smith & Maggie Welsh" +
-
-                    "Professional 2: Chis Martin & Nina Simone" +
-
-                    "Professionals 3: Sam Burg & Ava Max",
+                    Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                     Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg"
 
                 },
@@ -79,24 +46,7 @@ namespace SwimmingClubApp.Infrastructure
                     Id = 4,
                     DateCreated =DateTime.Now,
                     Title = "March Swimmers of the Month",
-                    Desctioption = "Here are our athletes for the month of March." +
-                    "Begginer 1: Levi Miller & Lena Yang" +
-
-                    "Begginer 2: Leah Jin & Alex Xiao" +
-
-                    "Begginer 3: Karim Belal & Angela Xiao" +
-
-                    "Fithness 1: Austin Ouyang & Ava Senn" +
-
-                    "Fithness 2:  Sever & Lucy Bojrab" +
-
-                    "Fithness 3: Flynn Keyser & Ella Harrity" +
-
-                    "Professional 1: Adam Smith & Maggie Welsh" +
-
-                    "Professional 2: Chis Martin & Nina Simone" +
-
-                    "Professionals 3: Sam Burg & Ava Max",
+                    Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                     Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg"
                 }
             };

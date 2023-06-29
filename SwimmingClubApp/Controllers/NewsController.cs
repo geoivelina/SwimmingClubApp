@@ -45,7 +45,7 @@ namespace SwimmingClubApp.Controllers
             this.data.Newses.Add(model);
             this.data.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(All));
         }
 
 
@@ -53,9 +53,10 @@ namespace SwimmingClubApp.Controllers
         {
             var news = this.data
                 .Newses
-                .OrderBy(n => n.Id)
+                .OrderByDescending(n => n.Id)
                 .Select(n => new NewsViewModel()
                 {
+                    Id = n.Id,
                     Title = n.Title,
                     DateCreated = n.DateCreated,
                 })
@@ -83,11 +84,13 @@ namespace SwimmingClubApp.Controllers
         }
 
         [Authorize]
+        
         public IActionResult Edit(int id)
         {
 
             return View();
         }
+
 
         [Authorize]
         public IActionResult Delete(int id)

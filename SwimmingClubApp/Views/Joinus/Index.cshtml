@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Join us";
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4 text-center">@ViewData["Title"]</h1>
+    <div class="container col-sm-12 offset-lg-1 col-lg-10 offset-xl-2 col-xl-8" style="background-color:lightgray">
+        <h2> Ready to join the club?</h2>
+        <p class="lead">
+           Please complete  the form below and one of the team from the appropriate club section will be in touch.
+        </p>
+        <p class="lead">
+           To register please click th button below.
+           This will open up a form with all the information needed.
+        </p>
+        <p>
+             <a asp-controller="Home" asp-action="EntryForm" class="btn btn-dark" asp-area="">Entry Form</a>
+       
+    </div>
+</div>
+

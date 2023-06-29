@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwimmingClubApp.Data;
 
@@ -11,9 +12,10 @@ using SwimmingClubApp.Data;
 namespace SwimmingClubApp.Data.Migrations
 {
     [DbContext(typeof(SimmingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230629091123_SwimmerTable")]
+    partial class SwimmerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,7 +269,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 6, 29, 12, 21, 48, 196, DateTimeKind.Local).AddTicks(5530),
+                            DateCreated = new DateTime(2023, 6, 29, 12, 11, 23, 188, DateTimeKind.Local).AddTicks(3757),
                             Desctioption = "Here are our athletes for the month of January. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "January Swimmers of the Month"
@@ -275,7 +277,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 6, 29, 12, 21, 48, 196, DateTimeKind.Local).AddTicks(5578),
+                            DateCreated = new DateTime(2023, 6, 29, 12, 11, 23, 188, DateTimeKind.Local).AddTicks(3825),
                             Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "February Swimmers of the Month"
@@ -283,7 +285,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 6, 29, 12, 21, 48, 196, DateTimeKind.Local).AddTicks(5583),
+                            DateCreated = new DateTime(2023, 6, 29, 12, 11, 23, 188, DateTimeKind.Local).AddTicks(3833),
                             Desctioption = "Join us on 24th of July 2023 in SemmerSet Venue at 20:00 h for our Anual Fundrising gathering. You can meet our athleats, their coaches and see their result. Tickets for the event could be found at the receprion desk. If you need more information or would like to join organisation team contact the coordinators: event@mail.com. ",
                             Image = "https://s3.amazonaws.com/images.ecwid.com/images/16075414/1126948529.jpg",
                             Title = "Anual Fundrising Event"
@@ -291,7 +293,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 6, 29, 12, 21, 48, 196, DateTimeKind.Local).AddTicks(5587),
+                            DateCreated = new DateTime(2023, 6, 29, 12, 11, 23, 188, DateTimeKind.Local).AddTicks(3844),
                             Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "March Swimmers of the Month"
@@ -432,8 +434,8 @@ namespace SwimmingClubApp.Data.Migrations
 
                     b.Property<string>("SwimmingExperience")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

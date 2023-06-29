@@ -13,6 +13,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Universe" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Models\Enums\" />
+    <Folder Include="wwwroot\img\Eshop\" />
   </ItemGroup>
 
 </Project>

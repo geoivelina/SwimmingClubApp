@@ -19,13 +19,29 @@ namespace SwimmingClubApp.Controllers
         {
             return View();
         }
+      
 
+        public IActionResult AllCoaches()
+        {
+            var coaches = this.data
+                .Coaches
+                .Select(c => new CoachListingViewModel
+                {
+                    FullName = c.FullName,
+                    Email = c.Email,
+                    Image = c.Image,
+                    Squad = c.Squad.SquadName,
+                    JobPosition = c.JobPosition
+                })
+                .ToList();
+
+            return View(coaches);
+        }
         public IActionResult Fundrising()
         {
             return View();
         }
 
-        [Authorize]
         public IActionResult AddCoach()
         {
             return View(new AddCoachFormModel
@@ -34,6 +50,9 @@ namespace SwimmingClubApp.Controllers
             });
 
         }
+
+        [Authorize]
+       
         [HttpPost]
         public IActionResult AddCoach(AddCoachFormModel coach)
         {
@@ -105,22 +124,7 @@ namespace SwimmingClubApp.Controllers
             return View(sponsors);
         }
 
-        public IActionResult AllCoaches()
-        {
-            var coaches = this.data
-                .Coaches
-                .Select(c => new CoachListingViewModel
-                {
-                    FullName = c.FullName,
-                    Email = c.Email,
-                    Image = c.Image,
-                    Squad = c.Squad.SquadName,
-                    JobPosition = c.JobPosition
-                })
-                .ToList();
-
-            return View(coaches);
-        }
+       
         private IEnumerable<CoachSquadViewModel> GetSquads()
         {
             return this.data

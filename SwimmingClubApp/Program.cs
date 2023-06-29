@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Data;
+using SwimmingClubApp.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +12,14 @@ builder.Services.AddDbContext<SimmingClubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<User>(options =>
 {
   //  options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SimmingClubDbContext>();
 
 builder.Services.AddControllersWithViews()

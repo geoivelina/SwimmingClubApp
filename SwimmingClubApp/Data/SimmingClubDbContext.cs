@@ -5,7 +5,7 @@ using SwimmingClubApp.Infrastructure;
 
 namespace SwimmingClubApp.Data
 {
-    public class SimmingClubDbContext : IdentityDbContext
+    public class SimmingClubDbContext : IdentityDbContext<User>
     {
         public SimmingClubDbContext(DbContextOptions<SimmingClubDbContext> options)
             : base(options)
@@ -29,5 +29,6 @@ namespace SwimmingClubApp.Data
         public DbSet<Squad> Squads { get; set; } = null!;
         public DbSet<News> Newses { get; set; } = null!;
         public DbSet<Sponsor> Sponsors { get; set; } = null!;
+        public DbSet<Swimmer> Swimmers { get; set; } = null!;
     }
 }

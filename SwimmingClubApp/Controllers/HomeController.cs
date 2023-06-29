@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿ using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models;
 using System.Diagnostics;
 
@@ -22,7 +22,7 @@ namespace SwimmingClubApp.Controllers
         {
             return View();
         }
-
+      
         public IActionResult Error() => View();
     }
 }
