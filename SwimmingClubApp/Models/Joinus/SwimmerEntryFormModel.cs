@@ -16,16 +16,16 @@ namespace SwimmingClubApp.Models.Joinus
         [Range(MinAge, MaxAge, ErrorMessage = "The age of the participant must be between {1} and {2} years old")]
         public int Age { get; set; }
 
-              
-        [Display(Name ="Contact Person Name")]
+
+        [Display(Name = "Contact Person Name")]
         [StringLength(ContactPersonNameMaxLength, MinimumLength = ContactPersonNameMinLength, ErrorMessage = "The Contact Person feild must be between {2} and {1} symbols")]
         //allows null, will be used only if the swimmer is under 18yo
-        public string ContactPersonName { get; set; }
+        public string ContactPersonName { get; set; } = null!;
               
         [Display(Name ="Relationship To Swimmer")]
         [StringLength(ContactPersonNameMaxLength, MinimumLength =RelationshipToSwimmerMinLength, ErrorMessage = "The Relationship  feild must be between {2} and {1} symbols")]
         //allows null, will be used only if the swimmer is under 18yo
-        public string RelationshipToSwimmer { get; set; }
+        public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]
         [Phone]

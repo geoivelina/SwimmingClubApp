@@ -18,13 +18,13 @@ namespace SwimmingClubApp.Data.Models
 
      
         [MaxLength(ContactPersonNameMaxLength)]
-        //allows null, will be used only if the swimmer is under 18yo
-        public string ContactPersonName { get; set; }
+        
+        public string ContactPersonName { get; set; } = null!;
 
-       
+
         [MaxLength(ContactPersonNameMaxLength)]
-        //allows null, will be used only if the swimmer is under 18yo
-        public string RelationshipToSwimmer { get; set; }
+       
+        public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]
         [MaxLength(AddressMaxLength)]

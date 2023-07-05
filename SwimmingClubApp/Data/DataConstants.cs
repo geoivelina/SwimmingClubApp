@@ -2,7 +2,25 @@
 {
     public class DataConstants
     {
-      public  class Coach
+
+        public class ProductCategory
+        {
+            public const int CategoryNameMinLength = 3;
+            public const int CategoryNameMaxLength = 15;
+        }
+        public class Product
+        {
+            public const int ProductNameMinLength = 3;
+            public const int ProductNameMaxLength = 50;
+
+         
+        }
+        public class SizeOption
+        {
+            public const int SizeOptionDescriptionMinLength = 1;
+            public const int SizeOptionDescriptionMaxLength = 15;
+        }
+        public  class Coach
         {
             public const int FullNameMinLength = 5;
             public const int FullNameMaxLength = 50;
@@ -60,14 +78,12 @@
         {
             public const int NameMinLenth = 3;
             public const int NameMaxLenth = 25;
-
         }
 
         public class User
         {
-            public const int FullNameMinLenth = 3;
-            public const int FullNameMaxLenth = 25;
-
+            public const int UserFullNameMinLenth = 3;
+            public const int UserFullNameMaxLenth = 25;
         }
     }
 }

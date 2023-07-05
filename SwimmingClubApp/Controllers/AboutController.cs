@@ -19,28 +19,14 @@ namespace SwimmingClubApp.Controllers
         {
             return View();
         }
-      
 
-        public IActionResult AllCoaches()
-        {
-            var coaches = this.data
-                .Coaches
-                .Select(c => new CoachListingViewModel
-                {
-                    FullName = c.FullName,
-                    Email = c.Email,
-                    Image = c.Image,
-                    Squad = c.Squad.SquadName,
-                    JobPosition = c.JobPosition
-                })
-                .ToList();
 
-            return View(coaches);
-        }
+
         public IActionResult Fundrising()
         {
             return View();
         }
+
 
         public IActionResult AddCoach()
         {
@@ -52,7 +38,6 @@ namespace SwimmingClubApp.Controllers
         }
 
         [Authorize]
-       
         [HttpPost]
         public IActionResult AddCoach(AddCoachFormModel coach)
         {
@@ -81,10 +66,33 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(AllCoaches));
         }
 
-        public IActionResult AddSponsor()
+
+
+        public IActionResult EditCoach()
         {
             return View();
+        }
 
+        public IActionResult DeletCoach()
+        {
+            return View();
+        }
+
+        public IActionResult AllCoaches()
+        {
+            var coaches = this.data
+                .Coaches
+                .Select(c => new CoachListingViewModel
+                {
+                    FullName = c.FullName,
+                    Email = c.Email,
+                    Image = c.Image,
+                    Squad = c.Squad.SquadName,
+                    JobPosition = c.JobPosition
+                })
+                .ToList();
+
+            return View(coaches);
         }
 
         [HttpPost]
@@ -110,6 +118,16 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(AllSponsors));
         }
 
+        public IActionResult EditSposor()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteSponsor()
+        {
+            return View();
+        }
+
         public IActionResult AllSponsors()
         {
             var sponsors = this.data
@@ -124,7 +142,7 @@ namespace SwimmingClubApp.Controllers
             return View(sponsors);
         }
 
-       
+
         private IEnumerable<CoachSquadViewModel> GetSquads()
         {
             return this.data

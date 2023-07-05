@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwimmingClubApp.Data;
 
@@ -11,9 +12,10 @@ using SwimmingClubApp.Data;
 namespace SwimmingClubApp.Data.Migrations
 {
     [DbContext(typeof(SimmingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230630104719_ProductAndRelatedTables")]
+    partial class ProductAndRelatedTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,7 +269,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 7, 5, 15, 6, 24, 444, DateTimeKind.Local).AddTicks(2414),
+                            DateCreated = new DateTime(2023, 6, 30, 13, 47, 18, 900, DateTimeKind.Local).AddTicks(9257),
                             Desctioption = "Here are our athletes for the month of January. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "January Swimmers of the Month"
@@ -275,7 +277,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 7, 5, 15, 6, 24, 444, DateTimeKind.Local).AddTicks(2466),
+                            DateCreated = new DateTime(2023, 6, 30, 13, 47, 18, 900, DateTimeKind.Local).AddTicks(9309),
                             Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "February Swimmers of the Month"
@@ -283,7 +285,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 7, 5, 15, 6, 24, 444, DateTimeKind.Local).AddTicks(2474),
+                            DateCreated = new DateTime(2023, 6, 30, 13, 47, 18, 900, DateTimeKind.Local).AddTicks(9314),
                             Desctioption = "Join us on 24th of July 2023 in SemmerSet Venue at 20:00 h for our Anual Fundrising gathering. You can meet our athleats, their coaches and see their result. Tickets for the event could be found at the receprion desk. If you need more information or would like to join organisation team contact the coordinators: event@mail.com. ",
                             Image = "https://s3.amazonaws.com/images.ecwid.com/images/16075414/1126948529.jpg",
                             Title = "Anual Fundrising Event"
@@ -291,7 +293,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 7, 5, 15, 6, 24, 444, DateTimeKind.Local).AddTicks(2482),
+                            DateCreated = new DateTime(2023, 6, 30, 13, 47, 18, 900, DateTimeKind.Local).AddTicks(9320),
                             Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             Title = "March Swimmers of the Month"
@@ -319,64 +321,19 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductCategoryId")
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SizeOptionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductCategoryId");
 
-                    b.ToTable("Products");
+                    b.HasIndex("SizeOptionId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Image = "/wwwroot/img/Eshop/bottle.jpg",
-                            Name = "Star Swimming Club Bottle",
-                            Price = 7.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Image = "/wwwroot/img/Eshop/Fins.jpg",
-                            Name = "Fins",
-                            Price = 30.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Image = "/wwwroot/img/Eshop/googles.jpg",
-                            Name = "Adult Googles",
-                            Price = 11.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Image = "/wwwroot/img/Eshop/Hat.jpg",
-                            Name = "Star Swimming Club Hat",
-                            Price = 5.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Image = "/wwwroot/img/Eshop/KickBoard.jpg",
-                            Name = "Kickboard",
-                            Price = 15.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Image = "/wwwroot/img/Eshop/towel.jpg",
-                            Name = "Star Swimming Club Towel",
-                            Price = 15.00m,
-                            ProductCategoryId = 4
-                        });
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductCategory", b =>
@@ -395,28 +352,6 @@ namespace SwimmingClubApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Junior"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryName = "Women"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryName = "Men"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryName = "Traning Aids"
-                        });
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductSize", b =>
@@ -442,7 +377,7 @@ namespace SwimmingClubApp.Data.Migrations
 
                     b.HasIndex("SizeOptionId");
 
-                    b.ToTable("ProductSize");
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.SizeOption", b =>
@@ -458,98 +393,9 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<bool>("IsChecked")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("SizeOptions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Kids M",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Kids L",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Kids XL",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Adult XS",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Adult S",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Adult M",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "Adult L",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "Adult XL",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "Age 7 - 8",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "Age 9 - 11",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Description = "Age 12 - 13",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Junior",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "None",
-                            IsChecked = false
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Description = "Adult",
-                            IsChecked = false
-                        });
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.Sponsor", b =>
@@ -831,25 +677,25 @@ namespace SwimmingClubApp.Data.Migrations
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>
                 {
-                    b.HasOne("SwimmingClubApp.Data.Models.ProductCategory", "ProductCategory")
+                    b.HasOne("SwimmingClubApp.Data.Models.ProductCategory", null)
                         .WithMany("Products")
-                        .HasForeignKey("ProductCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductCategoryId");
 
-                    b.Navigation("ProductCategory");
+                    b.HasOne("SwimmingClubApp.Data.Models.SizeOption", null)
+                        .WithMany("Products")
+                        .HasForeignKey("SizeOptionId");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductSize", b =>
                 {
                     b.HasOne("SwimmingClubApp.Data.Models.Product", "Product")
-                        .WithMany("Sizes")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SwimmingClubApp.Data.Models.SizeOption", "SizeOption")
-                        .WithMany("Products")
+                        .WithMany("ProductSizes")
                         .HasForeignKey("SizeOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -859,11 +705,6 @@ namespace SwimmingClubApp.Data.Migrations
                     b.Navigation("SizeOption");
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>
-                {
-                    b.Navigation("Sizes");
-                });
-
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductCategory", b =>
                 {
                     b.Navigation("Products");
@@ -871,6 +712,8 @@ namespace SwimmingClubApp.Data.Migrations
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.SizeOption", b =>
                 {
+                    b.Navigation("ProductSizes");
+
                     b.Navigation("Products");
                 });
 

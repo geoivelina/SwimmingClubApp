@@ -7,7 +7,7 @@ namespace SwimmingClubApp.Data.Models
     public class User : IdentityUser
     {
       
-        [MaxLength(FullNameMaxLenth)]
+        [MaxLength(UserFullNameMaxLenth)]
         public string UserFullName { get; set; } = null!;
     }
 }

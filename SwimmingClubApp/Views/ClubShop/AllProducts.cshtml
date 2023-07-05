@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ProductViewModel>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@product.Image" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                       <a asp-area="" asp-controller="ClubShop" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">View More</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
