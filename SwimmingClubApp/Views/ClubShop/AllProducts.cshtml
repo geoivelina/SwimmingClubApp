@@ -1,22 +1,101 @@
-﻿@model IEnumerable<ProductViewModel>
+﻿@model AllProductsQueryModel
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "All Products";
 }
+<h2>FIX SEARCH BTN!</h2>
+<h2>NEXT BTN DOES NOT WORK! WHY?</h2>
+<form method="get">
+    <div class="row mb-5">
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                <label asp-for="Category"> </label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Sorting"></label>
+            <select asp-for="Sorting" class=" form-control">
+                <option value="0" selected>Price</option>
+                <option value="1">Alphabetically</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+             <label> </label>
+            <input type="submit" class="btn btn-dark" value="Search" />
+        </div>
+    </div>
+</form>
+
+
+@*@if (!Model.Products.Any())
+{
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, Administrator!</h1>
+        <p class="lead">Currently you don`t have any products in the store.</p>
+        <hr class="my-4">
+        <p>Click the button to add some products in the .</p>
+        <p class="lead">
+            <a asp-controller="ClubShop" asp-action="AddProduct" class="btn btn-dark" asp-area="">Add Product</a>
+        </p>
+    </div>
+}*@
 
 <div class="album py-5 bg-light">
     <div class="container">
 
         <div class="row">
-            @foreach (var product in Model)
+            @foreach (var product in Model.Products)
             {
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@product.Image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
-                       <a asp-area="" asp-controller="ClubShop" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">View More</a>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="@product.Image" style="height: 250px; width: 100%; display: block;">
+                        <div class="card-body">
+                            <div class="pull-left">
+                                <h5 class="card-title">@product.Name </h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="card-title" style="color:crimson">$@product.Price </h5>
+                            </div>
+                            <a asp-area="" asp-controller="ClubShop" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">View More</a>
+                        </div>
                     </div>
                 </div>
             }
         </div>
+    </div>
+</div>
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var totalPages = Math.Ceiling((double)Model.TotalProducts / AllProductsQueryModel.ProductsPerPage);
+}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-dark @(Model.CurrentPage == 1 ? "disabled" : "")"
+           asp-controller="ClubShop"
+           asp-action="All"
+           asp-route-currentPage="@previousPage"
+           asp-route-category="@Model.Category"
+           asp-route-sorting="@((int)Model.Sorting)">Previous</a>
+    </div>
+
+    <div class="col-md-6">
+        <a class="btn btn-dark float-right @(Model.CurrentPage == totalPages ? "disabled" : "")"
+           asp-controller="ClubShop"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage++)"
+           asp-route-category="@Model.Category"
+           asp-route-sorting="@((int)Model.Sorting)">Next</a>
     </div>
 </div>

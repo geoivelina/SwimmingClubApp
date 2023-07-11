@@ -17,6 +17,7 @@ namespace SwimmingClubApp.Models.ClubShop
 
         [Required]
         [Display(Name = "Image URL")]
+        [Url]
         public string Image { get; set; } = null!;
 
 

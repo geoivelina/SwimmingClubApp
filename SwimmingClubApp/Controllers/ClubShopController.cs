@@ -2,6 +2,7 @@
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.ClubShop;
+using SwimmingClubApp.Services.Products;
 using System.Linq;
 
 namespace SwimmingClubApp.Controllers
@@ -9,10 +10,12 @@ namespace SwimmingClubApp.Controllers
     public class ClubShopController : Controller
     {
         private readonly SimmingClubDbContext data;
+        private readonly IProductService products;
 
-        public ClubShopController(SimmingClubDbContext data)
+        public ClubShopController(SimmingClubDbContext data, IProductService products)
         {
             this.data = data;
+            this.products = products;
         }
 
         public IActionResult AddProduct()
@@ -31,14 +34,14 @@ namespace SwimmingClubApp.Controllers
             {
                 this.ModelState.AddModelError(nameof(product.ProductCategoryId), "Category does not exist");
             }
-        
-            //foreach (var id in product.SizeOptions)
-            //{
-            //    if (!this.data.SizeOptions.Any(p => p.Id == id))
-            //    {
-            //        this.ModelState.AddModelError(nameof(product.SizeOptionId), "Category does not exist");
-            //    }
-            //}
+
+            foreach (var size in product.Sizes)
+            {
+                if (!this.data.SizeOptions.Any(p => p.Id == size.Id))
+                {
+                    this.ModelState.AddModelError(nameof(size.Id), "Size does not exist");
+                }
+            }
 
             if (!ModelState.IsValid)
             {
@@ -65,29 +68,36 @@ namespace SwimmingClubApp.Controllers
                 });
             }
 
-            //foreach (var optionSIze in product.Sizes)
-            //{
-            //    var option = this.data.SizeOptions.FirstOrDefault(x => x.Description == optionSIze.SizeDescription);
-            //    if (option == null)
-            //    {
-            //        option = new SizeOption { Description = optionSIze.SizeDescription };
-            //    }
-            //    newProduct.Sizes.Add(new ProductSize
-            //    {
-            //        SizeOption = option,
-
-            //    });
-            //}
-           // product.Sizes = SizesList;
             this.data.Products.Add(newProduct);
             this.data.SaveChanges();
 
             return RedirectToAction(nameof(AllProducts));
         }
 
+        public IActionResult Details(int id)
+        {
+            var product = this.data
+                .Products
+                .Where(n => n.Id == id)
+                .Select(n => new ProductDetailsViewModel()
+                {
+                    Image = n.Image,
+                    Name = n.Name,
+                    Price = n.Price,
+                    //SizeOptions = n.Sizes
+                })
+                .FirstOrDefault();
 
+            return View(product);
+        }
         public IActionResult EditProduct(int id)
         {
+            var product = this.data.Products.Where(p => p.Id == id);
+
+            if (product == null)
+            {
+
+            }
             return View();
         }
 
@@ -97,21 +107,17 @@ namespace SwimmingClubApp.Controllers
             return View();
         }
 
-        public IActionResult AllProducts()
+        public IActionResult AllProducts([FromQuery] AllProductsQueryModel query)
         {
-            var product = this.data
-               .Products
-               .OrderByDescending(p => p.Id)
-               .Select(n => new ProductViewModel()
-               {
-                   Id = n.Id,
-                   Image = n.Image,
-                   Name = n.Name,
-                   Price = n.Price
-               })
-               .ToList();
+            var products = this.products.All(query.Category, query.Sorting, query.CurrentPage, AllProductsQueryModel.ProductsPerPage);
 
-            return View(product);
+            var categories = this.products.ProductCategories();
+
+            query.TotalProducts = products.TotalProducts;
+            query.Categories= categories;
+            query.Products = products.Products;
+           
+            return View(query);
         }
         private IEnumerable<ProductCategoryViewModel> GetProductCategories()
         {
