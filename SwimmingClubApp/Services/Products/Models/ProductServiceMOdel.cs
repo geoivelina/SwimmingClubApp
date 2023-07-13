@@ -10,8 +10,10 @@ namespace SwimmingClubApp.Services.Products.Models
         public string Image { get; set; } = null!;
         public decimal Price { get; set; }
         public ProductSorting Sorting { get; set; }
+        public int ProductCategoryId { get; set; }
         public string Category { get; set; } = null!;
-        public IEnumerable<string> Categories { get; set; } = new List<string>();
+        public IEnumerable<ProductCategoryServiceModel> Categories { get; set; } = new List<ProductCategoryServiceModel>();
+        public List<ProductSizeServiceModel> SizesList { get; set; } = new List<ProductSizeServiceModel>();
 
     }
 }

@@ -63,6 +63,8 @@
                                 <h5 class="card-title" style="color:crimson">$@product.Price </h5>
                             </div>
                             <a asp-area="" asp-controller="ClubShop" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">View More</a>
+                            <a asp-area="" asp-controller="ClubShop" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-area="" asp-controller="ClubShop" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
                         </div>
                     </div>
                 </div>

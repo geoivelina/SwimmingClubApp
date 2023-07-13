@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Services.Coaches;
+using SwimmingClubApp.Services.Newses;
 using SwimmingClubApp.Services.Products;
+using SwimmingClubApp.Services.Sponsors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,9 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICoachService, CoachService>();
+builder.Services.AddTransient<ISponsorService, SponsorService>();
+builder.Services.AddTransient<INewsService, NewsService>();
 
 var app = builder.Build();
 

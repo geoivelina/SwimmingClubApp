@@ -1,6 +1,6 @@
-﻿namespace SwimmingClubApp.Models.ClubShop
+﻿namespace SwimmingClubApp.Services.Products.Models
 {
-    public class ProductSizeViewModel
+    public class ProductSizeServiceModel
     {
         public int Id { get; set; }
         public bool IsChecked { get; set; }

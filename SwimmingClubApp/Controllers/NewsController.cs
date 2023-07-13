@@ -3,47 +3,42 @@ using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.News;
+using SwimmingClubApp.Services.Newses;
+using SwimmingClubApp.Services.Newses.Models;
 
 namespace SwimmingClubApp.Controllers
 {
     public class NewsController : Controller
     {
-        private readonly SimmingClubDbContext data;
+        private readonly INewsService newses;
 
-        public NewsController(SimmingClubDbContext data)
+        public NewsController( INewsService newses)
         {
-            this.data = data;
+            this.newses = newses;
         }
 
-        [Authorize]
+
         public IActionResult AddNews()
         {
             return View();
-
         }
 
 
         [HttpPost]
-        [Authorize]
-        public IActionResult AddNews(AddNewsFormModel news)
+     
+        public IActionResult AddNews(NewsFormModel news)
         {
+            if (!this.newses.NewsExists(news.Id))
+            {
+                this.ModelState.AddModelError(nameof(news.Id), "News does not exist");
+            }
 
             if (!ModelState.IsValid)
             {
                 return View(news);
-
             }
-            var model = new News
-            {
-                DateCreated = DateTime.Now,
-                Desctioption = news.Desctioption,
-                Image = news.Image,
-                Title = news.Title
 
-            };
-
-            this.data.Newses.Add(model);
-            this.data.SaveChanges();
+            this.newses.CreateNews(news.DateCreated, news.Desctioption, news.Image, news.Title);
 
             return RedirectToAction(nameof(All));
         }
@@ -51,48 +46,65 @@ namespace SwimmingClubApp.Controllers
 
         public IActionResult All()
         {
-            var news = this.data
-                .Newses
-                .OrderByDescending(n => n.Id)
-                .Select(n => new NewsViewModel()
-                {
-                    Id = n.Id,
-                    Title = n.Title,
-                    DateCreated = n.DateCreated,
-                })
-                .ToList();
+            var newses = this.newses.All();
 
-            return View(news);
+            return View(newses);
         }
 
 
         public IActionResult Details(int id)
         {
-            var news = this.data
-                .Newses
-                .Where(n => n.Id == id)
-                .Select(n => new NewsDetailsViewModel()
-                {
-                    Title = n.Title,
-                    DateCreated = n.DateCreated,
-                    Desctioption = n.Desctioption,
-                    Image = n.Image
-                })
-                .FirstOrDefault();
+            var news = this.newses.Details(id);
 
             return View(news);
         }
 
-        [Authorize]
-        
+
+        [HttpGet]
         public IActionResult Edit(int id)
         {
 
-            return View();
+            if (!this.newses.NewsExists(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var news = this.newses.Details(id);
+
+            var editNews = new NewsDetailsServiceModel()
+            {
+               Image = news.Image,
+               DateCreated = DateTime.UtcNow,
+               Desctioption = news.Desctioption,
+               Title = news.Title,
+            };
+
+            return View(editNews);
         }
 
 
-        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(NewsDetailsServiceModel news, int id)
+        {
+            if (!this.newses.NewsExists(id))
+            {
+                ModelState.AddModelError("", "News does not exist");
+
+                return View(news);
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(news);
+            }
+
+            this.newses.Edit(id, news);
+
+            return RedirectToAction(nameof(All));
+        }
+
+
         public IActionResult Delete(int id)
         {
 

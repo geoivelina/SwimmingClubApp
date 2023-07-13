@@ -7,5 +7,13 @@ namespace SwimmingClubApp.Services.Products
     {
         ProductQueryServiceModel All(string category, ProductSorting sorting, int currentPage, int productsPerPage);
         IEnumerable<string> ProductCategories();
+
+        IEnumerable<ProductCategoryServiceModel> AllProductCategories();
+        List<ProductSizeServiceModel> AllSizeOptions();
+        bool ProductCategoriesExist(int productCategoryId);
+
+        ProductServiceMOdel Details(int id);
+
+        int CreateProduct(string name,string image,decimal price, int productCategoryId, List<ProductSizeServiceModel> sizesList);
     }
 }

@@ -1,7 +1,8 @@
-﻿namespace SwimmingClubApp.Models.About
+﻿namespace SwimmingClubApp.Services.Coaches.Models
 {
-    public class CoachListingViewModel
+    public class CoachListingServiceModel
     {
+        public int Id { get; set; }
         public string FullName { get; set; } = null!;
 
         public string Image { get; set; } = null!;

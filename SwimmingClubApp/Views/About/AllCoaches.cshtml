@@ -1,6 +1,6 @@
-﻿@model IEnumerable<CoachListingViewModel>
+﻿@model IEnumerable<CoachListingServiceModel>
 
-    @{
+@{
     ViewData["Title"] = "Coaches";
 }
 <h1>FIX THE LAYOUT! SHOW THEM IN TABLE!</h1>
@@ -18,6 +18,8 @@
                     <p class="card-text">Squad: @coach.Squad</p>
                     <br>
                     <a class="btn btn-dark" href="mailto:@coach.Email" target="_self">Contact Now</a>
+                    <a asp-area="" asp-controller="About" asp-action="EditCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-area="" asp-controller="About" asp-action="DeletCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
                 </div>
             </div>
             <div class="card" style="width: 16rem;">
@@ -27,6 +29,6 @@
             </div>
         </div>
     }
-        <br />
+    <br />
 </div>
 

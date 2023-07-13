@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SwimmingClubApp.Services.Products.Models;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static SwimmingClubApp.Data.DataConstants;
 using static SwimmingClubApp.Data.DataConstants.Product;
-using static SwimmingClubApp.Data.DataConstants.ProductCategory;
 
 namespace SwimmingClubApp.Models.ClubShop
 {
-    public class AddProductFormModel
+    public class ProductFormModel
     {
 
         [Required]
@@ -29,11 +27,11 @@ namespace SwimmingClubApp.Models.ClubShop
         [Required]
         [Display(Name = "Product Category")]
         public int ProductCategoryId { get; set; }
-        public IEnumerable<ProductCategoryViewModel> ProductCategories { get; set; } = new List<ProductCategoryViewModel>();
+        public IEnumerable<ProductCategoryServiceModel> ProductCategories { get; set; } = new List<ProductCategoryServiceModel>();
 
-        public IEnumerable<ProductSizeViewModel> Sizes { get; set; } = new List<ProductSizeViewModel>();
+        public List<ProductSizeServiceModel> SizesList { get; set; } = new List<ProductSizeServiceModel>();
 
-        public IEnumerable<int> SizesList { get; set; } = new List<int>();
+       // public IEnumerable<int> SizesList { get; set; } = new List<int>();
 
     }
 }

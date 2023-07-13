@@ -1,6 +1,6 @@
-﻿namespace SwimmingClubApp.Models.News
+﻿namespace SwimmingClubApp.Services.Newses.Models
 {
-    public class NewsViewModel
+    public class NewsServiceModel
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;

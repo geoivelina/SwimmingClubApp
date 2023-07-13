@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.About;
+using SwimmingClubApp.Services.Coaches;
+using SwimmingClubApp.Services.Sponsors;
 
 namespace SwimmingClubApp.Controllers
 {
     public class AboutController : Controller
     {
-        private readonly SimmingClubDbContext data;
+        private readonly ICoachService coaches;
+        private readonly ISponsorService sponsors;
 
-        public AboutController(SimmingClubDbContext data)
+        public AboutController(ICoachService coaches, ISponsorService sponsors)
         {
-            this.data = data;
+            this.coaches = coaches;
+            this.sponsors = sponsors;
         }
 
         public IActionResult History()
@@ -30,47 +34,83 @@ namespace SwimmingClubApp.Controllers
 
         public IActionResult AddCoach()
         {
-            return View(new AddCoachFormModel
+            return View(new CoachFormModel
             {
-                Squads = this.GetSquads()
+                Squads = this.coaches.AllSquads()
             });
 
         }
 
-        [Authorize]
+
         [HttpPost]
-        public IActionResult AddCoach(AddCoachFormModel coach)
+        public IActionResult AddCoach(CoachFormModel coach)
         {
-            if (!this.data.Squads.Any(s => s.Id == coach.SquadId))
+            if (!this.coaches.SquadExists(coach.SquadId))
             {
                 this.ModelState.AddModelError(nameof(coach.SquadId), "Squad does not exist");
             }
             if (!ModelState.IsValid)
             {
-                coach.Squads = this.GetSquads();
+                coach.Squads = this.coaches.AllSquads();
                 return View(coach);
 
             }
-            var newCoach = new Coach
-            {
-                FullName = coach.FullName,
-                Image = coach.Image,
-                Email = coach.Email,
-                SquadId = coach.SquadId,
-                JobPosition = coach.JobPosition
-            };
 
-            this.data.Coaches.Add(newCoach);
-            this.data.SaveChanges();
+            this.coaches.CreateCoach(coach.FullName, coach.Image, coach.Email, coach.SquadId, coach.JobPosition);
 
             return RedirectToAction(nameof(AllCoaches));
         }
 
-
-
-        public IActionResult EditCoach()
+        [HttpGet]
+        public IActionResult EditCoach(int id)
         {
-            return View();
+            if (!this.coaches.CoachExists(id))
+            {
+                return RedirectToAction(nameof(AllCoaches));
+            }
+
+            var coach = this.coaches.CoachDetails(id);
+
+            var editCocah = new CoachFormModel()
+            {
+                FullName = coach.FullName,
+                Email = coach.Email,
+                Image = coach.Image,
+                JobPosition = coach.JobPosition,
+                SquadId = coach.SquadId,
+                Squads = this.coaches.AllSquads()
+            };
+           
+            return View(editCocah);
+        }
+
+        [HttpPost]
+        public IActionResult EditCoach(CoachFormModel coach, int id)
+        {
+            if (!this.coaches.CoachExists(id))
+            {
+                ModelState.AddModelError("", "Coach does not exist");
+
+                return View(coach);
+            }
+
+           
+            if (!this.coaches.SquadExists(coach.SquadId))
+            {
+                ModelState.AddModelError(nameof(coach.SquadId), "Squat does not exist");
+              
+                return View(coach);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                coach.Squads = this.coaches.AllSquads();
+                return View(coach);
+            }
+
+            this.coaches.Edit(id, coach);
+
+            return RedirectToAction(nameof(AllCoaches));
         }
 
         public IActionResult DeletCoach()
@@ -80,40 +120,27 @@ namespace SwimmingClubApp.Controllers
 
         public IActionResult AllCoaches()
         {
-            var coaches = this.data
-                .Coaches
-                .Select(c => new CoachListingViewModel
-                {
-                    FullName = c.FullName,
-                    Email = c.Email,
-                    Image = c.Image,
-                    Squad = c.Squad.SquadName,
-                    JobPosition = c.JobPosition
-                })
-                .ToList();
+            var coaches = this.coaches.AllCoaches();
 
             return View(coaches);
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult AddSponsor(AddSponsorFormModel sponsor)
-        {
 
+        public IActionResult AddSponsor()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult AddSponsor(SponsorFormModel sponsor)
+        {
             if (!ModelState.IsValid)
             {
-                return View();
-
+                return View(sponsor);
             }
-            var newSponsor = new Sponsor
-            {
-                Name = sponsor.Name,
-                Link = sponsor.Link,
-                Logo = sponsor.Logo
-            };
 
-            this.data.Sponsors.Add(newSponsor);
-            this.data.SaveChanges();
+            this.sponsors.CreateSponsor(sponsor.Name, sponsor.Link, sponsor.Logo);
 
             return RedirectToAction(nameof(AllSponsors));
         }
@@ -130,30 +157,11 @@ namespace SwimmingClubApp.Controllers
 
         public IActionResult AllSponsors()
         {
-            var sponsors = this.data
-                .Sponsors
-                .Select(c => new SponsorViewModel
-                {
-                    Logo = c.Logo,
-                    HomePageLink = c.Link
-                })
-                .ToList();
+            var sponsors = this.sponsors.AllSponsors();
 
             return View(sponsors);
         }
 
-
-        private IEnumerable<CoachSquadViewModel> GetSquads()
-        {
-            return this.data
-                .Squads
-                .Select(s => new CoachSquadViewModel
-                {
-                    Id = s.Id,
-                    SquadName = s.SquadName
-                })
-                .ToList();
-        }
 
     }
 }

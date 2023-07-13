@@ -1,0 +1,41 @@
+﻿@model CoachFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h1 class="heading-margin text-center">@ViewBag.Title</h1>
+        <form method="post">
+            <div class="mb-3 form-group ">
+                <label asp-for="FullName">Full Name</label>
+                <input asp-for="FullName" class="form-control" placeholder="Full Name">
+                 <span asp-validation-for="FullName" class="small text-danger"></span>
+            </div>
+           
+            <div class="mb-3 form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com">
+                  <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="mb-3 mt-3 form-group ">
+                <label asp-for="Image">Photo</label>
+                <input asp-for="Image" class="form-control" placeholder="Photo link">
+                  <span asp-validation-for="Image" class="small text-danger"></span>
+            </div>
+             <div class="mb-3 form-group">
+                <label asp-for="JobPosition">Job Position</label>
+                <input asp-for="JobPosition" class="form-control" placeholder="Head Coach">
+                  <span asp-validation-for="JobPosition" class="small text-danger"></span>
+            </div>
+            <div class="mb-3 form-group ">
+                <label asp-for="SquadId"></label>
+                <select asp-for="SquadId" class=" form-control">
+                    @foreach (var squad in Model.Squads)
+                    {
+                        <option value="@squad.Id">@squad.SquadName</option>
+                    }
+                </select>
+            </div>
+
+            <input class="btn btn-dark" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

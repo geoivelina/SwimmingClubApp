@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SwimmingClubApp.Services.Coaches.Models;
+using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.Coach;
 
 namespace SwimmingClubApp.Models.About
 {
-    public class AddCoachFormModel
+    public class CoachFormModel
     {
         [Required]
         [StringLength(FullNameMaxLength, MinimumLength = FullNameMinLength, ErrorMessage = "The Full Name feild must be between {2} and {1} symbols")]
@@ -26,6 +27,7 @@ namespace SwimmingClubApp.Models.About
 
         [Required]
         [EmailAddress]
+        [Display(Name ="Email Address")]
         public string Email { get; set; } = null!;
 
         [Required]
@@ -36,7 +38,7 @@ namespace SwimmingClubApp.Models.About
         [Display(Name = "Squad")]
         public int SquadId { get; set; }
 
-        public IEnumerable<CoachSquadViewModel> Squads { get; set; } = new List<CoachSquadViewModel>();
+        public IEnumerable<CoachSquadServiceModel> Squads { get; set; } = new List<CoachSquadServiceModel>();
 
     }
 }

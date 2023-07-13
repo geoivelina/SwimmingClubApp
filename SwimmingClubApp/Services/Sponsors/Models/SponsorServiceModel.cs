@@ -1,6 +1,6 @@
-﻿namespace SwimmingClubApp.Models.About
+﻿namespace SwimmingClubApp.Services.Sponsors.Models
 {
-    public class SponsorViewModel
+    public class SponsorServiceModel
     {
         public string Logo { get; set; } = null!;
         public string HomePageLink { get; set; } = null!;

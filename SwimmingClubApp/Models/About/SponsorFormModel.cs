@@ -3,7 +3,7 @@ using static SwimmingClubApp.Data.DataConstants.Sponsor;
 
 namespace SwimmingClubApp.Models.About
 {
-    public class AddSponsorFormModel
+    public class SponsorFormModel
     {
         [Required]
         [StringLength(NameMaxLenth, MinimumLength = NameMinLenth, ErrorMessage = "Sponsor Name must be between {2} and {1} symbols")]
