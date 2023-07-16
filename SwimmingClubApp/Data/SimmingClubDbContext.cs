@@ -23,6 +23,7 @@ namespace SwimmingClubApp.Data
             builder.ApplyConfiguration(new SizeOptionConfiguration());
             builder.ApplyConfiguration(new SponsorsConfiguration());
             builder.ApplyConfiguration(new SquadsConfiguration());
+            builder.ApplyConfiguration(new AdministratorConfiguration());
 
             base.OnModelCreating(builder);
         }

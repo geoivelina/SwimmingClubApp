@@ -16,7 +16,7 @@ namespace SwimmingClubApp.Services.Products
 
         public ProductQueryServiceModel All(string category, ProductSorting sorting, int currentPage, int productsPerPage)
         {
-            var queryProduct = this.data.Products.AsQueryable();
+            var queryProduct = this.data.Products.Where(p => p.IsAvtive).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(category))
             {

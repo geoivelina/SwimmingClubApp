@@ -20,5 +20,7 @@ namespace SwimmingClubApp.Data.Models
         [Required]
         [MaxLength(DescriptionMaxLenth)]
         public string Desctioption { get; set; } = null!;
+
+        public bool IsAvtive { get; set; } = true;
     }
 }

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using SwimmingClubApp.Data;
-using SwimmingClubApp.Data.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models.News;
 using SwimmingClubApp.Services.Newses;
 using SwimmingClubApp.Services.Newses.Models;
@@ -104,11 +101,42 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(All));
         }
 
-
+        [HttpGet]
         public IActionResult Delete(int id)
         {
+            if (!this.newses.NewsExists(id))
+            {
+                ModelState.AddModelError("", "News does not exist");
 
-            return View();
+                return RedirectToAction(nameof(All));
+            }
+
+            var news = this.newses.Details(id);
+
+            var toDelete = new NewsDetailsServiceModel
+            {
+                Title = news.Title,
+                Desctioption = news.Desctioption,
+                DateCreated = news.DateCreated,
+                Image = news.Image,
+                IsActive = news.IsActive
+            };
+            return View(toDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id, NewsDetailsServiceModel news)
+        {
+            if (!this.newses.NewsExists(id))
+            {
+                ModelState.AddModelError("", "News does not exist");
+
+                return RedirectToAction(nameof(All));
+            }
+
+            this.newses.Delete(id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

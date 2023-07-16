@@ -9,5 +9,6 @@ namespace SwimmingClubApp.Services.Newses
         IEnumerable<NewsServiceModel> All();
         NewsDetailsServiceModel Details(int id);
         void Edit(int id, NewsDetailsServiceModel news);
+        void Delete(int id);
     }
 }

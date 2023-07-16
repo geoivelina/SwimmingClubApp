@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwimmingClubApp.Data;
 
@@ -11,9 +12,10 @@ using SwimmingClubApp.Data;
 namespace SwimmingClubApp.Data.Migrations
 {
     [DbContext(typeof(SimmingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230715110402_IsActiveFieldAddedInCoachNewsProductTables")]
+    partial class IsActiveFieldAddedInCoachNewsProductTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

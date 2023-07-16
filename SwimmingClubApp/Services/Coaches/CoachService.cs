@@ -19,6 +19,7 @@ namespace SwimmingClubApp.Services.Coaches
         {
             return this.data
                   .Coaches
+                  .Where(c => c.IsAvtive)
                   .Select(c => new CoachListingServiceModel
                   {
                       Id = c.Id,
@@ -31,36 +32,25 @@ namespace SwimmingClubApp.Services.Coaches
                   .ToList();
         }
 
-        public IEnumerable<CoachSquadServiceModel> AllSquads()
-        {
-            return this.data
-                  .Squads
-                  .Select(s => new CoachSquadServiceModel
-                  {
-                      Id = s.Id,
-                      SquadName = s.SquadName
-                  })
-                  .ToList();
-        }
-
         public CoachDetailsServiceModel CoachDetails(int coachId)
         {
             return this.data.Coaches
-                 .Where(c => c.Id == coachId)
+                 .Where(c => c.Id == coachId && c.IsAvtive)
                  .Select(c => new CoachDetailsServiceModel
                  {
                      Image = c.Image,
                      Email = c.Email,
                      FullName = c.FullName,
                      JobPosition = c.JobPosition,
-                     SquadId = c.SquadId
+                     SquadId = c.SquadId,
+                     IsActive = c.IsAvtive
                  })
                  .FirstOrDefault();
         }
 
         public bool CoachExists(int coachId)
         {
-            return this.data.Coaches.Any(c => c.Id == coachId);
+            return this.data.Coaches.Any(c => c.Id == coachId && c.IsAvtive);
         }
 
         public int CreateCoach(string fullName, string image, string email, int squadId, string jobPosition)
@@ -71,7 +61,8 @@ namespace SwimmingClubApp.Services.Coaches
                 Image = image,
                 Email = email,
                 SquadId = squadId,
-                JobPosition = jobPosition
+                JobPosition = jobPosition,
+                IsAvtive = true,
             };
 
             this.data.Coaches.Add(newCoach);
@@ -83,7 +74,7 @@ namespace SwimmingClubApp.Services.Coaches
         public void Edit(int id, CoachFormModel coach)
         {
             var toEdit = this.data.Coaches.Find(id);
-            
+
             toEdit.FullName = coach.FullName;
             toEdit.Email = coach.Email;
             toEdit.Image = coach.Image;
@@ -92,10 +83,28 @@ namespace SwimmingClubApp.Services.Coaches
 
             this.data.SaveChanges();
         }
+        public void Delete(int id)
+        {
+            var toDelete = this.data.Coaches.Find(id);
+            toDelete.IsAvtive = false;
+
+            this.data.SaveChanges();
+        }
 
         public bool SquadExists(int squadId)
         {
             return this.data.Squads.Any(s => s.Id == squadId);
+        }
+        public IEnumerable<CoachSquadServiceModel> AllSquads()
+        {
+            return this.data
+                  .Squads
+                  .Select(s => new CoachSquadServiceModel
+                  {
+                      Id = s.Id,
+                      SquadName = s.SquadName
+                  })
+                  .ToList();
         }
     }
 }

@@ -84,6 +84,10 @@
         {
             public const int UserFullNameMinLenth = 3;
             public const int UserFullNameMaxLenth = 25;
+
+            public const int PasswordMaxLength = 100;
+            public const int PasswordMinLength = 6;
+
         }
     }
 }

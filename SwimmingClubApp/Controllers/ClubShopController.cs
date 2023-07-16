@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Data;
-using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.ClubShop;
 using SwimmingClubApp.Services.Products;
-using SwimmingClubApp.Services.Products.Models;
-using System.Linq;
 
 namespace SwimmingClubApp.Controllers
 {

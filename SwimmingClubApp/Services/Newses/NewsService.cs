@@ -13,20 +13,6 @@ namespace SwimmingClubApp.Services.Newses
             this.data = data;
         }
 
-        public IEnumerable<NewsServiceModel> All()
-        {
-            return this.data
-                .Newses
-                .Select(n => new NewsServiceModel
-                {
-                    Id = n.Id,
-                    DateCreated = n.DateCreated,
-                    Image = n.Image,
-                    Title = n.Title
-                })
-                .ToList();
-        }
-
         public int CreateNews(DateTime dateCreated, string desctioption, string image, string title)
         {
             var news = new News
@@ -42,22 +28,6 @@ namespace SwimmingClubApp.Services.Newses
 
             return news.Id;
         }
-
-        public NewsDetailsServiceModel Details(int id)
-        {
-            return this.data
-                .Newses
-                .Where(n => n.Id == id)
-                .Select(n => new NewsDetailsServiceModel()
-                {
-                    Title = n.Title,
-                    DateCreated = n.DateCreated,
-                    Desctioption = n.Desctioption,
-                    Image = n.Image
-                })
-                .FirstOrDefault();
-        }
-
         public void Edit(int id, NewsDetailsServiceModel news)
         {
             var toEdit = this.data.Newses.Find(id);
@@ -69,9 +39,46 @@ namespace SwimmingClubApp.Services.Newses
 
             this.data.SaveChanges();
         }
+
+        public void Delete(int id)
+        {
+            var toDelete = this.data.Newses.Find(id);
+            toDelete.IsAvtive = false;
+
+            this.data.SaveChanges();
+        }
+        public NewsDetailsServiceModel Details(int id)
+        {
+            return this.data
+                .Newses
+                .Where(n => n.Id == id && n.IsAvtive)
+                .Select(n => new NewsDetailsServiceModel()
+                {
+                    Title = n.Title,
+                    DateCreated = n.DateCreated,
+                    Desctioption = n.Desctioption,
+                    Image = n.Image
+                })
+                .FirstOrDefault();
+        }
+
         public bool NewsExists(int newsId)
         {
             return this.data.Newses.Any(c => c.Id == newsId);
+        }
+        public IEnumerable<NewsServiceModel> All()
+        {
+            return this.data
+                .Newses
+                .Where(n => n.IsAvtive)
+                .Select(n => new NewsServiceModel
+                {
+                    Id = n.Id,
+                    DateCreated = n.DateCreated,
+                    Image = n.Image,
+                    Title = n.Title
+                })
+                .ToList();
         }
     }
 }

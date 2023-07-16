@@ -3,23 +3,22 @@
 @{
     ViewData["Title"] = "Coaches";
 }
-<h1>FIX THE LAYOUT! SHOW THEM IN TABLE!</h1>
-
-<div class="row">
-
+@*<h1>FIX THE LAYOUT! SHOW THEM IN TABLE!</h1>
+*@
+<div class="row offset-4 mt-4">
     @foreach (var coach in Model)
     {
-        <div class="row">
-
+        <div class="row mt-2">
             <div class="card" style="width: 16rem;">
                 <div class="card-body">
                     <h5 class="card-title">@coach.FullName</h5>
                     <p class="card-text">@coach.JobPosition</p>
                     <p class="card-text">Squad: @coach.Squad</p>
-                    <br>
                     <a class="btn btn-dark" href="mailto:@coach.Email" target="_self">Contact Now</a>
-                    <a asp-area="" asp-controller="About" asp-action="EditCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a asp-area="" asp-controller="About" asp-action="DeletCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    <div class="mt-3">
+                        <a asp-area="" asp-controller="About" asp-action="EditCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a asp-area="" asp-controller="About" asp-action="DeleteCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    </div>
                 </div>
             </div>
             <div class="card" style="width: 16rem;">

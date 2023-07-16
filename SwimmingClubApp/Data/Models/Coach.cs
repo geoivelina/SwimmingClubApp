@@ -26,5 +26,7 @@ namespace SwimmingClubApp.Data.Models
         [Required]
         [MaxLength(EmailMaxLength)]
         public string Email { get; set; } = null!;
+
+        public bool IsAvtive { get; set; } = true;
     }
 }

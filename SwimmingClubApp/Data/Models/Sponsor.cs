@@ -15,5 +15,7 @@ namespace SwimmingClubApp.Data.Models
         public string Logo { get; set; } = null!;
         [Required]
         public string Link { get; set; } = null!;
+
+        public bool IsAvtive { get; set; } = true;
     }
 }

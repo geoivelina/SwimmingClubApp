@@ -28,7 +28,7 @@ namespace SwimmingClubApp.Data.Models
 
         public List<ProductSize> Sizes { get; set; } = new List<ProductSize>();
 
-
+        public bool IsAvtive { get; set; } = true;
 
     }
 }

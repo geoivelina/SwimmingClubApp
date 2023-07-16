@@ -1,5 +1,6 @@
 ﻿using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Models.About;
 using SwimmingClubApp.Services.Sponsors.Models;
 
 namespace SwimmingClubApp.Services.Sponsors
@@ -13,14 +14,18 @@ namespace SwimmingClubApp.Services.Sponsors
             this.data = data;
         }
 
-        public IEnumerable<SponsorServiceModel> AllSponsors()
+        public IEnumerable<SponsorDetailsServiceModel> AllSponsors()
         {
             var sponsors = this.data
                         .Sponsors
-                        .Select(c => new SponsorServiceModel
+                        .Where(s => s.IsAvtive)
+                        .Select(s => new SponsorDetailsServiceModel
                         {
-                            Logo = c.Logo,
-                            HomePageLink = c.Link
+                            Id = s.Id,
+                            Logo = s.Logo,
+                            HomePageLink = s.Link,
+                            Name = s.Name,
+                            IsActive = s.IsAvtive
                         })
                         .ToList();
 
@@ -40,6 +45,45 @@ namespace SwimmingClubApp.Services.Sponsors
             this.data.SaveChanges();
 
             return newSponsor.Id;
+        }
+
+        public void DeleteSponsor(int id, SponsorDetailsServiceModel sponsor)
+        {
+            var toDelete = this.data.Sponsors.Find(id);
+            toDelete.IsAvtive = false;
+
+            this.data.SaveChanges();
+        }
+
+        public SponsorDetailsServiceModel Details(int id)
+        {
+            return this.data.Sponsors
+                   .Where(s => s.Id == id && s.IsAvtive)
+                   .Select(s => new SponsorDetailsServiceModel
+                   {
+                       Id = s.Id,
+                       HomePageLink = s.Link,
+                       Logo = s.Logo,
+                       Name = s.Name,
+                       IsActive = s.IsAvtive
+                   })
+                   .First();
+        }
+
+        public void Edit(int id, SponsorFormModel sponsor)
+        {
+            var toEdit = this.data.Sponsors.Find(id);
+
+            toEdit.Name = sponsor.Name;
+            toEdit.Logo = sponsor.Logo;
+            toEdit.Link = sponsor.Link;
+
+            this.data.SaveChanges();
+        }
+
+        public bool SponsorExists(int id)
+        {
+            return this.data.Sponsors.Any(s => s.Id == id);
         }
     }
 }

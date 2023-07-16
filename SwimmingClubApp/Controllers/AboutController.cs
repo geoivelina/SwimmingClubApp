@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using SwimmingClubApp.Data;
-using SwimmingClubApp.Data.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models.About;
 using SwimmingClubApp.Services.Coaches;
+using SwimmingClubApp.Services.Coaches.Models;
 using SwimmingClubApp.Services.Sponsors;
+using SwimmingClubApp.Services.Sponsors.Models;
 
 namespace SwimmingClubApp.Controllers
 {
@@ -71,7 +70,7 @@ namespace SwimmingClubApp.Controllers
 
             var coach = this.coaches.CoachDetails(id);
 
-            var editCocah = new CoachFormModel()
+            var editCocach = new CoachFormModel()
             {
                 FullName = coach.FullName,
                 Email = coach.Email,
@@ -80,8 +79,8 @@ namespace SwimmingClubApp.Controllers
                 SquadId = coach.SquadId,
                 Squads = this.coaches.AllSquads()
             };
-           
-            return View(editCocah);
+
+            return View(editCocach);
         }
 
         [HttpPost]
@@ -91,14 +90,14 @@ namespace SwimmingClubApp.Controllers
             {
                 ModelState.AddModelError("", "Coach does not exist");
 
-                return View(coach);
+                return RedirectToAction(nameof(AllCoaches));
             }
 
-           
+
             if (!this.coaches.SquadExists(coach.SquadId))
             {
                 ModelState.AddModelError(nameof(coach.SquadId), "Squat does not exist");
-              
+
                 return View(coach);
             }
 
@@ -113,18 +112,67 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(AllCoaches));
         }
 
-        public IActionResult DeletCoach()
+        [HttpGet]
+        public IActionResult DeleteCoach(int id)
         {
-            return View();
+            if (!this.coaches.CoachExists(id))
+            {
+                ModelState.AddModelError("", "Coach does not exist");
+
+                return RedirectToAction(nameof(AllCoaches));
+            }
+
+            var coach = this.coaches.CoachDetails(id);
+
+            if (!this.coaches.SquadExists(coach.SquadId))
+            {
+                ModelState.AddModelError(nameof(coach.SquadId), "Squat does not exist");
+
+                return View(nameof(AllCoaches));
+            }
+            
+            var toDelete = new CoachDetailsServiceModel
+            {
+                FullName = coach.FullName,
+                Image = coach.Image,
+                Email = coach.Email,
+                JobPosition = coach.JobPosition,
+                SquadId = coach.SquadId,
+                IsActive = coach.IsActive
+            };
+
+            return View(toDelete);
         }
 
+        [HttpPost]
+        public IActionResult DeleteCoach(CoachDetailsServiceModel coach, int id)
+        {
+            if (!this.coaches.CoachExists(id))
+            {
+                ModelState.AddModelError("", "Coach does not exist");
+
+                return RedirectToAction(nameof(AllCoaches));
+            }
+
+            var coachDetails = this.coaches.CoachDetails(id);
+
+            if (!this.coaches.SquadExists(coachDetails.SquadId))
+            {
+                ModelState.AddModelError(nameof(coach.SquadId), "Squat does not exist");
+
+                return View(coach);
+            }
+
+            this.coaches.Delete(id);
+
+            return RedirectToAction(nameof(AllCoaches));
+        }
         public IActionResult AllCoaches()
         {
             var coaches = this.coaches.AllCoaches();
 
             return View(coaches);
         }
-
 
         public IActionResult AddSponsor()
         {
@@ -145,16 +193,82 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(AllSponsors));
         }
 
-        public IActionResult EditSposor()
+        [HttpGet]
+        public IActionResult EditSponsor(int id)
         {
-            return View();
+            if (!this.sponsors.SponsorExists(id))
+            {
+                return RedirectToAction(nameof(AllSponsors));
+            }
+
+            var sponsor = this.sponsors.Details(id);
+
+            var toEdit = new SponsorFormModel()
+            {
+                Name = sponsor.Name,
+                Logo = sponsor.Logo,
+                Link = sponsor.HomePageLink,
+            };
+
+            return View(toEdit);
         }
 
-        public IActionResult DeleteSponsor()
+
+        [HttpPost]
+        public IActionResult EditSponsor(int id, SponsorFormModel sponsor)
         {
-            return View();
+            if (!this.sponsors.SponsorExists(id))
+            {
+                return RedirectToAction(nameof(AllSponsors));
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(sponsor);
+            }
+
+            this.sponsors.Edit(id, sponsor);
+
+            return RedirectToAction(nameof(AllSponsors));
         }
 
+        [HttpGet]
+        public IActionResult DeleteSponsor(int id)
+        {
+            if (!this.sponsors.SponsorExists(id))
+            {
+                ModelState.AddModelError("", "Spondor does not exist");
+
+                return RedirectToAction(nameof(AllSponsors));
+            }
+
+            var sponsor = this.sponsors.Details(id);
+
+            var toDelete = new SponsorDetailsServiceModel
+            {
+               HomePageLink = sponsor.HomePageLink,
+               Logo = sponsor.Logo,
+               Name = sponsor.Name,
+               IsActive = sponsor.IsActive
+            };
+            return View(toDelete);
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteSponsor(int id, SponsorDetailsServiceModel sponsor)
+        {
+            if (!this.sponsors.SponsorExists(id))
+            {
+                ModelState.AddModelError("", "Spondor does not exist");
+
+                return RedirectToAction(nameof(AllSponsors));
+            }
+
+            this.sponsors.DeleteSponsor(id, sponsor);
+
+            return RedirectToAction(nameof(AllSponsors));
+        }
         public IActionResult AllSponsors()
         {
             var sponsors = this.sponsors.AllSponsors();
