@@ -38,7 +38,7 @@ namespace SwimmingClubApp.Infrastructure
                 FullName = "Justin Robin",
                 Email = "justin.robin@mail.com",
                 JobPosition = "Senior Swimming Instructor",
-                SquadId = 2,
+                SquadId = 3,
                 Image = "https://tse2.mm.bing.net/th?id=OIP.5cla8U39A4eNC8xzRCMDiQHaHa&pid=Api"
             },
              new Coach()
@@ -47,7 +47,7 @@ namespace SwimmingClubApp.Infrastructure
                 FullName = "Cindy Somerton",
                 Email = "cindy.somerton@mail.com",
                 JobPosition = "General Manager",
-                SquadId = 2,
+                SquadId = 3,
                 Image = "https://tse4.mm.bing.net/th?id=OIP.6Ue-IdphavC3AxW8adedCAHaHa&pid=Api"
             },
             };

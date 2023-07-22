@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models.News;
 using SwimmingClubApp.Services.Newses;
 using SwimmingClubApp.Services.Newses.Models;
 
+using static SwimmingClubApp.Areas.Admin.AdminConstants;
+
 namespace SwimmingClubApp.Controllers
 {
+    //[Authorize(Roles = AdminRoleName)]
     public class NewsController : Controller
     {
         private readonly INewsService newses;
@@ -14,7 +18,7 @@ namespace SwimmingClubApp.Controllers
             this.newses = newses;
         }
 
-
+        [HttpGet]
         public IActionResult AddNews()
         {
             return View();
@@ -22,7 +26,6 @@ namespace SwimmingClubApp.Controllers
 
 
         [HttpPost]
-     
         public IActionResult AddNews(NewsFormModel news)
         {
             if (!this.newses.NewsExists(news.Id))
@@ -40,7 +43,7 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(All));
         }
 
-
+        [AllowAnonymous]
         public IActionResult All()
         {
             var newses = this.newses.All();
@@ -48,7 +51,7 @@ namespace SwimmingClubApp.Controllers
             return View(newses);
         }
 
-
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var news = this.newses.Details(id);

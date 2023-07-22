@@ -11,10 +11,13 @@
                         <a href="@sponsor.HomePageLink">
                             <img class="card-img-top" src="@sponsor.Logo" alt="">
                         </a>
-                        <div class="mt-3">
-                            <a asp-area="" asp-controller="About" asp-action="EditSponsor" asp-route-id="@sponsor.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a asp-area="" asp-controller="About" asp-action="DeleteSponsor" asp-route-id="@sponsor.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                        </div>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <div class="mt-3">
+                                <a asp-area="" asp-controller="About" asp-action="EditSponsor" asp-route-id="@sponsor.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a asp-area="" asp-controller="About" asp-action="DeleteSponsor" asp-route-id="@sponsor.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

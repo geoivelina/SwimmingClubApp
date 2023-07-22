@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SwimmingClubApp.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.User;
 
 namespace SwimmingClubApp.Areas.Identity.Pages.Account
@@ -20,85 +20,68 @@ namespace SwimmingClubApp.Areas.Identity.Pages.Account
             this.signInManager = signInManager;
         }
 
-
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
+
 
         public class InputModel
         {
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
-            public string Email { get; set; }
-
+            public string Email { get; set; } = null!;
 
             [Display(Name = "Full Name")]
-            [MaxLength(UserFullNameMaxLenth)]
-            public string UserFullName { get; set; }
-
+            public string UserFullName { get; set; } = null!;
 
             [Required]
             [StringLength(PasswordMaxLength, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = PasswordMinLength)]
             [DataType(DataType.Password)]
-            public string Password { get; set; }
+            [Display(Name = "Password")]
+            public string Password { get; set; } = null!;
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm Password")]
+            [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            public string ConfirmPassword { get; set; } = null!;
         }
 
 
-        public void OnGet(string returnUrl = null)
+        public async Task OnGetAsync(string? returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
                 var user = new User
                 {
-                    UserName = Input.Email,
                     Email = Input.Email,
-                    UserFullName = Input.UserFullName
+                    UserFullName = Input.UserFullName,
+                    UserName = Input.Email
                 };
 
-
+               
                 var result = await userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                   // await userManager.AddToRoleAsync(user, "User");
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
-
+                    return LocalRedirect("~/Login");
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
             return Page();
         }
-
-        private IdentityUser CreateUser()
-        {
-            try
-            {
-                return Activator.CreateInstance<User>();
-            }
-            catch
-            {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-            }
-        }
-
     }
 }

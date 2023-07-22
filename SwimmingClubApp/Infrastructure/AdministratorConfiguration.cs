@@ -1,48 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SwimmingClubApp.Data.Models;
+
+using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Infrastructure
 {
 
     internal class AdministratorConfiguration : IEntityTypeConfiguration<User>
     {
+        private User AdminUser { get; set; } = null!;
+
         public void Configure(EntityTypeBuilder<User> builder)
         {
-           // CreateAdministrator();
+          builder.HasData(CreateAdministrator());
         }
 
-        private static void CreateAdministrator(IServiceProvider services)
+        private User CreateAdministrator()
         {
-            //var userManager = services.GetRequiredService<UserManager<User>>();
-            //var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var hasher = new PasswordHasher<User>();
 
-            //Task.Run(async () =>
-            //{
-            //    if (await roleManager.RoleExistsAsync(AdministratorRoleName))
-            //    {
-            //        return;
-            //    }
-            //    var role = new IdentityRole { Name = AdministratorRoleName };
+            this.AdminUser = new User()
+            {
+                Id = "a1259a89-da2c-413d-94b9-fa5860faa017",
+                Email = AdminEmail,
+                NormalizedEmail = NormalizedAdminEmail,
+                UserName = AdminEmail,
+                NormalizedUserName = NormalizedAdminEmail,
+                UserFullName = "Admin"
+            };
 
-            //    await roleManager.CreateAsync(role);
+            this.AdminUser.PasswordHash = hasher.HashPassword(this.AdminUser, "admin123");
 
-            //    const string adminEmail = "admin@mail.com";
-            //    const string adminPassword = "admin123";
-
-            //    var user = new User
-            //    {
-            //        Email = adminEmail,
-            //        UserName = adminEmail,
-            //        FullName = "Admin"
-            //    };
-
-            //    await userManager.CreateAsync(user, adminPassword);
-
-            //    await userManager.AddToRoleAsync(user, role.Name);
-            //})
-            //    .GetAwaiter()
-            //    .GetResult();
+            return this.AdminUser;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SwimmingClubApp.Services.Entries.Models;
+using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.Swimmer;
 
 namespace SwimmingClubApp.Models.Joinus
@@ -19,12 +20,10 @@ namespace SwimmingClubApp.Models.Joinus
 
         [Display(Name = "Contact Person Name")]
         [StringLength(ContactPersonNameMaxLength, MinimumLength = ContactPersonNameMinLength, ErrorMessage = "The Contact Person feild must be between {2} and {1} symbols")]
-        //allows null, will be used only if the swimmer is under 18yo
         public string ContactPersonName { get; set; } = null!;
               
         [Display(Name ="Relationship To Swimmer")]
         [StringLength(ContactPersonNameMaxLength, MinimumLength =RelationshipToSwimmerMinLength, ErrorMessage = "The Relationship  feild must be between {2} and {1} symbols")]
-        //allows null, will be used only if the swimmer is under 18yo
         public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]
@@ -63,6 +62,6 @@ namespace SwimmingClubApp.Models.Joinus
         [Display(Name = "Squad")]
         public int SquadId { get; set; }
 
-        public IEnumerable<SwimmerSquadModel> Squads { get; set; } = new List<SwimmerSquadModel>();
+        public IEnumerable<SwimmerSquadServiceModel> Squads { get; set; } = new List<SwimmerSquadServiceModel>();
     }
 }

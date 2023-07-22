@@ -27,6 +27,14 @@ namespace SwimmingClubApp.Data.Models
         public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]
+        public string PhoneNumber { get; set; } = null!;
+
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = null!;
+
+        [Required]
         [MaxLength(AddressMaxLength)]
         public string Address { get; set; } = null!;
 
@@ -38,9 +46,8 @@ namespace SwimmingClubApp.Data.Models
 
         [Required]
         public int SquadId { get; set; }
+        public Squad Squad { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
         public bool IsApproved { get; set; }
     }
 }

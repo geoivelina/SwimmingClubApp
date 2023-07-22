@@ -1,6 +1,9 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models;
 using System.Diagnostics;
+
+using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
 {
@@ -9,10 +12,15 @@ namespace SwimmingClubApp.Controllers
        
         public IActionResult Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = AreaName });
+            }
+
             return View();
         }
 
-
+        [Authorize]
         public IActionResult Schedule()
         {
             return View();

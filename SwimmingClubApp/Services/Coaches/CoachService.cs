@@ -27,7 +27,8 @@ namespace SwimmingClubApp.Services.Coaches
                       Email = c.Email,
                       Image = c.Image,
                       Squad = c.Squad.SquadName,
-                      JobPosition = c.JobPosition
+                      JobPosition = c.JobPosition,
+                      IsAvtive = c.IsAvtive
                   })
                   .ToList();
         }

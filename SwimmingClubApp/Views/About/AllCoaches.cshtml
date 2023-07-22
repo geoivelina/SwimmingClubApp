@@ -15,10 +15,13 @@
                     <p class="card-text">@coach.JobPosition</p>
                     <p class="card-text">Squad: @coach.Squad</p>
                     <a class="btn btn-dark" href="mailto:@coach.Email" target="_self">Contact Now</a>
-                    <div class="mt-3">
-                        <a asp-area="" asp-controller="About" asp-action="EditCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        <a asp-area="" asp-controller="About" asp-action="DeleteCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                    </div>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <div class="mt-3">
+                            <a asp-area="" asp-controller="About" asp-action="EditCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-area="" asp-controller="About" asp-action="DeleteCoach" asp-route-id="@coach.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="card" style="width: 16rem;">

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SwimmerServiceModel>
+
+@{
+    ViewBag.Title = "All Applications";
+}
+
+<h1 class="text-center">All Applications From Swimmers</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Contact Person</th>
+            <th scope="col">Relationship With Swimmer</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Medical Datails</th>
+            <th scope="col">Swimming Experience</th>
+            <th scope="col">Squad</th>
+            <th scope="col">Approved</th>
+            <th scope="col">Approve/Disapprove</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var swimmer in Model)
+        {
+            <tr>
+                <td scope="col">@swimmer.Id</td>
+                <td scope="col">@swimmer.FullName</td>
+                <td scope="col">@swimmer.Age</td>
+                <td scope="col">@swimmer.ContactPersonName</td>
+                <td scope="col">@swimmer.RelationshipToSwimmer</td>
+                <td scope="col">@swimmer.PhoneNumber</td>
+                <td scope="col">@swimmer.Email</td>
+                <td scope="col">@swimmer.Address</td>
+                <td scope="col">@swimmer.MedicalDatails</td>
+                <td scope="col">@swimmer.SwimmingExperience</td>
+                <td scope="col">@swimmer.SwimmingExperience</td>
+                <td scope="col">@swimmer.Squad</td>
+                <td scope="col">@(swimmer.IsApproved == true ? "Yes" : "No")</td>
+                <td scope="col">
+                    <a asp-area="" asp-controller="ClubShop" asp-action="Aprove" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Aprove</a>
+                </td>
+                <td scope="col">
+                    <a asp-area="" asp-controller="Joinus" asp-action="Edit" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-area="" asp-controller="Joinus" asp-action="Delete" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -277,7 +277,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 7, 15, 14, 4, 1, 831, DateTimeKind.Local).AddTicks(1132),
+                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3244),
                             Desctioption = "Here are our athletes for the month of January. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -286,7 +286,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 7, 15, 14, 4, 1, 831, DateTimeKind.Local).AddTicks(1185),
+                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3301),
                             Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -295,7 +295,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 7, 15, 14, 4, 1, 831, DateTimeKind.Local).AddTicks(1191),
+                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3306),
                             Desctioption = "Join us on 24th of July 2023 in SemmerSet Venue at 20:00 h for our Anual Fundrising gathering. You can meet our athleats, their coaches and see their result. Tickets for the event could be found at the receprion desk. If you need more information or would like to join organisation team contact the coordinators: event@mail.com. ",
                             Image = "https://s3.amazonaws.com/images.ecwid.com/images/16075414/1126948529.jpg",
                             IsAvtive = true,
@@ -304,7 +304,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 7, 15, 14, 4, 1, 831, DateTimeKind.Local).AddTicks(1197),
+                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3312),
                             Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -694,6 +694,10 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -703,6 +707,10 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("MedicalDatails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -719,12 +727,88 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
+                    b.HasIndex("SquadId");
+
                     b.ToTable("Swimmers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "SomeTown, SomeStreet, SomeNumber",
+                            Age = 12,
+                            ContactPersonName = "Sam Miller",
+                            Email = "levi@mail.com",
+                            FullName = "Levi Miller",
+                            IsApproved = false,
+                            MedicalDatails = "None",
+                            PhoneNumber = "+000111222333",
+                            RelationshipToSwimmer = "Mother",
+                            SquadId = 1,
+                            SwimmingExperience = "Some other swimming club"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "SomeTown, SomeStreet, SomeNumber",
+                            Age = 22,
+                            ContactPersonName = "Some Relative",
+                            Email = "austin@mail.com",
+                            FullName = "Austin Ouyang",
+                            IsApproved = false,
+                            MedicalDatails = "None",
+                            PhoneNumber = "+000111222333",
+                            RelationshipToSwimmer = "Some",
+                            SquadId = 3,
+                            SwimmingExperience = "2 other swimming clubs"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "SomeTown, SomeStreet, SomeNumber",
+                            Age = 21,
+                            ContactPersonName = "Some Relative",
+                            Email = "ava@mail.com",
+                            FullName = "Ava Senn",
+                            IsApproved = false,
+                            MedicalDatails = "None",
+                            PhoneNumber = "+000111222333",
+                            RelationshipToSwimmer = "Some",
+                            SquadId = 3,
+                            SwimmingExperience = "2 other swimming clubs"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "SomeTown, SomeStreet, SomeNumber",
+                            Age = 18,
+                            ContactPersonName = "Some Relative",
+                            Email = "adam@mail.com",
+                            FullName = "Adam Smith",
+                            IsApproved = false,
+                            MedicalDatails = "None",
+                            PhoneNumber = "+000111222333",
+                            RelationshipToSwimmer = "Some",
+                            SquadId = 2,
+                            SwimmingExperience = "2 other swimming clubs"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "SomeTown, SomeStreet, SomeNumber",
+                            Age = 17,
+                            ContactPersonName = "Some Relative",
+                            Email = "maggie@mail.com",
+                            FullName = "Maggie Welsh",
+                            IsApproved = false,
+                            MedicalDatails = "None",
+                            PhoneNumber = "+000111222333",
+                            RelationshipToSwimmer = "Some",
+                            SquadId = 2,
+                            SwimmingExperience = "2 other swimming clubs"
+                        });
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.User", b =>
@@ -795,6 +879,42 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a1259a89-da2c-413d-94b9-fa5860faa017",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0a683ebd-c12f-43f6-bc11-eaa18e787499",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHSOu3Jz3c/uYG07Y9dkxYXMzsM9TgnoC3K0Xwr8F/MFbyC+7faHtx1bFBRK/qpsbg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4dba79e8-e667-42a3-85b9-ab3ca845d91a",
+                            TwoFactorEnabled = false,
+                            UserFullName = "Admin",
+                            UserName = "admin@mail.com"
+                        },
+                        new
+                        {
+                            Id = "a8cf3ed6-7921-4e33-8da6-7ebb70d5f4c3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9ed9d62b-bb06-470d-b8e0-af089eb96b6e",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKgwZf2cLfJR45uBc2OhXBOjkvaJ4KRiH/TbuKkWGzJpwYEwNanQ7JyTdajtg7CAng==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "75c2daa3-9f8d-424d-8e12-85f0d744468d",
+                            TwoFactorEnabled = false,
+                            UserFullName = "Guest User",
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -887,6 +1007,17 @@ namespace SwimmingClubApp.Data.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("SizeOption");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.Swimmer", b =>
+                {
+                    b.HasOne("SwimmingClubApp.Data.Models.Squad", "Squad")
+                        .WithMany()
+                        .HasForeignKey("SquadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Squad");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>

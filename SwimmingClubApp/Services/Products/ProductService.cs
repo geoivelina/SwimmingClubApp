@@ -14,7 +14,7 @@ namespace SwimmingClubApp.Services.Products
             this.data = data;
         }
 
-        public ProductQueryServiceModel All(string category, ProductSorting sorting, int currentPage, int productsPerPage)
+        public ProductQueryServiceModel All(string category, ProductSorting sorting, int currentPage = 1, int productsPerPage = 1)
         {
             var queryProduct = this.data.Products.Where(p => p.IsAvtive).AsQueryable();
 
@@ -30,27 +30,24 @@ namespace SwimmingClubApp.Services.Products
                 _ => queryProduct.OrderByDescending(p => p.Id)
             };
 
-            var totalProducts = queryProduct.Count();
-
             var products = queryProduct
                .Skip((currentPage - 1) * productsPerPage)
                .Take(productsPerPage)
-                .Select(n => new ProductServiceMOdel()
+                .Select(n => new ProductServiceModel()
                 {
                     Id = n.Id,
                     Image = n.Image,
                     Name = n.Name,
-                    Price = n.Price,
-                    Category = n.ProductCategory.CategoryName
+                    Price = n.Price
                 })
                 .ToList();
 
+            var totalProducts = queryProduct.Count();
+
             return new ProductQueryServiceModel
             {
-                TotalProducts = totalProducts,
-                CurrentPage = currentPage,
-                ProductsPerPage = productsPerPage,
                 Products = products,
+                TotalProducts = totalProducts
             };
         }
 
@@ -103,16 +100,17 @@ namespace SwimmingClubApp.Services.Products
             return newProduct.Id;
         }
 
-        public ProductServiceMOdel Details(int id)
+        public ProductDetailsServiceModel ProductDetails(int id)
         {
             return this.data.Products
-                 .Where(p => p.Id == id)
-                 .Select(p => new ProductServiceMOdel
+                 .Where(p => p.Id == id && p.IsAvtive)
+                 .Select(p => new ProductDetailsServiceModel
                  {
                      Id = p.Id,
                      Image = p.Image,
                      Name = p.Name,
                      Price = p.Price,
+
                      Category = p.ProductCategory.CategoryName,
                      ProductCategoryId = p.ProductCategoryId,
                      SizesList = p.Sizes.Select(s => new ProductSizeServiceModel
@@ -125,7 +123,7 @@ namespace SwimmingClubApp.Services.Products
                  .FirstOrDefault();
         }
 
-        public IEnumerable<string> ProductCategories()
+        public IEnumerable<string> ProductCategoriesNames()
         {
             return this.data
                   .ProductCategories
@@ -136,7 +134,12 @@ namespace SwimmingClubApp.Services.Products
 
         public bool ProductCategoriesExist(int productCategoryId)
         {
-            return !this.data.ProductCategories.Any(p => p.Id == productCategoryId);
+            return this.data.ProductCategories.Any(p => p.Id == productCategoryId);
+        }
+
+        public bool ProductExists(int id)
+        {
+            return this.data.Products.Any(p => p.Id == id);
         }
     }
 }

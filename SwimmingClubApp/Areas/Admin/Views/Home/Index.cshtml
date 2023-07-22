@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Administrator Page";
+}
+
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is administrator area where you can <b>read</b>, <b>create</b>,
+        <b>delete</b> and <b>edit</b> entities.
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all swimmers, coaches, sponsors and news</b> and <b>all store products</b> in the system.
+    </p>
+    <hr class="my-4">
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllSponsors" class="btn btn-dark btn-lg">All Sponsors</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllCoaches" class="btn btn-dark btn-lg">All Coaches</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllProducts" class="btn btn-dark btn-lg">All Products</a>
+    <span>  |   </span>
+    <span>  |   </span>
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllUsers" class="btn btn-dark btn-lg">All Users</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllSwimmers" class="btn btn-dark btn-lg">All Swimmers</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="AllEntries" class="btn btn-dark btn-lg">All Entries</a>
+   
+
+</div>

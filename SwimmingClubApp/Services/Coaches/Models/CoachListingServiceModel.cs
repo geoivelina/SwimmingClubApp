@@ -11,5 +11,6 @@
         public string JobPosition { get; set; } = null!;
 
         public string Squad { get; set; } = null!;
+        public bool IsAvtive { get; set; } = true;
     }
 }

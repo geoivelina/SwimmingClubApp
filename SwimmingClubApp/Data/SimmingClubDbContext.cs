@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Infrastructure;
 
 namespace SwimmingClubApp.Data
 {
-    public class SimmingClubDbContext : IdentityDbContext<User>
+    public class SimmingClubDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public SimmingClubDbContext(DbContextOptions<SimmingClubDbContext> options)
             : base(options)
         {
         }
-
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -24,6 +24,8 @@ namespace SwimmingClubApp.Data
             builder.ApplyConfiguration(new SponsorsConfiguration());
             builder.ApplyConfiguration(new SquadsConfiguration());
             builder.ApplyConfiguration(new AdministratorConfiguration());
+            builder.ApplyConfiguration(new UsersConfiguration());
+            builder.ApplyConfiguration(new SwimmersConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -37,13 +39,10 @@ namespace SwimmingClubApp.Data
         public DbSet<News> Newses { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<ProductCategory> ProductCategories { get; set; } = null!;
-       // public DbSet<ProductSize> ProductSizes { get; set; } = null!;
         public DbSet<SizeOption> SizeOptions { get; set; } = null!;
         public DbSet<Sponsor> Sponsors { get; set; } = null!;
         public DbSet<Squad> Squads { get; set; } = null!;
         public DbSet<Swimmer> Swimmers { get; set; } = null!;
-
-
 
     }
 

@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models.About;
 using SwimmingClubApp.Services.Coaches;
 using SwimmingClubApp.Services.Coaches.Models;
 using SwimmingClubApp.Services.Sponsors;
 using SwimmingClubApp.Services.Sponsors.Models;
 
+using static SwimmingClubApp.Areas.Admin.AdminConstants;
+
 namespace SwimmingClubApp.Controllers
 {
+   // [Authorize(Roles = AdminRoleName)]
+
     public class AboutController : Controller
     {
         private readonly ICoachService coaches;
@@ -18,19 +23,20 @@ namespace SwimmingClubApp.Controllers
             this.sponsors = sponsors;
         }
 
+        [AllowAnonymous]
         public IActionResult History()
         {
             return View();
         }
 
 
-
+        [AllowAnonymous]
         public IActionResult Fundrising()
         {
             return View();
         }
 
-
+        [HttpGet]
         public IActionResult AddCoach()
         {
             return View(new CoachFormModel

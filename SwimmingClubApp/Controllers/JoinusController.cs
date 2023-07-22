@@ -1,72 +1,62 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Data;
-using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.Joinus;
+using SwimmingClubApp.Services.Entries;
+
+using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
 {
+   // [Authorize(Roles = AdminRoleName)]
     public class JoinusController : Controller
     {
-        private readonly SimmingClubDbContext data;
+        private readonly IJoinusService entries;
 
-        public JoinusController(SimmingClubDbContext data)
+        public JoinusController(IJoinusService entries)
         {
-            this.data = data;
+            this.entries = entries;
         }
+
+        [AllowAnonymous]
+        [HttpGet]
         public IActionResult EntryForm()
         {
             return View(new SwimmerEntryFormModel
             {
-                Squads = this.GetSquads()
-            }); ;
+                Squads = this.entries.AllSquads()
+            });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult EntryForm(SwimmerEntryFormModel swimmer)
         {
-            if (!this.data.Squads.Any(s=> s.Id == swimmer.SquadId))
+            if (!this.entries.SquadExists(swimmer.SquadId))
             {
                 this.ModelState.AddModelError(nameof(swimmer.SquadId), "Squad does not exist.");
             }
 
             if (!ModelState.IsValid)
             {
-                swimmer.Squads = this.GetSquads();
+                swimmer.Squads = this.entries.AllSquads();
                 return View(swimmer);
             }
 
-            var newSwimmer = new Swimmer
-            {
-                FullName = swimmer.FullName,
-                Age = swimmer.Age,
-                ContactPersonName = swimmer.ContactPersonName,
-                RelationshipToSwimmer = swimmer.RelationshipToSwimmer,
-                Address = swimmer.Address,
-                MedicalDatails = swimmer.MedicalDatails,
-                SwimmingExperience = swimmer.SwimmingExperience,
-                SquadId = swimmer.SquadId,
-                IsApproved = false
-            };
-         
-
-            this.data.Swimmers.Add(newSwimmer);
-            this.data.SaveChanges();
+            this.entries.CreateEntry(swimmer.FullName, swimmer.Age, swimmer.ContactPersonName, swimmer.RelationshipToSwimmer, swimmer.Address, swimmer.MedicalDatails, swimmer.SwimmingExperience, swimmer.SquadId);
 
             return RedirectToAction(nameof(Thankyou));
         }
 
-        private IEnumerable<SwimmerSquadModel> GetSquads()
+
+        public IActionResult AllEntries()
         {
-            return this.data
-                .Squads
-                .Select(s => new SwimmerSquadModel
-                {
-                    Id = s.Id,
-                    SquadName = s.SquadName
-                })
-                .ToList();
+            var entries = this.entries.AllSwimmers();
+
+            return View(entries);
         }
-    
+
+        [AllowAnonymous]
         public IActionResult Thankyou()
         {
             return View();

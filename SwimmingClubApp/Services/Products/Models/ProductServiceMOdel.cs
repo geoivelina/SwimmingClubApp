@@ -3,17 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SwimmingClubApp.Services.Products.Models
 {
-    public class ProductServiceMOdel
+    public class ProductServiceModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Product Name")]
         public string Name { get; set; } = null!;
+
+        [Display(Name= "Image URL")]
         public string Image { get; set; } = null!;
         public decimal Price { get; set; }
-        public ProductSorting Sorting { get; set; }
-        public int ProductCategoryId { get; set; }
-        public string Category { get; set; } = null!;
-        public IEnumerable<ProductCategoryServiceModel> Categories { get; set; } = new List<ProductCategoryServiceModel>();
-        public List<ProductSizeServiceModel> SizesList { get; set; } = new List<ProductSizeServiceModel>();
+
+
 
     }
 }

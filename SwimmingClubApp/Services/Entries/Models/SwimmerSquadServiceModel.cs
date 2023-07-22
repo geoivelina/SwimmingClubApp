@@ -1,6 +1,6 @@
-﻿namespace SwimmingClubApp.Models.Joinus
+﻿namespace SwimmingClubApp.Services.Entries.Models
 {
-    public class SwimmerSquadModel
+    public class SwimmerSquadServiceModel
     {
         public int Id { get; set; }
         public string SquadName { get; set; } = null!;
