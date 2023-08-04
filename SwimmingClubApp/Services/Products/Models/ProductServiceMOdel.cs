@@ -1,5 +1,4 @@
-﻿using SwimmingClubApp.Models.ClubShop;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SwimmingClubApp.Services.Products.Models
 {
@@ -13,6 +12,7 @@ namespace SwimmingClubApp.Services.Products.Models
         [Display(Name= "Image URL")]
         public string Image { get; set; } = null!;
         public decimal Price { get; set; }
+        public bool IsActive { get; set; }
 
 
 

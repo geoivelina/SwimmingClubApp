@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SwimmingClubApp.Data;
 using SwimmingClubApp.Models.Joinus;
 using SwimmingClubApp.Services.Entries;
 
@@ -8,7 +7,7 @@ using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
 {
-   // [Authorize(Roles = AdminRoleName)]
+    [Authorize(Roles = AdminRoleName)]
     public class JoinusController : Controller
     {
         private readonly IJoinusService entries;
@@ -48,13 +47,6 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(Thankyou));
         }
 
-
-        public IActionResult AllEntries()
-        {
-            var entries = this.entries.AllSwimmers();
-
-            return View(entries);
-        }
 
         [AllowAnonymous]
         public IActionResult Thankyou()

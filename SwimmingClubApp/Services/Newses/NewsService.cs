@@ -1,14 +1,15 @@
 ﻿using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Newses.Models;
 
 namespace SwimmingClubApp.Services.Newses
 {
     public class NewsService : INewsService
     {
-        private readonly SimmingClubDbContext data;
+        private readonly SwimmingClubDbContext data;
 
-        public NewsService(SimmingClubDbContext data)
+        public NewsService(SwimmingClubDbContext data)
         {
             this.data = data;
         }
@@ -28,7 +29,7 @@ namespace SwimmingClubApp.Services.Newses
 
             return news.Id;
         }
-        public void Edit(int id, NewsDetailsServiceModel news)
+        public void EditNews(int id, NewsDetailsServiceModel news)
         {
             var toEdit = this.data.Newses.Find(id);
 
@@ -40,7 +41,7 @@ namespace SwimmingClubApp.Services.Newses
             this.data.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void DeleteNews(int id)
         {
             var toDelete = this.data.Newses.Find(id);
             toDelete.IsAvtive = false;
@@ -66,7 +67,7 @@ namespace SwimmingClubApp.Services.Newses
         {
             return this.data.Newses.Any(c => c.Id == newsId);
         }
-        public IEnumerable<NewsServiceModel> All()
+        public IEnumerable<NewsServiceModel> AllNews()
         {
             return this.data
                 .Newses

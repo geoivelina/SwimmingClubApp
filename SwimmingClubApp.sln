@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingClubApp", "SwimmingClubApp\SwimmingClubApp.csproj", "{BF296980-2EE6-499E-A06A-9BD726D5EEEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingClubApp", "SwimmingClubApp\SwimmingClubApp.csproj", "{C7910A6E-C229-40EB-8BB1-9642FEBBEA5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF296980-2EE6-499E-A06A-9BD726D5EEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF296980-2EE6-499E-A06A-9BD726D5EEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF296980-2EE6-499E-A06A-9BD726D5EEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF296980-2EE6-499E-A06A-9BD726D5EEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7910A6E-C229-40EB-8BB1-9642FEBBEA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7910A6E-C229-40EB-8BB1-9642FEBBEA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7910A6E-C229-40EB-8BB1-9642FEBBEA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7910A6E-C229-40EB-8BB1-9642FEBBEA5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

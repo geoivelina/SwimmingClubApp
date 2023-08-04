@@ -12,7 +12,9 @@
         public string Address { get; set; } = null!;
         public string MedicalDatails { get; set; }
         public string SwimmingExperience { get; set; } = null!;
-        public string Squad { get; set; } = null!;
+        public int SquadId { get; set; }
+
+        public string SquadName { get; set; }
         public bool IsApproved { get; set; }
     }
 }

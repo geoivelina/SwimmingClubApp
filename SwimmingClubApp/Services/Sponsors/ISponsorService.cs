@@ -7,7 +7,7 @@ namespace SwimmingClubApp.Services.Sponsors
     {
         bool SponsorExists(int id);
         void Edit(int id, SponsorFormModel sponsor);
-        void DeleteSponsor(int id, SponsorDetailsServiceModel sponsor);
+        void DeleteSponsor(int id);
         SponsorDetailsServiceModel Details(int id);
         int CreateSponsor(string name, string link, string logo);
         IEnumerable<SponsorDetailsServiceModel> AllSponsors();

@@ -1,26 +1,28 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Models.About;
 using SwimmingClubApp.Services.Coaches;
 using SwimmingClubApp.Services.Coaches.Models;
 using SwimmingClubApp.Services.Sponsors;
 using SwimmingClubApp.Services.Sponsors.Models;
-
 using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
 {
-   // [Authorize(Roles = AdminRoleName)]
+    [Authorize(Roles = AdminRoleName)]
 
     public class AboutController : Controller
     {
         private readonly ICoachService coaches;
         private readonly ISponsorService sponsors;
+        private readonly IMapper mapper;
 
-        public AboutController(ICoachService coaches, ISponsorService sponsors)
+        public AboutController(ICoachService coaches, ISponsorService sponsors, IMapper mapper)
         {
             this.coaches = coaches;
             this.sponsors = sponsors;
+            this.mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -102,7 +104,7 @@ namespace SwimmingClubApp.Controllers
 
             if (!this.coaches.SquadExists(coach.SquadId))
             {
-                ModelState.AddModelError(nameof(coach.SquadId), "Squat does not exist");
+                ModelState.AddModelError(nameof(coach.SquadId), "Squad does not exist");
 
                 return View(coach);
             }
@@ -173,6 +175,8 @@ namespace SwimmingClubApp.Controllers
 
             return RedirectToAction(nameof(AllCoaches));
         }
+
+        [AllowAnonymous]
         public IActionResult AllCoaches()
         {
             var coaches = this.coaches.AllCoaches();
@@ -271,10 +275,12 @@ namespace SwimmingClubApp.Controllers
                 return RedirectToAction(nameof(AllSponsors));
             }
 
-            this.sponsors.DeleteSponsor(id, sponsor);
+            this.sponsors.DeleteSponsor(id);
 
             return RedirectToAction(nameof(AllSponsors));
         }
+
+        [AllowAnonymous]
         public IActionResult AllSponsors()
         {
             var sponsors = this.sponsors.AllSponsors();

@@ -1,18 +1,22 @@
-﻿using SwimmingClubApp.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
-using SwimmingClubApp.Models.About;
 using SwimmingClubApp.Services.Coaches.Models;
+using SwimmingClubApp.Services.Data.Models;
 
 namespace SwimmingClubApp.Services.Coaches
 {
     public class CoachService : ICoachService
     {
 
-        private readonly SimmingClubDbContext data;
+        private readonly SwimmingClubDbContext data;
+        private readonly IMapper mapper;
 
-        public CoachService(SimmingClubDbContext data)
+        public CoachService(SwimmingClubDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public IEnumerable<CoachListingServiceModel> AllCoaches()
@@ -20,6 +24,7 @@ namespace SwimmingClubApp.Services.Coaches
             return this.data
                   .Coaches
                   .Where(c => c.IsAvtive)
+                  //.ProjectTo<CoachListingServiceModel>(this.mapper.ConfigurationProvider)
                   .Select(c => new CoachListingServiceModel
                   {
                       Id = c.Id,

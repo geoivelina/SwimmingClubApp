@@ -4,9 +4,9 @@ namespace SwimmingClubApp.Services.Users
 {
     public class UserService : IUserService
     {
-        private readonly SimmingClubDbContext data;
+        private readonly SwimmingClubDbContext data;
 
-        public UserService(SimmingClubDbContext data)
+        public UserService(SwimmingClubDbContext data)
         {
             this.data = data;
         }

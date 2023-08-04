@@ -1,35 +1,18 @@
 ﻿using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.About;
+using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Sponsors.Models;
 
 namespace SwimmingClubApp.Services.Sponsors
 {
     public class SponsorService : ISponsorService
     {
-        private readonly SimmingClubDbContext data;
+        private readonly SwimmingClubDbContext data;
 
-        public SponsorService(SimmingClubDbContext data)
+        public SponsorService(SwimmingClubDbContext data)
         {
             this.data = data;
-        }
-
-        public IEnumerable<SponsorDetailsServiceModel> AllSponsors()
-        {
-            var sponsors = this.data
-                        .Sponsors
-                        .Where(s => s.IsAvtive)
-                        .Select(s => new SponsorDetailsServiceModel
-                        {
-                            Id = s.Id,
-                            Logo = s.Logo,
-                            HomePageLink = s.Link,
-                            Name = s.Name,
-                            IsActive = s.IsAvtive
-                        })
-                        .ToList();
-
-            return sponsors;
         }
 
         public int CreateSponsor(string name, string link, string logo)
@@ -47,14 +30,16 @@ namespace SwimmingClubApp.Services.Sponsors
             return newSponsor.Id;
         }
 
-        public void DeleteSponsor(int id, SponsorDetailsServiceModel sponsor)
+        public void Edit(int id, SponsorFormModel sponsor)
         {
-            var toDelete = this.data.Sponsors.Find(id);
-            toDelete.IsAvtive = false;
+            var toEdit = this.data.Sponsors.Find(id);
+
+            toEdit.Name = sponsor.Name;
+            toEdit.Logo = sponsor.Logo;
+            toEdit.Link = sponsor.Link;
 
             this.data.SaveChanges();
         }
-
         public SponsorDetailsServiceModel Details(int id)
         {
             return this.data.Sponsors
@@ -70,17 +55,30 @@ namespace SwimmingClubApp.Services.Sponsors
                    .First();
         }
 
-        public void Edit(int id, SponsorFormModel sponsor)
+        public void DeleteSponsor(int id)
         {
-            var toEdit = this.data.Sponsors.Find(id);
-
-            toEdit.Name = sponsor.Name;
-            toEdit.Logo = sponsor.Logo;
-            toEdit.Link = sponsor.Link;
+            var toDelete = this.data.Sponsors.Find(id);
+            toDelete.IsAvtive = false;
 
             this.data.SaveChanges();
         }
+        public IEnumerable<SponsorDetailsServiceModel> AllSponsors()
+        {
+            var sponsors = this.data
+                        .Sponsors
+                        .Where(s => s.IsAvtive)
+                        .Select(s => new SponsorDetailsServiceModel
+                        {
+                            Id = s.Id,
+                            Logo = s.Logo,
+                            HomePageLink = s.Link,
+                            Name = s.Name,
+                            IsActive = s.IsAvtive
+                        })
+                        .ToList();
 
+            return sponsors;
+        }
         public bool SponsorExists(int id)
         {
             return this.data.Sponsors.Any(s => s.Id == id);

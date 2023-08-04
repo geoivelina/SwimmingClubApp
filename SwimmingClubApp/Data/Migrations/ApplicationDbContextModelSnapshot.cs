@@ -10,7 +10,7 @@ using SwimmingClubApp.Data;
 
 namespace SwimmingClubApp.Data.Migrations
 {
-    [DbContext(typeof(SimmingClubDbContext))]
+    [DbContext(typeof(SwimmingClubDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -227,7 +227,7 @@ namespace SwimmingClubApp.Data.Migrations
                             Image = "https://tse2.mm.bing.net/th?id=OIP.5cla8U39A4eNC8xzRCMDiQHaHa&pid=Api",
                             IsAvtive = true,
                             JobPosition = "Senior Swimming Instructor",
-                            SquadId = 2
+                            SquadId = 3
                         },
                         new
                         {
@@ -237,7 +237,7 @@ namespace SwimmingClubApp.Data.Migrations
                             Image = "https://tse4.mm.bing.net/th?id=OIP.6Ue-IdphavC3AxW8adedCAHaHa&pid=Api",
                             IsAvtive = true,
                             JobPosition = "General Manager",
-                            SquadId = 2
+                            SquadId = 3
                         });
                 });
 
@@ -277,7 +277,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3244),
+                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5215),
                             Desctioption = "Here are our athletes for the month of January. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -286,7 +286,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3301),
+                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5274),
                             Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -295,7 +295,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3306),
+                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5280),
                             Desctioption = "Join us on 24th of July 2023 in SemmerSet Venue at 20:00 h for our Anual Fundrising gathering. You can meet our athleats, their coaches and see their result. Tickets for the event could be found at the receprion desk. If you need more information or would like to join organisation team contact the coordinators: event@mail.com. ",
                             Image = "https://s3.amazonaws.com/images.ecwid.com/images/16075414/1126948529.jpg",
                             IsAvtive = true,
@@ -304,7 +304,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 7, 21, 10, 43, 18, 325, DateTimeKind.Local).AddTicks(3312),
+                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5286),
                             Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -312,133 +312,32 @@ namespace SwimmingClubApp.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.OrderStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvtive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductCategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductCategoryId");
-
-                    b.ToTable("Products");
+                    b.ToTable("OrderStatuses");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Image = "https://thumbs.dreamstime.com/b/sports-bottle-silhouette-icon-black-simple-illustration-plastic-container-scale-handle-water-contour-isolated-230479543.jpg",
-                            IsAvtive = true,
-                            Name = "Star Swimming Club Bottle",
-                            Price = 7.00m,
-                            ProductCategoryId = 4
+                            Name = "Active"
                         },
                         new
                         {
                             Id = 2,
-                            Image = "https://tse3.mm.bing.net/th?id=OIP.V3pt_Mlm8RMFF51PfXO8qQHaHa&pid=Api",
-                            IsAvtive = true,
-                            Name = "Fins",
-                            Price = 30.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Image = "https://tse1.mm.bing.net/th?id=OIP.SJjMXsjJV7NIePPD-UDjEAHaHa&pid=Api",
-                            IsAvtive = true,
-                            Name = "Adult Googles",
-                            Price = 11.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Image = "https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/a5921c08923f404586ef252ada57626a.png",
-                            IsAvtive = true,
-                            Name = "Star Swimming Club Hat",
-                            Price = 5.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Image = "https://tse2.mm.bing.net/th?id=OIP._Rm-iwyJeCelyO1zNt4WygHaHa&pid=Api",
-                            IsAvtive = true,
-                            Name = "Kickboard",
-                            Price = 15.00m,
-                            ProductCategoryId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Image = "https://tse4.mm.bing.net/th?id=OIP.GzxZvy7xMdsGgEYBh8QeEAAAAA&pid=Api",
-                            IsAvtive = true,
-                            Name = "Star Swimming Club Towel",
-                            Price = 15.00m,
-                            ProductCategoryId = 4
-                        });
-                });
-
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Junior"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryName = "Women"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryName = "Men"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryName = "Traning Aids"
+                            Name = "Complete"
                         });
                 });
 
@@ -703,6 +602,9 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
@@ -742,6 +644,7 @@ namespace SwimmingClubApp.Data.Migrations
                             ContactPersonName = "Sam Miller",
                             Email = "levi@mail.com",
                             FullName = "Levi Miller",
+                            IsActive = false,
                             IsApproved = false,
                             MedicalDatails = "None",
                             PhoneNumber = "+000111222333",
@@ -757,6 +660,7 @@ namespace SwimmingClubApp.Data.Migrations
                             ContactPersonName = "Some Relative",
                             Email = "austin@mail.com",
                             FullName = "Austin Ouyang",
+                            IsActive = false,
                             IsApproved = false,
                             MedicalDatails = "None",
                             PhoneNumber = "+000111222333",
@@ -772,6 +676,7 @@ namespace SwimmingClubApp.Data.Migrations
                             ContactPersonName = "Some Relative",
                             Email = "ava@mail.com",
                             FullName = "Ava Senn",
+                            IsActive = false,
                             IsApproved = false,
                             MedicalDatails = "None",
                             PhoneNumber = "+000111222333",
@@ -787,6 +692,7 @@ namespace SwimmingClubApp.Data.Migrations
                             ContactPersonName = "Some Relative",
                             Email = "adam@mail.com",
                             FullName = "Adam Smith",
+                            IsActive = false,
                             IsApproved = false,
                             MedicalDatails = "None",
                             PhoneNumber = "+000111222333",
@@ -802,6 +708,7 @@ namespace SwimmingClubApp.Data.Migrations
                             ContactPersonName = "Some Relative",
                             Email = "maggie@mail.com",
                             FullName = "Maggie Welsh",
+                            IsActive = false,
                             IsApproved = false,
                             MedicalDatails = "None",
                             PhoneNumber = "+000111222333",
@@ -885,15 +792,15 @@ namespace SwimmingClubApp.Data.Migrations
                         {
                             Id = "a1259a89-da2c-413d-94b9-fa5860faa017",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a683ebd-c12f-43f6-bc11-eaa18e787499",
+                            ConcurrencyStamp = "d2e7e149-b2cb-429e-8829-f307c63ad644",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHSOu3Jz3c/uYG07Y9dkxYXMzsM9TgnoC3K0Xwr8F/MFbyC+7faHtx1bFBRK/qpsbg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAp8G6ABiab3HdZBIahkq9HuSL3pP7mAmGflqusCApVzRGiGXow4JFb2mk5K/ELn9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4dba79e8-e667-42a3-85b9-ab3ca845d91a",
+                            SecurityStamp = "f0f4854e-526b-42db-baa7-3f0be3887175",
                             TwoFactorEnabled = false,
                             UserFullName = "Admin",
                             UserName = "admin@mail.com"
@@ -902,18 +809,186 @@ namespace SwimmingClubApp.Data.Migrations
                         {
                             Id = "a8cf3ed6-7921-4e33-8da6-7ebb70d5f4c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ed9d62b-bb06-470d-b8e0-af089eb96b6e",
+                            ConcurrencyStamp = "b857c345-cf3b-460a-aa0d-ab65612590a1",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKgwZf2cLfJR45uBc2OhXBOjkvaJ4KRiH/TbuKkWGzJpwYEwNanQ7JyTdajtg7CAng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIENyhFwOAdXokNFdnM8qKTOgPmDkqHWgI1zieT2OXf1q1YMU0oIR7ItbScdTMxLyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75c2daa3-9f8d-424d-8e12-85f0d744468d",
+                            SecurityStamp = "9ead9d26-a5cd-47c6-9029-598ef8d46bc4",
                             TwoFactorEnabled = false,
                             UserFullName = "Guest User",
                             UserName = "guest@mail.com"
+                        });
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("IssuedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IssuerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssuerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvtive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductCategoryId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Image = "https://thumbs.dreamstime.com/b/sports-bottle-silhouette-icon-black-simple-illustration-plastic-container-scale-handle-water-contour-isolated-230479543.jpg",
+                            IsAvtive = true,
+                            Name = "Star Swimming Club Bottle",
+                            Price = 7.00m,
+                            ProductCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Image = "https://tse3.mm.bing.net/th?id=OIP.V3pt_Mlm8RMFF51PfXO8qQHaHa&pid=Api",
+                            IsAvtive = true,
+                            Name = "Fins",
+                            Price = 30.00m,
+                            ProductCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Image = "https://tse1.mm.bing.net/th?id=OIP.SJjMXsjJV7NIePPD-UDjEAHaHa&pid=Api",
+                            IsAvtive = true,
+                            Name = "Adult Googles",
+                            Price = 11.00m,
+                            ProductCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Image = "https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/a5921c08923f404586ef252ada57626a.png",
+                            IsAvtive = true,
+                            Name = "Star Swimming Club Hat",
+                            Price = 5.00m,
+                            ProductCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Image = "https://tse2.mm.bing.net/th?id=OIP._Rm-iwyJeCelyO1zNt4WygHaHa&pid=Api",
+                            IsAvtive = true,
+                            Name = "Kickboard",
+                            Price = 15.00m,
+                            ProductCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Image = "https://tse4.mm.bing.net/th?id=OIP.GzxZvy7xMdsGgEYBh8QeEAAAAA&pid=Api",
+                            IsAvtive = true,
+                            Name = "Star Swimming Club Towel",
+                            Price = 15.00m,
+                            ProductCategoryId = 4
+                        });
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Junior"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Women"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Men"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryName = "Traning Aids"
                         });
                 });
 
@@ -979,20 +1054,9 @@ namespace SwimmingClubApp.Data.Migrations
                     b.Navigation("Squad");
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>
-                {
-                    b.HasOne("SwimmingClubApp.Data.Models.ProductCategory", "ProductCategory")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductCategory");
-                });
-
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductSize", b =>
                 {
-                    b.HasOne("SwimmingClubApp.Data.Models.Product", "Product")
+                    b.HasOne("SwimmingClubApp.Services.Data.Models.Product", "Product")
                         .WithMany("Sizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1020,14 +1084,42 @@ namespace SwimmingClubApp.Data.Migrations
                     b.Navigation("Squad");
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.Product", b =>
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Order", b =>
                 {
-                    b.Navigation("Sizes");
+                    b.HasOne("SwimmingClubApp.Data.Models.User", "Issuer")
+                        .WithMany("Orders")
+                        .HasForeignKey("IssuerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SwimmingClubApp.Services.Data.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SwimmingClubApp.Data.Models.OrderStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Issuer");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductCategory", b =>
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Product", b =>
                 {
-                    b.Navigation("Products");
+                    b.HasOne("SwimmingClubApp.Services.Data.Models.ProductCategory", "ProductCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductCategory");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.SizeOption", b =>
@@ -1038,6 +1130,21 @@ namespace SwimmingClubApp.Data.Migrations
             modelBuilder.Entity("SwimmingClubApp.Data.Models.Squad", b =>
                 {
                     b.Navigation("Coaches");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.User", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Product", b =>
+                {
+                    b.Navigation("Sizes");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.ProductCategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

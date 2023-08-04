@@ -1,11 +1,11 @@
-﻿using SwimmingClubApp.Models.ClubShop;
+﻿using SwimmingClubApp.Data;
 using System.ComponentModel.DataAnnotations;
 
 namespace SwimmingClubApp.Services.Products.Models
 {
     public class AllProductsQueryModel
     {
-        public const int ProductsPerPage = 3;
+        public const int ProductsPerPage = 6;
         public string Category { get; set; } = null!;
         public ProductSorting Sorting { get; set; }
         public int CurrentPage { get; set; } = 1;

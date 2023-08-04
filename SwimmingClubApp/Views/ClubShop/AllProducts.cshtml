@@ -37,16 +37,22 @@
 </form>
 
 
-@if (!Model.Products.Any())
+@if (!Model.Products.Any() && this.User.IsInRole("Administrator"))
 {
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <h1 class="display-4">Hello, Administrator!</h1>
         <p class="lead">Currently you don`t have any products in the store.</p>
         <hr class="my-4">
-        <p>Click the button to add some products in Club Shop.</p>
+        <p class="lead">Click the button to add some products in Club Shop.</p>
         <p class="lead">
             <a asp-controller="ClubShop" asp-action="AddProduct" class="btn btn-dark" asp-area="">Add Product</a>
         </p>
+    </div>
+}
+else if (!Model.Products.Any())
+{
+    <div class="jumbotron">
+        <p class="lead text-center">Currently you don`t have any products by the given criteria.</p>
     </div>
 }
 
@@ -66,11 +72,6 @@
                                 <h5 class="card-title" style="color:crimson">$@product.Price </h5>
                             </div>
                             <a asp-area="" asp-controller="ClubShop" asp-action="Details" asp-route-id="@product.Id" class="btn btn-dark">View More</a>
-                            @if (this.User.IsInRole("Administrator"))
-                            {
-                                <a asp-area="" asp-controller="ClubShop" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                <a asp-area="" asp-controller="ClubShop" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                            }
                         </div>
                     </div>
                 </div>

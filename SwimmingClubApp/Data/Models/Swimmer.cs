@@ -4,7 +4,7 @@ using static SwimmingClubApp.Data.DataConstants.Swimmer;
 
 namespace SwimmingClubApp.Data.Models
 {
-    public class Swimmer 
+    public class Swimmer
     {
         public int Id { get; set; }
 
@@ -16,14 +16,14 @@ namespace SwimmingClubApp.Data.Models
         [Range(MinAge, MaxAge)]
         public int Age { get; set; }
 
-     
+
         [MaxLength(ContactPersonNameMaxLength)]
-        
+
         public string ContactPersonName { get; set; } = null!;
 
 
         [MaxLength(ContactPersonNameMaxLength)]
-       
+
         public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]
@@ -49,5 +49,7 @@ namespace SwimmingClubApp.Data.Models
         public Squad Squad { get; set; }
 
         public bool IsApproved { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using SwimmingClubApp.Models.News;
-
-namespace SwimmingClubApp.Services.Newses.Models
+﻿namespace SwimmingClubApp.Services.Newses.Models
 {
     public class NewsDetailsServiceModel : NewsServiceModel
     {

@@ -2,7 +2,6 @@
 {
     public class DataConstants
     {
-
         public class ProductCategory
         {
             public const int CategoryNameMinLength = 3;
@@ -13,14 +12,14 @@
             public const int ProductNameMinLength = 3;
             public const int ProductNameMaxLength = 50;
 
-         
+
         }
         public class SizeOption
         {
             public const int SizeOptionDescriptionMinLength = 1;
             public const int SizeOptionDescriptionMaxLength = 15;
         }
-        public  class Coach
+        public class Coach
         {
             public const int FullNameMinLength = 5;
             public const int FullNameMaxLength = 50;
@@ -88,6 +87,14 @@
             public const int PasswordMaxLength = 100;
             public const int PasswordMinLength = 6;
 
+        }
+
+        public class AdminConstants
+        {
+            public const string AreaName = "Admin";
+            public const string AdminRoleName = "Administrator";
+            public const string AdminEmail = "admin@mail.com";
+            public const string NormalizedAdminEmail = "ADMIN@MAIL.COM";
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using SwimmingClubApp.Models.About;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.Coach;
 
 namespace SwimmingClubApp.Data.Models

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using SwimmingClubApp.Data.Models;
 
-using static SwimmingClubApp.Areas.Admin.AdminConstants;
+using static SwimmingClubApp.Data.DataConstants.AdminConstants;
 
 namespace SwimmingClubApp.Infrastructure
 {

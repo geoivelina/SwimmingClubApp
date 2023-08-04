@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using static SwimmingClubApp.Areas.Admin.AdminConstants;
+using static SwimmingClubApp.Data.DataConstants.AdminConstants;
 
 namespace SwimmingClubApp.Infrastructure
 {

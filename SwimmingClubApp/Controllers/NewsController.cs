@@ -8,7 +8,7 @@ using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
 {
-    //[Authorize(Roles = AdminRoleName)]
+    [Authorize(Roles = AdminRoleName)]
     public class NewsController : Controller
     {
         private readonly INewsService newses;
@@ -40,13 +40,13 @@ namespace SwimmingClubApp.Controllers
 
             this.newses.CreateNews(news.DateCreated, news.Desctioption, news.Image, news.Title);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(AllNews));
         }
 
         [AllowAnonymous]
-        public IActionResult All()
+        public IActionResult AllNews()
         {
-            var newses = this.newses.All();
+            var newses = this.newses.AllNews();
 
             return View(newses);
         }
@@ -66,7 +66,7 @@ namespace SwimmingClubApp.Controllers
 
             if (!this.newses.NewsExists(id))
             {
-                return RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(AllNews));
             }
 
             var news = this.newses.Details(id);
@@ -99,9 +99,9 @@ namespace SwimmingClubApp.Controllers
                 return View(news);
             }
 
-            this.newses.Edit(id, news);
+            this.newses.EditNews(id, news);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(AllNews));
         }
 
         [HttpGet]
@@ -111,7 +111,7 @@ namespace SwimmingClubApp.Controllers
             {
                 ModelState.AddModelError("", "News does not exist");
 
-                return RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(AllNews));
             }
 
             var news = this.newses.Details(id);
@@ -134,12 +134,12 @@ namespace SwimmingClubApp.Controllers
             {
                 ModelState.AddModelError("", "News does not exist");
 
-                return RedirectToAction(nameof(All));
+                return RedirectToAction(nameof(AllNews));
             }
 
-            this.newses.Delete(id);
+            this.newses.DeleteNews(id);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(AllNews));
         }
     }
 }

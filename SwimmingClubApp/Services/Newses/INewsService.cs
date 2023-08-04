@@ -6,9 +6,9 @@ namespace SwimmingClubApp.Services.Newses
     {
         bool NewsExists(int coachId);
         int CreateNews(DateTime dateCreated, string desctioption, string image, string title);
-        IEnumerable<NewsServiceModel> All();
+        IEnumerable<NewsServiceModel> AllNews();
         NewsDetailsServiceModel Details(int id);
-        void Edit(int id, NewsDetailsServiceModel news);
-        void Delete(int id);
+        void EditNews(int id, NewsDetailsServiceModel news);
+        void DeleteNews(int id);
     }
 }

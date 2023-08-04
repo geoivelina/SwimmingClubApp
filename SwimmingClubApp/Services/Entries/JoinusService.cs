@@ -1,28 +1,17 @@
 ﻿using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Entries.Models;
 
 namespace SwimmingClubApp.Services.Entries
 {
     public class JoinusService : IJoinusService
     {
-        private readonly SimmingClubDbContext data;
+        private readonly SwimmingClubDbContext data;
 
-        public JoinusService(SimmingClubDbContext data)
+        public JoinusService(SwimmingClubDbContext data)
         {
             this.data = data;
-        }
-
-        public IEnumerable<SwimmerSquadServiceModel> AllSquads()
-        {
-            return this.data
-                .Squads
-                .Select(s => new SwimmerSquadServiceModel
-                {
-                    Id = s.Id,
-                    SquadName = s.SquadName
-                })
-                .ToList();
         }
 
         public int CreateEntry(string fullName, int age, string contactPersonName, string relationshipToSwimmer, string address, string? medicalDatails, string swimmingExperience, int squadId)
@@ -45,26 +34,48 @@ namespace SwimmingClubApp.Services.Entries
             return newSwimmer.Id;
         }
 
-        public IEnumerable<SwimmerServiceModel> SwimmersToApprove()
+        public void EditSwimmer(
+            int id,
+            string fullName,
+            int age,
+            string email,
+            string address,
+            string phoneNumber,
+            string contactPerson,
+            string medicalDetails,
+            string relationship,
+            string swimmingExperience,
+            int squad
+            )
         {
-            return this.data
-                .Swimmers
-                .Where(s => s.IsApproved == false)
-                .Select(s => new SwimmerServiceModel
-                {
-                    Id = s.Id,
-                    Address = s.Address,
-                    Age = s.Age,
-                    FullName = s.FullName,
-                    PhoneNumber = s.PhoneNumber,
-                    Email = s.Email,
-                    ContactPersonName = s.ContactPersonName,
-                    RelationshipToSwimmer = s.RelationshipToSwimmer,
-                    MedicalDatails = s.MedicalDatails,
-                    SwimmingExperience = s.SwimmingExperience,
-                    Squad = s.Squad.SquadName
-                });
+            var toEdit = this.data.Swimmers.Find(id);
+
+            if (toEdit == null)
+            {
+                return;
+            }
+            toEdit.FullName = fullName;
+            toEdit.Age = age;
+            toEdit.Email = email;
+            toEdit.Address = address;
+            toEdit.PhoneNumber = phoneNumber;
+            toEdit.ContactPersonName = contactPerson;
+            toEdit.MedicalDatails = medicalDetails;
+            toEdit.RelationshipToSwimmer = relationship;
+            toEdit.SwimmingExperience = swimmingExperience;
+            toEdit.SquadId = squad;
+
+            this.data.SaveChanges();
         }
+
+        public void DeleteSwimmer(int id)
+        {
+            var toDelete = this.data.Swimmers.Find(id);
+            toDelete.IsActive = false;
+
+            this.data.SaveChanges();
+        }
+     
         public bool SquadExists(int squadId)
         {
             return this.data.Squads.Any(s => s.Id == squadId);
@@ -82,25 +93,31 @@ namespace SwimmingClubApp.Services.Entries
                 .Select(s => s.Id)
                 .FirstOrDefault();
         }
-
-        public IEnumerable<SwimmerServiceModel> AllSwimmers()
+       
+       
+        public IEnumerable<SwimmerSquadServiceModel> AllSquads()
         {
-            return this.data.Swimmers
-                .Select(s => new SwimmerServiceModel
+            return this.data
+                .Squads
+                .Select(s => new SwimmerSquadServiceModel
                 {
                     Id = s.Id,
-                    FullName = s.FullName,
-                    Age = s.Age,
-                    Address = s.Address,
-                    ContactPersonName = s.ContactPersonName,
-                    Email = s.Email,
-                    MedicalDatails = s.MedicalDatails,
-                    PhoneNumber = s.PhoneNumber,
-                    RelationshipToSwimmer = s.RelationshipToSwimmer,
-                    Squad = s.Squad.SquadName,
-                    SwimmingExperience = s.SwimmingExperience,
-                    IsApproved = s.IsApproved
-                });
+                    SquadName = s.SquadName
+                })
+                .ToList();
         }
+
+        public SwimmerSquadServiceModel SquadName(int id)
+        {
+            return this.data.Squads
+                .Where(s => s.Id == id)
+                .Select(s => new SwimmerSquadServiceModel
+                {
+                    SquadName = s.SquadName
+                })
+                .FirstOrDefault();
+        }
+
+      
     }
 }

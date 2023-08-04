@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SwimmingClubApp.Data.Models;
 using System.ComponentModel.DataAnnotations;
+
 using static SwimmingClubApp.Data.DataConstants.User;
 
 namespace SwimmingClubApp.Areas.Identity.Pages.Account
@@ -49,7 +50,7 @@ namespace SwimmingClubApp.Areas.Identity.Pages.Account
         }
 
 
-        public async Task OnGetAsync(string? returnUrl = null)
+        public void OnGet(string? returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }

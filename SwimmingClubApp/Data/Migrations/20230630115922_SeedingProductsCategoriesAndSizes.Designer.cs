@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SwimmingClubApp.Data;
 
 #nullable disable
 
 namespace SwimmingClubApp.Data.Migrations
 {
-    [DbContext(typeof(SimmingClubDbContext))]
+    [DbContext(typeof(SwimmingClubDbContext))]
     [Migration("20230630115922_SeedingProductsCategoriesAndSizes")]
     partial class SeedingProductsCategoriesAndSizes
     {

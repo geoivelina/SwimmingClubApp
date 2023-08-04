@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.Differencing;
-using SwimmingClubApp.Models.About;
+﻿
 using SwimmingClubApp.Services.Coaches.Models;
 
 namespace SwimmingClubApp.Services.Coaches

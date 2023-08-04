@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SwimmingClubApp.Data;
 using System;
 
 namespace SwimmingClubApp.Data.Migrations
 {
-    [DbContext(typeof(SimmingClubDbContext))]
+    [DbContext(typeof(SwimmingClubDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

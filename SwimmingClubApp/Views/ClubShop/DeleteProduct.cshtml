@@ -1,3 +1,28 @@
-﻿@{
+﻿@model ProductDetailsServiceModel
+@{
     ViewBag.Title = "Delete Product";
 }
+
+<form asp-action="DeleteProduct">
+    <div class="offset-4 mt-4 md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <img class="card-img-top" src="@Model.Image" alt="">
+            </div>
+        </div>
+        <div class="card mt-2" style="width: 18rem;  background-color:lightgray">
+            <h3 class="text-center">Delete Product</h3>
+            &nbsp;
+            <div style="font-size:14px;">
+                <div class="card-body">
+                    <p class="card-title"><b>Product Name:</b> @Model.Name</p>
+                    <p class="card-text"><b>Product Price:</b> @Model.Price $</p>
+                    <h5>Are you sure you want to delete this Product: <b>@Model.Name?</b></h5>
+                    <div class="form-group">
+                        <input type="submit" value="Delete" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

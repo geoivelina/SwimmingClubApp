@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SwimmingClubApp.Data.Models;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using static SwimmingClubApp.Data.DataConstants.Product;
 
-namespace SwimmingClubApp.Data.Models
+namespace SwimmingClubApp.Services.Data.Models
 {
     public class Product
     {

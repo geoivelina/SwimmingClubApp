@@ -14,10 +14,21 @@ namespace SwimmingClubApp.Services.Entries
                 string? medicalDatails,
                 string swimmingExperience,
                 int squadId);
-
-        IEnumerable<SwimmerServiceModel> SwimmersToApprove();
-        IEnumerable<SwimmerServiceModel> AllSwimmers();
+        void EditSwimmer(int id,
+           string fullName,
+           int age,
+           string email,
+           string address,
+           string phoneNumber,
+           string contactPerson,
+           string medicalDetails,
+           string relationship,
+           string swimmingExperience,
+           int squad);
+        void DeleteSwimmer(int id);
+        
         int SwimmerById(int swimmerId);
         bool SwimmerExists(int id);
+        SwimmerSquadServiceModel SquadName(int id);
     }
 }

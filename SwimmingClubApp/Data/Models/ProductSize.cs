@@ -1,4 +1,6 @@
-﻿namespace SwimmingClubApp.Data.Models
+﻿using SwimmingClubApp.Services.Data.Models;
+
+namespace SwimmingClubApp.Data.Models
 {
     public class ProductSize
     {

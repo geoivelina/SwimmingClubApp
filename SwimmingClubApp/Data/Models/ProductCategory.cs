@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SwimmingClubApp.Data.DataConstants.ProductCategory;
 
-namespace SwimmingClubApp.Data.Models
+namespace SwimmingClubApp.Services.Data.Models
 {
     public class ProductCategory
     {
