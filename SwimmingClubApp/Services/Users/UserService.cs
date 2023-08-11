@@ -1,8 +1,10 @@
 ﻿using SwimmingClubApp.Data;
+using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 
 namespace SwimmingClubApp.Services.Users
 {
-    public class UserService : IUserService
+    public class UserService : IUserService, IMapFrom<User>
     {
         private readonly SwimmingClubDbContext data;
 

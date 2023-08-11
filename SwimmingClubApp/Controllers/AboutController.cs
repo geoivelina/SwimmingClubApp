@@ -217,7 +217,7 @@ namespace SwimmingClubApp.Controllers
             {
                 Name = sponsor.Name,
                 Logo = sponsor.Logo,
-                Link = sponsor.HomePageLink,
+                Link = sponsor.Link,
             };
 
             return View(toEdit);
@@ -256,7 +256,7 @@ namespace SwimmingClubApp.Controllers
 
             var toDelete = new SponsorDetailsServiceModel
             {
-               HomePageLink = sponsor.HomePageLink,
+               Link = sponsor.Link,
                Logo = sponsor.Logo,
                Name = sponsor.Name,
                IsActive = sponsor.IsActive

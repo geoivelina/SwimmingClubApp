@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Services.Coaches.Models;
 using SwimmingClubApp.Services.Data.Models;
 
@@ -19,40 +20,8 @@ namespace SwimmingClubApp.Services.Coaches
             this.mapper = mapper;
         }
 
-        public IEnumerable<CoachListingServiceModel> AllCoaches()
-        {
-            return this.data
-                  .Coaches
-                  .Where(c => c.IsAvtive)
-                  //.ProjectTo<CoachListingServiceModel>(this.mapper.ConfigurationProvider)
-                  .Select(c => new CoachListingServiceModel
-                  {
-                      Id = c.Id,
-                      FullName = c.FullName,
-                      Email = c.Email,
-                      Image = c.Image,
-                      Squad = c.Squad.SquadName,
-                      JobPosition = c.JobPosition,
-                      IsAvtive = c.IsAvtive
-                  })
-                  .ToList();
-        }
-
-        public CoachDetailsServiceModel CoachDetails(int coachId)
-        {
-            return this.data.Coaches
-                 .Where(c => c.Id == coachId && c.IsAvtive)
-                 .Select(c => new CoachDetailsServiceModel
-                 {
-                     Image = c.Image,
-                     Email = c.Email,
-                     FullName = c.FullName,
-                     JobPosition = c.JobPosition,
-                     SquadId = c.SquadId,
-                     IsActive = c.IsAvtive
-                 })
-                 .FirstOrDefault();
-        }
+        //Kenov: Do Not Use AutoMapper for Create & Edit Methods
+    
 
         public bool CoachExists(int coachId)
         {
@@ -97,6 +66,22 @@ namespace SwimmingClubApp.Services.Coaches
             this.data.SaveChanges();
         }
 
+        public IEnumerable<CoachListingServiceModel> AllCoaches()
+        {
+            return this.data
+                  .Coaches
+                  .Where(c => c.IsAvtive)
+                  .ProjectTo<CoachListingServiceModel>(this.mapper.ConfigurationProvider)
+                  .ToList();
+        }
+
+        public CoachDetailsServiceModel CoachDetails(int coachId)
+        {
+            return this.data.Coaches
+                 .Where(c => c.Id == coachId && c.IsAvtive)
+                 .To<CoachDetailsServiceModel>()
+                 .FirstOrDefault();
+        }
         public bool SquadExists(int squadId)
         {
             return this.data.Squads.Any(s => s.Id == squadId);
@@ -105,11 +90,7 @@ namespace SwimmingClubApp.Services.Coaches
         {
             return this.data
                   .Squads
-                  .Select(s => new CoachSquadServiceModel
-                  {
-                      Id = s.Id,
-                      SquadName = s.SquadName
-                  })
+                  .To<CoachSquadServiceModel>()
                   .ToList();
         }
     }

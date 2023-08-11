@@ -1,5 +1,7 @@
-﻿using SwimmingClubApp.Data;
+﻿using AutoMapper;
+using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Newses.Models;
 
@@ -8,10 +10,12 @@ namespace SwimmingClubApp.Services.Newses
     public class NewsService : INewsService
     {
         private readonly SwimmingClubDbContext data;
+        private readonly IMapper mapper;
 
-        public NewsService(SwimmingClubDbContext data)
+        public NewsService(SwimmingClubDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int CreateNews(DateTime dateCreated, string desctioption, string image, string title)
@@ -53,13 +57,7 @@ namespace SwimmingClubApp.Services.Newses
             return this.data
                 .Newses
                 .Where(n => n.Id == id && n.IsAvtive)
-                .Select(n => new NewsDetailsServiceModel()
-                {
-                    Title = n.Title,
-                    DateCreated = n.DateCreated,
-                    Desctioption = n.Desctioption,
-                    Image = n.Image
-                })
+               .To<NewsDetailsServiceModel>()
                 .FirstOrDefault();
         }
 
@@ -72,13 +70,7 @@ namespace SwimmingClubApp.Services.Newses
             return this.data
                 .Newses
                 .Where(n => n.IsAvtive)
-                .Select(n => new NewsServiceModel
-                {
-                    Id = n.Id,
-                    DateCreated = n.DateCreated,
-                    Image = n.Image,
-                    Title = n.Title
-                })
+                .To<NewsServiceModel>()
                 .ToList();
         }
     }

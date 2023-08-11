@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyTested.AspNetCore.Mvc.Utilities.Extensions;
 using SwimmingClubApp.Infrastructure;
 using SwimmingClubApp.Models.ClubShop;
+using SwimmingClubApp.Services.Invoices;
 using SwimmingClubApp.Services.Orders;
 using SwimmingClubApp.Services.Orders.Models;
 using SwimmingClubApp.Services.Products;
 using SwimmingClubApp.Services.Products.Models;
-using System.Security.Claims;
 using static SwimmingClubApp.Areas.Admin.AdminConstants;
 
 namespace SwimmingClubApp.Controllers
@@ -18,13 +17,19 @@ namespace SwimmingClubApp.Controllers
     {
         private readonly IProductService products;
         private readonly IOrderService orders;
+        private readonly IInvoiceService invoices;
         private readonly IMapper mapper;
 
-        public ClubShopController(IProductService products, IMapper mapper, IOrderService orders)
+        public ClubShopController(
+            IProductService products,
+            IMapper mapper,
+            IOrderService orders,
+            IInvoiceService invoices)
         {
             this.products = products;
             this.mapper = mapper;
             this.orders = orders;
+            this.invoices = invoices;
         }
 
         [HttpPost]
@@ -35,8 +40,10 @@ namespace SwimmingClubApp.Controllers
             order.IssuerId = this.User.GetId();
 
             this.orders.CreateOrder(order);
-            return this.Redirect("/");
+            return this.Redirect("/ClubShop/AllProducts");
         }
+
+        //TODO: MAPPING HERE
 
         [HttpGet]
         [AllowAnonymous]
@@ -44,21 +51,31 @@ namespace SwimmingClubApp.Controllers
         {
             var orders = this.orders
                 .All()
-                .Where(o => o.Status.Name == "Active")
+                .Where(o => o.StatusId == 1 && o.IssuerId == this.User.GetId())
+                .Select(o => new OrderCartViewModel
+                {
+                    Id = o.Id,
+                    ProductPrice = o.Product.Price,
+                    ProductName = o.Product.Name,
+                    Quantity = o.Quantity,
+                    Sum = o.Product.Price * o.Quantity
+                })
                 .ToList();
 
-            var cart = this.mapper.Map<OrderCartViewModel>(orders);
-            cart.Sum = cart.Quantity * cart.Price;
 
-            return View(cart);
+            return View(orders);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult CompleteOrder()
+        public IActionResult FinishOrder()
         {
-            return View();
+            var userId = this.User.GetId();
+            var invoiceId = this.invoices.CreateInvoice(userId);
+
+            return this.Redirect($"/Invoice/Details/{invoiceId}");
         }
+
 
         [HttpGet]
         public IActionResult AddProduct()
@@ -91,7 +108,6 @@ namespace SwimmingClubApp.Controllers
                 product.AllSizes = this.products.AllSizeOptions();
                 product.ProductCategories = this.products.AllProductCategories();
                 return View(product);
-
             }
 
 
@@ -100,17 +116,6 @@ namespace SwimmingClubApp.Controllers
             return RedirectToAction(nameof(AllProducts));
         }
 
-        [AllowAnonymous]
-        public IActionResult Details(int id)
-        {
-            if (!this.products.ProductExists(id))
-            {
-                return BadRequest();
-            }
-            var product = this.products.ProductDetails(id);
-
-            return View(product);
-        }
 
         [HttpGet]
         public IActionResult EditProduct(int id)
@@ -124,10 +129,6 @@ namespace SwimmingClubApp.Controllers
             {
                 this.ModelState.AddModelError(nameof(product.ProductCategoryId), "Category does not exist");
             }
-
-            //var productForm = this.mapper.Map<ProductFormModel>(product);
-            //productForm.ProductCategories = products.AllProductCategories();
-            //productForm.AllSizes = products.AllSizeOptions();
 
             return View(new ProductFormModel
             {
@@ -214,6 +215,21 @@ namespace SwimmingClubApp.Controllers
             this.products.DeleteProduct(id);
 
             return RedirectToAction(nameof(AllProducts));
+        }
+
+
+        [AllowAnonymous]
+        public IActionResult Details(int id)
+        {
+            if (!this.products.ProductExists(id))
+            {
+                return BadRequest();
+            }
+            var product = this.products.ProductDetails(id);
+
+            //var productDetails = this.products.ProductById(id);
+
+            return View(product);
         }
 
         [AllowAnonymous]

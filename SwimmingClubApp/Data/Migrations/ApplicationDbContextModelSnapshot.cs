@@ -241,6 +241,28 @@ namespace SwimmingClubApp.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("IssuedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Invoices");
+                });
+
             modelBuilder.Entity("SwimmingClubApp.Data.Models.News", b =>
                 {
                     b.Property<int>("Id")
@@ -277,7 +299,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5215),
+                            DateCreated = new DateTime(2023, 8, 11, 14, 23, 14, 893, DateTimeKind.Local).AddTicks(2523),
                             Desctioption = "Here are our athletes for the month of January. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao.  Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -286,7 +308,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5274),
+                            DateCreated = new DateTime(2023, 8, 11, 14, 23, 14, 893, DateTimeKind.Local).AddTicks(2579),
                             Desctioption = "Here are our athletes for the month of February. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2: Brock Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max. ",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -295,7 +317,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5280),
+                            DateCreated = new DateTime(2023, 8, 11, 14, 23, 14, 893, DateTimeKind.Local).AddTicks(2585),
                             Desctioption = "Join us on 24th of July 2023 in SemmerSet Venue at 20:00 h for our Anual Fundrising gathering. You can meet our athleats, their coaches and see their result. Tickets for the event could be found at the receprion desk. If you need more information or would like to join organisation team contact the coordinators: event@mail.com. ",
                             Image = "https://s3.amazonaws.com/images.ecwid.com/images/16075414/1126948529.jpg",
                             IsAvtive = true,
@@ -304,7 +326,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 8, 3, 11, 39, 54, 43, DateTimeKind.Local).AddTicks(5286),
+                            DateCreated = new DateTime(2023, 8, 11, 14, 23, 14, 893, DateTimeKind.Local).AddTicks(2591),
                             Desctioption = "Here are our athletes for the month of March. Begginer 1: Levi Miller & Lena Yang. Begginer 2: Leah Jin & Alex Xiao. Begginer 3: Karim Belal & Angela Xiao. Fithness 1: Austin Ouyang & Ava Senn. Fithness 2:  Sever & Lucy Bojrab. Fithness 3: Flynn Keyser & Ella Harrity. Professional 1: Adam Smith & Maggie Welsh. Professional 2: Chis Martin & Nina Simone. Professionals 3: Sam Burg & Ava Max.",
                             Image = "https://i.pinimg.com/originals/c8/67/fb/c867fbdf7a1952905f883e8294eb6498.jpg",
                             IsAvtive = true,
@@ -337,7 +359,7 @@ namespace SwimmingClubApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Complete"
+                            Name = "Completed"
                         });
                 });
 
@@ -792,15 +814,15 @@ namespace SwimmingClubApp.Data.Migrations
                         {
                             Id = "a1259a89-da2c-413d-94b9-fa5860faa017",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d2e7e149-b2cb-429e-8829-f307c63ad644",
+                            ConcurrencyStamp = "dbb34fa2-bdc5-407b-ae2a-1de07f488bbb",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAp8G6ABiab3HdZBIahkq9HuSL3pP7mAmGflqusCApVzRGiGXow4JFb2mk5K/ELn9A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBOHowHJTN082x02JJ0Veb3aF9cOGR8Ex4N55GXtmzQofBNup/YWszUhQ/NBeVjIXQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0f4854e-526b-42db-baa7-3f0be3887175",
+                            SecurityStamp = "483175a6-1f23-4644-af96-0ff37bb330b3",
                             TwoFactorEnabled = false,
                             UserFullName = "Admin",
                             UserName = "admin@mail.com"
@@ -809,15 +831,15 @@ namespace SwimmingClubApp.Data.Migrations
                         {
                             Id = "a8cf3ed6-7921-4e33-8da6-7ebb70d5f4c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b857c345-cf3b-460a-aa0d-ab65612590a1",
+                            ConcurrencyStamp = "b7da5b3c-459d-4373-a29b-8b459f53ef53",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIENyhFwOAdXokNFdnM8qKTOgPmDkqHWgI1zieT2OXf1q1YMU0oIR7ItbScdTMxLyA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMPaePZ7lQHt4fKAEvMcPTO5ssRa3Y12LtCWiHeONhzGkd0mv8iLZGqBh0O5iUrmuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ead9d26-a5cd-47c6-9029-598ef8d46bc4",
+                            SecurityStamp = "8c52c0d0-8cf1-4192-bc20-46568bf9215b",
                             TwoFactorEnabled = false,
                             UserFullName = "Guest User",
                             UserName = "guest@mail.com"
@@ -832,6 +854,9 @@ namespace SwimmingClubApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("InvoiceId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("IssuedOn")
                         .HasColumnType("datetime2");
 
@@ -843,6 +868,7 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<int>("SizeId")
@@ -852,6 +878,8 @@ namespace SwimmingClubApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
 
                     b.HasIndex("IssuerId");
 
@@ -1054,6 +1082,17 @@ namespace SwimmingClubApp.Data.Migrations
                     b.Navigation("Squad");
                 });
 
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.Invoice", b =>
+                {
+                    b.HasOne("SwimmingClubApp.Data.Models.User", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("SwimmingClubApp.Data.Models.ProductSize", b =>
                 {
                     b.HasOne("SwimmingClubApp.Services.Data.Models.Product", "Product")
@@ -1086,6 +1125,10 @@ namespace SwimmingClubApp.Data.Migrations
 
             modelBuilder.Entity("SwimmingClubApp.Services.Data.Models.Order", b =>
                 {
+                    b.HasOne("SwimmingClubApp.Data.Models.Invoice", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("InvoiceId");
+
                     b.HasOne("SwimmingClubApp.Data.Models.User", "Issuer")
                         .WithMany("Orders")
                         .HasForeignKey("IssuerId")
@@ -1120,6 +1163,11 @@ namespace SwimmingClubApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("SwimmingClubApp.Data.Models.Invoice", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("SwimmingClubApp.Data.Models.SizeOption", b =>

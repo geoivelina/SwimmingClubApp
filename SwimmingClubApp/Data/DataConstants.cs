@@ -96,5 +96,11 @@
             public const string AdminEmail = "admin@mail.com";
             public const string NormalizedAdminEmail = "ADMIN@MAIL.COM";
         }
+
+        public class Order
+        {
+            public const int QuantityMinAmount = 1;
+            public const int QuantityMaxAmount = 10;
+        }
     }
 }

@@ -1,5 +1,8 @@
-﻿using SwimmingClubApp.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Products.Models;
 
@@ -8,12 +11,15 @@ namespace SwimmingClubApp.Services.Products
     public class ProductService : IProductService
     {
         private readonly SwimmingClubDbContext data;
+        private readonly IMapper mapper;
 
-        public ProductService(SwimmingClubDbContext data)
+        public ProductService(SwimmingClubDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
+        //Kenov:Do Not Use AutoMapper in Create& Edit Methods
         public int CreateProduct(string name, string image, decimal price, int productCategoryId, List<ProductSizeServiceModel> sizesList)
         {
             var newProduct = new Product
@@ -63,27 +69,38 @@ namespace SwimmingClubApp.Services.Products
 
             return product.Id;
         }
+
+        public ProductServiceModel ProductById(int id)
+        {
+          return  this.data.Products
+                .To<ProductServiceModel>()
+                .SingleOrDefault(p => p.Id == id);
+        }
+
+        //TODO: FINISH MAPPING HERE
         public ProductDetailsServiceModel ProductDetails(int id)
         {
-            return this.data.Products
-                 .Where(p => p.Id == id && p.IsAvtive)
-                 .Select(p => new ProductDetailsServiceModel
-                 {
-                     Id = p.Id,
-                     Image = p.Image,
-                     Name = p.Name,
-                     Price = p.Price,
-
-                     Category = p.ProductCategory.CategoryName,
-                     ProductCategoryId = p.ProductCategoryId,
-                     SizesList = p.Sizes.Select(s => new ProductSizeServiceModel
-                     {
-                         Id = s.Id,
-                         SizeDescription = s.SizeOption.Description,
-                         IsChecked = s.SizeOption.IsChecked
-                     }).ToList()
-                 })
+            
+            var productData = this.data.Products
+                .Where(p => p.Id == id && p.IsAvtive)
+                .Select(p => new ProductDetailsServiceModel
+                {
+                    Price = p.Price,
+                    Id = p.Id,
+                    Image = p.Image,
+                    Name = p.Name,
+                    ProductCategoryName = p.ProductCategory.CategoryName,
+                    ProductCategoryId = p.ProductCategoryId,
+                    SizesList = p.Sizes.Select(s => new ProductSizeServiceModel
+                    {
+                        Id = s.SizeOption.Id,
+                        Description = s.SizeOption.Description,
+                        IsChecked = s.SizeOption.IsChecked
+                    }).ToList()
+                })
                  .FirstOrDefault();
+
+            return productData;
         }
 
         public void DeleteProduct(int id)
@@ -94,9 +111,9 @@ namespace SwimmingClubApp.Services.Products
             this.data.SaveChanges();
         }
         public ProductQueryServiceModel AllProducts(
-            string category = null, 
-            ProductSorting sorting = ProductSorting.Alphabetically, 
-            int currentPage = 1, 
+            string category = null,
+            ProductSorting sorting = ProductSorting.Alphabetically,
+            int currentPage = 1,
             int productsPerPage = int.MaxValue)
         {
             var queryProduct = this.data.Products.Where(p => p.IsAvtive).AsQueryable();
@@ -116,14 +133,7 @@ namespace SwimmingClubApp.Services.Products
             var products = queryProduct
                .Skip((currentPage - 1) * productsPerPage)
                .Take(productsPerPage)
-                .Select(n => new ProductServiceModel()
-                {
-                    Id = n.Id,
-                    Image = n.Image,
-                    Name = n.Name,
-                    Price = n.Price,
-                    IsActive = n.IsAvtive
-                })
+               .To<ProductServiceModel>()
                 .ToList();
 
             var totalProducts = queryProduct.Count();
@@ -139,11 +149,7 @@ namespace SwimmingClubApp.Services.Products
         {
             return this.data
                 .ProductCategories
-                .Select(p => new ProductCategoryServiceModel
-                {
-                    Id = p.Id,
-                    Name = p.CategoryName
-                })
+                .To<ProductCategoryServiceModel>()
                 .ToList();
         }
 
@@ -151,21 +157,18 @@ namespace SwimmingClubApp.Services.Products
         {
             return this.data
                 .SizeOptions
-                .Select(s => new ProductSizeServiceModel
-                {
-                    Id = s.Id,
-                    SizeDescription = s.Description
-                })
+                .To<ProductSizeServiceModel>()
                 .ToList();
         }
 
         public IEnumerable<string> ProductCategoriesNames()
         {
-            return this.data
+            var categories = this.data
                   .ProductCategories
                   .Select(c => c.CategoryName)
                   .Distinct()
                   .ToList();
+            return categories;
         }
 
         public bool ProductCategoriesExist(int productCategoryId)
@@ -178,6 +181,6 @@ namespace SwimmingClubApp.Services.Products
             return this.data.Products.Any(p => p.Id == id);
         }
 
-       
+
     }
 }

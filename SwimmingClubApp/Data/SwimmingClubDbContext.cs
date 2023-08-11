@@ -47,6 +47,7 @@ namespace SwimmingClubApp.Data
         public DbSet<Swimmer> Swimmers { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<OrderStatus> OrderStatuses { get; set; } = null!;
+        public DbSet<Invoice> Invoices { get; set; } = null!;
 
     }
 

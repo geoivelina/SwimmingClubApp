@@ -10,6 +10,9 @@ namespace SwimmingClubApp.Services.Products
         void DeleteProduct(int id);
         bool ProductExists(int id);
         ProductDetailsServiceModel ProductDetails(int id);
+
+        ProductServiceModel ProductById(int id);
+
         ProductQueryServiceModel AllProducts(string category= null,ProductSorting sorting = ProductSorting.Alphabetically, int currentPage = 1, int productsPerPage = int.MaxValue);
         IEnumerable<string> ProductCategoriesNames();
 

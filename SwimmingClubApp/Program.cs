@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Areas.Admin.Services.Swimmers;
-using SwimmingClubApp.Controllers;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Infrastructure;
 using SwimmingClubApp.Services.Coaches;
 using SwimmingClubApp.Services.Entries;
+using SwimmingClubApp.Services.Invoices;
+using SwimmingClubApp.Services.Invoices.Models;
 using SwimmingClubApp.Services.Newses;
 using SwimmingClubApp.Services.Orders;
 using SwimmingClubApp.Services.Products;
@@ -47,6 +48,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IJoinusService, JoinusService>();
 builder.Services.AddTransient<ISwimmerService, SwimmerService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IInvoiceService, InvoiceService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

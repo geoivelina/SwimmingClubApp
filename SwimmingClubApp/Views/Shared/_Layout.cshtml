@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,7 +19,9 @@
                 </button>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
+                        @if (!User.IsAdmin())
+                        {
+                            <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" asp-area="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 About Us
                             </a>
@@ -45,20 +48,27 @@
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="ClubShop" asp-action="AllProducts">Club Shop</a>
                         </li>
-                       
+                        }
                         @if (User.IsAdmin())
                         {
-                            <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="ClubShop" asp-action="AddProduct">Add Product</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="About" asp-action="AddCoach">Add Coach</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="About" asp-action="AddSponsor">Add Sponsor</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="News" asp-action="AddNews">Add News</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active dropdown-toggle" asp-area="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add Entity
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" asp-area="" asp-controller="ClubShop" asp-action="AddProduct">Add Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" asp-area="" asp-controller="About" asp-action="AddCoach">Add Coach</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" asp-area="" asp-controller="About" asp-action="AddSponsor">Add Sponsor</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" asp-area="" asp-controller="News" asp-action="AddNews">Add News</a>
+                                    </li>
+                                </ul>
                             </li>
                         }
                     </ul>

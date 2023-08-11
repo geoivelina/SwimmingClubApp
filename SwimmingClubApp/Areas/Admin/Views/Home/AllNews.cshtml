@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NewsServiceModel>
+
+@{
+    ViewBag.Title = "All News";
+}
+
+<h1 class="text-center">All News</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">News Title</th>
+            <th class="text-center">Created On</th>
+            <th class="text-center">Image</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var news in Model)
+        {
+            <tr>
+                <td class="text-center">@news.Id</td>
+                <td class="text-center">@news.Title</td>
+                <td class="text-center">@news.DateCreated</td>
+                <td class="text-center">@news.Image</td>
+                <td class="text-center">
+                    <a asp-area="" asp-controller="News" asp-action="Edit" asp-route-id="@news.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-area="" asp-controller="News" asp-action="Delete" asp-route-id="@news.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

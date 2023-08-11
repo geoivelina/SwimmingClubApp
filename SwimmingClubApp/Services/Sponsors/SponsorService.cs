@@ -1,7 +1,8 @@
-﻿using SwimmingClubApp.Data;
+﻿using AutoMapper;
+using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Models.About;
-using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Sponsors.Models;
 
 namespace SwimmingClubApp.Services.Sponsors
@@ -9,10 +10,12 @@ namespace SwimmingClubApp.Services.Sponsors
     public class SponsorService : ISponsorService
     {
         private readonly SwimmingClubDbContext data;
+        private readonly IMapper mapper;
 
-        public SponsorService(SwimmingClubDbContext data)
+        public SponsorService(SwimmingClubDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int CreateSponsor(string name, string link, string logo)
@@ -40,20 +43,6 @@ namespace SwimmingClubApp.Services.Sponsors
 
             this.data.SaveChanges();
         }
-        public SponsorDetailsServiceModel Details(int id)
-        {
-            return this.data.Sponsors
-                   .Where(s => s.Id == id && s.IsAvtive)
-                   .Select(s => new SponsorDetailsServiceModel
-                   {
-                       Id = s.Id,
-                       HomePageLink = s.Link,
-                       Logo = s.Logo,
-                       Name = s.Name,
-                       IsActive = s.IsAvtive
-                   })
-                   .First();
-        }
 
         public void DeleteSponsor(int id)
         {
@@ -62,19 +51,20 @@ namespace SwimmingClubApp.Services.Sponsors
 
             this.data.SaveChanges();
         }
+
+        public SponsorDetailsServiceModel Details(int id)
+        {
+            return this.data.Sponsors
+                   .Where(s => s.Id == id && s.IsAvtive)
+                   .To<SponsorDetailsServiceModel>()
+                   .First();
+        }
         public IEnumerable<SponsorDetailsServiceModel> AllSponsors()
         {
             var sponsors = this.data
                         .Sponsors
                         .Where(s => s.IsAvtive)
-                        .Select(s => new SponsorDetailsServiceModel
-                        {
-                            Id = s.Id,
-                            Logo = s.Logo,
-                            HomePageLink = s.Link,
-                            Name = s.Name,
-                            IsActive = s.IsAvtive
-                        })
+                        .To<SponsorDetailsServiceModel>()
                         .ToList();
 
             return sponsors;

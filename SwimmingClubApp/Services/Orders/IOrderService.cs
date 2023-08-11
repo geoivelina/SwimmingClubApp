@@ -1,4 +1,6 @@
-﻿using SwimmingClubApp.Services.Orders.Models;
+﻿using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Services.Data.Models;
+using SwimmingClubApp.Services.Orders.Models;
 
 namespace SwimmingClubApp.Services.Orders
 {
@@ -6,5 +8,9 @@ namespace SwimmingClubApp.Services.Orders
     {
         int CreateOrder(OrderServiceModel order);
         IEnumerable<OrderServiceModel> All();
+        void SetOrdersToInvoice(Invoice invoice);
+        int FinishOrder(int orderId);
+        Order OrderById(int orderId);
+        bool OrderExists(int orderId);
     }
 }

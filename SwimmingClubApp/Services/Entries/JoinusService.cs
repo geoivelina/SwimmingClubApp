@@ -1,5 +1,8 @@
-﻿using SwimmingClubApp.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Entries.Models;
 
@@ -8,10 +11,12 @@ namespace SwimmingClubApp.Services.Entries
     public class JoinusService : IJoinusService
     {
         private readonly SwimmingClubDbContext data;
+        private readonly IMapper mapper;
 
-        public JoinusService(SwimmingClubDbContext data)
+        public JoinusService(SwimmingClubDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int CreateEntry(string fullName, int age, string contactPersonName, string relationshipToSwimmer, string address, string? medicalDatails, string swimmingExperience, int squadId)
@@ -99,11 +104,12 @@ namespace SwimmingClubApp.Services.Entries
         {
             return this.data
                 .Squads
-                .Select(s => new SwimmerSquadServiceModel
-                {
-                    Id = s.Id,
-                    SquadName = s.SquadName
-                })
+                .ProjectTo<SwimmerSquadServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(s => new SwimmerSquadServiceModel
+                //{
+                //    Id = s.Id,
+                //    SquadName = s.SquadName
+                //})
                 .ToList();
         }
 
@@ -111,10 +117,11 @@ namespace SwimmingClubApp.Services.Entries
         {
             return this.data.Squads
                 .Where(s => s.Id == id)
-                .Select(s => new SwimmerSquadServiceModel
-                {
-                    SquadName = s.SquadName
-                })
+                .To<SwimmerSquadServiceModel>()
+                //.Select(s => new SwimmerSquadServiceModel
+                //{
+                //    SquadName = s.SquadName
+                //})
                 .FirstOrDefault();
         }
 

@@ -23,7 +23,7 @@ namespace SwimmingClubApp.Infrastructure.Configurations
                 new OrderStatus()
                 {
                     Id = 2,
-                    Name = "Complete"
+                    Name = "Completed"
                 }
             };
             return statuses;

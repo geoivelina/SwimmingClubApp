@@ -37,6 +37,7 @@ namespace SwimmingClubApp.Areas.Admin.Controllers
 
 
         public IActionResult AllSponsors() => View(this.sponsors.AllSponsors());
+        public IActionResult AllNews() => View(this.newses.AllNews());
         public IActionResult AllCoaches() => View(this.coaches.AllCoaches());
         public IActionResult AllProducts() => View(this.products.AllProducts().Products);
 

@@ -1,6 +1,9 @@
-﻿namespace SwimmingClubApp.Services.Newses.Models
+﻿using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
+
+namespace SwimmingClubApp.Services.Newses.Models
 {
-    public class NewsServiceModel
+    public class NewsServiceModel: IMapFrom<News>, IMapTo<News>
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;

@@ -1,10 +1,13 @@
-﻿namespace SwimmingClubApp.Services.Products.Models
+﻿using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
+
+namespace SwimmingClubApp.Services.Products.Models
 {
-    public class ProductSizeServiceModel
+    public class ProductSizeServiceModel :IMapFrom<SizeOption>, IMapTo<SizeOption>
     {
         public int Id { get; set; }
         public bool IsChecked { get; set; }
-        public string SizeDescription { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
     }
 }

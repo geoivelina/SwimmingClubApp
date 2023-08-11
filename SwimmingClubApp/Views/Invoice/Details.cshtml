@@ -1,0 +1,60 @@
+﻿@model InvoiceDetailsViewModel
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<div class="card mt-3 md-10">
+    <div class="card-body mx-4">
+        <div class="container">
+            <p class="text-center" style="font-size: 30px;  fw-bold">Thank for your purchase</p>
+            <div class="row">
+                <ul class="list-unstyled">
+                    <li class="text-black"><span class=" fw-bold">Client:</span> @Model.ClientName</li>
+                    <li class="text-black"><span class=" fw-bold">Invoice: </span># @Model.Id</li>
+                    <li class="text-black"><span class=" fw-bold">Issued On:</span> @Model.IssuedOn.ToString("dd/MM/yy")</li>
+                </ul>
+                <hr style="border: 2px solid black;">
+                <div class="col-md-4">
+                    <p class=" fw-bold">Product</p>
+                </div>
+                <div class="col-md-2">
+                    <p class=" fw-bold">Quantity</p>
+                </div>
+                <div class="col-md-2">
+                    <p class="float-end  fw-bold">Price</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="float-end fw-bold">Sum</p>
+                </div>
+                <hr>
+
+                @foreach (var product in Model.Orders)
+                {
+                    <div class="col-md-4">
+                        <p>@product.ProductName</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>@product.Quantity</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="float-end">$ @product.ProductPrice</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="float-end">$ @(product.ProductPrice*product.Quantity)</p>
+                    </div>
+                }
+
+                <hr>
+                <hr style="border: 2px solid black;">
+            </div>
+            <div class="row text-black">
+                <div class="col-xl-12">
+                    <p class="float-end fw-bold">
+                        Total Sum: $@Model.Orders.Sum(o=>o.ProductPrice*o.Quantity).ToString("f2")
+                    </p>
+                </div>
+                <hr style="border: 2px solid black;">
+            </div>
+        </div>
+    </div>
+</div>

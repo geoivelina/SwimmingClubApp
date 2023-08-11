@@ -1,6 +1,9 @@
-﻿namespace SwimmingClubApp.Services.Coaches.Models
+﻿using SwimmingClubApp.Data.Models;
+using SwimmingClubApp.Infrastructure.Mapping;
+
+namespace SwimmingClubApp.Services.Coaches.Models
 {
-    public class CoachListingServiceModel
+    public class CoachListingServiceModel :IMapFrom<Coach>, IMapTo<Coach>
     {
         public int Id { get; set; }
         public string FullName { get; set; } = null!;

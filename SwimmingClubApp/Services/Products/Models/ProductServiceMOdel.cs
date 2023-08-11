@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SwimmingClubApp.Infrastructure.Mapping;
+using SwimmingClubApp.Services.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SwimmingClubApp.Services.Products.Models
 {
-    public class ProductServiceModel
+    public class ProductServiceModel : IMapFrom<Product>, IMapTo<Product>
     {
         public int Id { get; set; }
 
@@ -14,7 +16,11 @@ namespace SwimmingClubApp.Services.Products.Models
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
 
+        [Display(Name = "Category")]
+        public int ProductCategoryId { get; set; }
+        public ProductCategoryServiceModel ProductCategory { get; set; } = null!;
 
+        public List<ProductSizeServiceModel> SizesList { get; set; } = new List<ProductSizeServiceModel>();
 
     }
 }

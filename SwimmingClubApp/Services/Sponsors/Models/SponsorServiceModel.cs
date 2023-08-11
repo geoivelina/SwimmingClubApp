@@ -3,6 +3,6 @@
     public class SponsorServiceModel
     {
         public string Logo { get; set; } = null!;
-        public string HomePageLink { get; set; } = null!;
+        public string Link { get; set; } = null!;
     }
 }
