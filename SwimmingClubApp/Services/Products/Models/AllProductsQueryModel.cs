@@ -1,5 +1,4 @@
-﻿using SwimmingClubApp.Data;
-using System.ComponentModel.DataAnnotations;
+﻿using SwimmingClubApp.Models.ClubShop;
 
 namespace SwimmingClubApp.Services.Products.Models
 {

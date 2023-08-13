@@ -5,8 +5,9 @@ namespace SwimmingClubApp.Areas.Admin.Services.Swimmers
 {
     public interface ISwimmerService
     {
+        IEnumerable<SwimmerDetailsServiceModel> AllApprovedSwimmers();
+        IEnumerable<SwimmerDetailsServiceModel> AllDiaspprovedSwimmers();
         IEnumerable<SwimmerDetailsServiceModel> AllSwimmers();
-        IEnumerable<SwimmerDetailsServiceModel> SwimmersToApprove();
         void Approve(int id);
         void Disapprove(int id);
 

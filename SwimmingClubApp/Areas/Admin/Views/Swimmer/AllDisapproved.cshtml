@@ -1,7 +1,8 @@
-﻿@{
-    ViewBag.Title = "All Applications From Swimmers";
+﻿@model IEnumerable<SwimmerDetailsServiceModel>
+
+@{
+    ViewBag.Title = "All Dispproved Swimmers";
 }
-@model IEnumerable<SwimmerDetailsServiceModel>
 
 <h1 class="text-center">@ViewBag.Title</h1>
 <table class="table table-dark">
@@ -37,8 +38,7 @@
                 <td scope="col">@swimmer.SwimmingExperience</td>
                 <td scope="col">@swimmer.SquadName</td>
                 <td scope="col">
-                    <a asp-area="Admin" asp-controller="Swimmer" asp-action="Edit" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a asp-area="Admin" asp-controller="Swimmer" asp-action="Delete" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    <a asp-area="Admin" asp-controller="Swimmer" asp-action="Approve" asp-route-id="@swimmer.Id" class="btn btn-sm btn-outline-secondary">Approve</a>
 
                 </td>
             </tr>

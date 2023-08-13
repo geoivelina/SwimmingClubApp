@@ -40,15 +40,15 @@ builder.Services.AddControllersWithViews()
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     });
 
-builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ICoachService, CoachService>();
-builder.Services.AddTransient<ISponsorService, SponsorService>();
-builder.Services.AddTransient<INewsService, NewsService>();
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IJoinusService, JoinusService>();
-builder.Services.AddTransient<ISwimmerService, SwimmerService>();
-builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IInvoiceService, InvoiceService>();
+builder.Services.AddTransient<IJoinusService, JoinusService>();
+builder.Services.AddTransient<INewsService, NewsService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ISponsorService, SponsorService>();
+builder.Services.AddTransient<ISwimmerService, SwimmerService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

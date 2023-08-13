@@ -22,32 +22,32 @@
                         @if (!User.IsAdmin())
                         {
                             <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" asp-area="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About Us
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="History">History</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="AllCoaches">Coaches</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="AllSponsors">Sponsors</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="Fundrising">Fundrising</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Schedule">Schedule</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="More">More Information</a>
-                        </li>
-                        <li class="nav-item">
+                                <a class="nav-link active dropdown-toggle" asp-area="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    About Us
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="History">History</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="AllCoaches">Coaches</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="AllSponsors">Sponsors</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="Fundrising">Fundrising</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Schedule">Schedule</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="More">More Information</a>
+                            </li>
+                            <li class="nav-item">
 
-                            <a class="nav-link active" asp-area="" asp-controller="News" asp-action="AllNews">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Joinus" asp-action="EntryForm">Join Now</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="ClubShop" asp-action="AllProducts">Club Shop</a>
-                        </li>
+                                <a class="nav-link active" asp-area="" asp-controller="News" asp-action="AllNews">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Joinus" asp-action="EntryForm">Join Now</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="ClubShop" asp-action="AllProducts">Club Shop</a>
+                            </li>
                         }
                         @if (User.IsAdmin())
                         {
@@ -67,6 +67,22 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" asp-area="" asp-controller="News" asp-action="AddNews">Add News</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active dropdown-toggle" asp-area="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Swimmers
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" asp-area="Admin" asp-controller="Swimmer" asp-action="AllEntries">All Swimmers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active"  asp-area="Admin" asp-controller="Swimmer" asp-action="AllSwimmers">Approved Swimmers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active"  asp-area="Admin" asp-controller="Swimmer" asp-action="AllDisapproved">Disapproved Swimmers</a>
                                     </li>
                                 </ul>
                             </li>

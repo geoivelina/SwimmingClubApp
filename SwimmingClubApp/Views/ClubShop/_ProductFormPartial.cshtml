@@ -25,29 +25,31 @@
                 <select asp-for="ProductCategoryId" class=" form-control">
                     @foreach (var category in Model.ProductCategories)
                     {
-                        <option value="@category.Id">@category.Name</option>
+                        <option value="@category.Id">@category.CategoryName</option>
                     }
                 </select>
             </div>
             <div class="mb-3 form-group ">
-                <label asp-for="SizesList">Size Options</label>
+                <label asp-for="Sizes">Size Options</label>
             </div>
             <div class="mb-3 form-group" style="">
                 @foreach (var size in Model.AllSizes)
                 {
                     <div class="form-check form-check-inline">
                         <input class="form-check-input"
-                           type="checkbox"
-                           value="@size.Id"
-                           name="SizesList"
-                           id="checkbox_@size.Id"
-                           checked="@size.IsChecked">
-                        <label class="form-check-label" for="checkbox_@size.Id">
-                            @size.Description
-                        </label>
+                                type="checkbox"
+                                value="@size.Id"
+                                name="sizes"
+                                id="checkbox_@size.Id"
+                                checked="@size.IsChecked" 
+                            >
+                        <label class="form-check-label" for="checkbox_@size.Id"> @size.Description</label>
+                        <input type="hidden" asp-for="@size.Id" />
+                        <input type="hidden" asp-for="@size.Description" />
                     </div>
+
                 }
-                <span asp-validation-for="SizesList" class="small text-danger"></span>
+                <span asp-validation-for="Sizes" class="small text-danger"></span>
             </div>
             <input class="btn btn-dark" type="submit" value="Save" />
         </form>

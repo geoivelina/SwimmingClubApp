@@ -29,6 +29,8 @@ namespace SwimmingClubApp.Data
             builder.ApplyConfiguration(new SwimmersConfiguration());
             builder.ApplyConfiguration(new OrderStatusConfiguration());
 
+
+
             base.OnModelCreating(builder);
         }
 

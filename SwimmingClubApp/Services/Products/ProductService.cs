@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Infrastructure.Mapping;
+using SwimmingClubApp.Models.ClubShop;
 using SwimmingClubApp.Services.Data.Models;
 using SwimmingClubApp.Services.Products.Models;
 
@@ -20,29 +22,38 @@ namespace SwimmingClubApp.Services.Products
         }
 
         //Kenov:Do Not Use AutoMapper in Create& Edit Methods
-        public int CreateProduct(string name, string image, decimal price, int productCategoryId, List<ProductSizeServiceModel> sizesList)
+        public SizeOption SetSizeOptions(int id)
         {
-            var newProduct = new Product
+            var size = this.data.SizeOptions.Where(s => s.Id == id).FirstOrDefault();
+            return size;
+
+        }
+
+        //TODO: ADDING SIZES IS BROKEN. WHY? ERROR: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_ProductSize_SizeOptions_SizeOptionId". The conflict occurred in database "SwimmingClubApp", table "dbo.SizeOptions", column 'Id'.
+        public int CreateProduct(ProductFormModel input, List<int> sizes)
+        {
+            var product = new Product
             {
-                Name = name,
-                Image = image,
-                Price = price,
-                ProductCategoryId = productCategoryId,
+                Name = input.Name,
+                Image = input.Image,
+                Price = input.Price,
+                ProductCategoryId = input.ProductCategoryId
             };
 
-            foreach (var sizeOption in sizesList)
+            foreach (var inputSize in sizes)
             {
-                var size = this.data.SizeOptions.FirstOrDefault(s => s.Id == sizeOption.Id);
-                newProduct.Sizes.Add(new ProductSize
+                var size = this.data.SizeOptions.ToList().FirstOrDefault(x => x.Id == inputSize);
+
+                product.Sizes.Add(new ProductSize
                 {
-                    SizeOption = size,
+                    SizeOption = size
                 });
             }
 
-            this.data.Products.Add(newProduct);
+            this.data.Products.Add(product);
             this.data.SaveChanges();
 
-            return newProduct.Id;
+            return product.Id;
         }
 
 
@@ -72,15 +83,15 @@ namespace SwimmingClubApp.Services.Products
 
         public ProductServiceModel ProductById(int id)
         {
-          return  this.data.Products
-                .To<ProductServiceModel>()
-                .SingleOrDefault(p => p.Id == id);
+            return this.data.Products
+                  .To<ProductServiceModel>()
+                  .SingleOrDefault(p => p.Id == id);
         }
 
         //TODO: FINISH MAPPING HERE
         public ProductDetailsServiceModel ProductDetails(int id)
         {
-            
+
             var productData = this.data.Products
                 .Where(p => p.Id == id && p.IsAvtive)
                 .Select(p => new ProductDetailsServiceModel
@@ -110,13 +121,15 @@ namespace SwimmingClubApp.Services.Products
 
             this.data.SaveChanges();
         }
+
         public ProductQueryServiceModel AllProducts(
             string category = null,
             ProductSorting sorting = ProductSorting.Alphabetically,
             int currentPage = 1,
             int productsPerPage = int.MaxValue)
         {
-            var queryProduct = this.data.Products.Where(p => p.IsAvtive).AsQueryable();
+            var queryProduct = this.data.Products
+                .Where(p => p.IsAvtive).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(category))
             {
@@ -129,28 +142,61 @@ namespace SwimmingClubApp.Services.Products
                 ProductSorting.Price => queryProduct.OrderBy(p => p.Price),
                 _ => queryProduct.OrderByDescending(p => p.Id)
             };
+            // var sizes = this.data.SizeOptions.ForEach(so => new )
 
             var products = queryProduct
                .Skip((currentPage - 1) * productsPerPage)
                .Take(productsPerPage)
-               .To<ProductServiceModel>()
+               .ProjectTo<ProductServiceModel>(this.mapper.ConfigurationProvider)
+               //.ProjectTo<ProductSizeServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(p => new ProductServiceModel
+                //{
+                //    Id = p.Id,
+                //    Image = p.Image,
+                //    Name = p.Name,
+                //    Price = p.Price,
+                //    ProductCategoryId = p.ProductCategoryId,
+                //    IsActive = p.IsAvtive,
+                //    Sizes = p.Sizes
+                //})
                 .ToList();
-
+            
             var totalProducts = queryProduct.Count();
-
             return new ProductQueryServiceModel
             {
                 Products = products,
                 TotalProducts = totalProducts
             };
         }
+        public IEnumerable<ProductSize> AllSizes(List<int> sizeList)
+        {
 
+            var list = new List<ProductSize>();
+            foreach (var size in sizeList)
+            {
+                var sizeoption = this.data.SizeOptions.ToList().FirstOrDefault(s => s.Id == size);
+                list.Add(new ProductSize
+                {
+                    Id = sizeoption.Id,
+                });
+            }
+            return list;
+        }
+        public void SetSizesToProduct(Product product, int id)
+        {
+            //var list = this.data.SizeOptions.Where(s => s.Id == id).Select( x=> new )
+            //product.Sizes = .ToList();
+            //invoice.Orders = this.data.Orders
+            //    .Where(o => o.IssuerId == invoice.ClientId && o.StatusId == 1)
+            //    .ToList();
+        }
         public IEnumerable<ProductCategoryServiceModel> AllProductCategories()
         {
-            return this.data
+            var productCat = this.data
                 .ProductCategories
                 .To<ProductCategoryServiceModel>()
                 .ToList();
+            return productCat;
         }
 
         public List<ProductSizeServiceModel> AllSizeOptions()

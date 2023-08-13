@@ -21,12 +21,6 @@ namespace SwimmingClubApp.Services.Coaches
         }
 
         //Kenov: Do Not Use AutoMapper for Create & Edit Methods
-    
-
-        public bool CoachExists(int coachId)
-        {
-            return this.data.Coaches.Any(c => c.Id == coachId && c.IsAvtive);
-        }
 
         public int CreateCoach(string fullName, string image, string email, int squadId, string jobPosition)
         {
@@ -66,6 +60,13 @@ namespace SwimmingClubApp.Services.Coaches
             this.data.SaveChanges();
         }
 
+        public CoachDetailsServiceModel CoachDetails(int coachId)
+        {
+            return this.data.Coaches
+                 .Where(c => c.Id == coachId && c.IsAvtive)
+                 .To<CoachDetailsServiceModel>()
+                 .FirstOrDefault();
+        }
         public IEnumerable<CoachListingServiceModel> AllCoaches()
         {
             return this.data
@@ -75,23 +76,21 @@ namespace SwimmingClubApp.Services.Coaches
                   .ToList();
         }
 
-        public CoachDetailsServiceModel CoachDetails(int coachId)
-        {
-            return this.data.Coaches
-                 .Where(c => c.Id == coachId && c.IsAvtive)
-                 .To<CoachDetailsServiceModel>()
-                 .FirstOrDefault();
-        }
-        public bool SquadExists(int squadId)
-        {
-            return this.data.Squads.Any(s => s.Id == squadId);
-        }
         public IEnumerable<CoachSquadServiceModel> AllSquads()
         {
             return this.data
                   .Squads
                   .To<CoachSquadServiceModel>()
                   .ToList();
+        }
+
+        public bool CoachExists(int coachId)
+        {
+            return this.data.Coaches.Any(c => c.Id == coachId && c.IsAvtive);
+        }
+        public bool SquadExists(int squadId)
+        {
+            return this.data.Squads.Any(s => s.Id == squadId);
         }
     }
 }

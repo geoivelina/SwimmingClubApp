@@ -14,11 +14,9 @@ namespace SwimmingClubApp.Areas.Admin.Controllers
             this.entries = entries;
         }
 
-        public IActionResult AllSwimmers() => View(this.entries.AllSwimmers());
-
-        public IActionResult AllEntries() => View(this.entries.SwimmersToApprove());
-
-
+        public IActionResult AllEntries() => View(this.entries.AllSwimmers());
+        public IActionResult AllSwimmers() => View(this.entries.AllApprovedSwimmers());
+        public IActionResult AllDisapproved() => View(this.entries.AllDiaspprovedSwimmers());
         public IActionResult Approve(int id)
         {
             this.entries.Approve(id);

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SwimmingClubApp.Services.Products.Models
 {
-    public class ProductServiceModel : IMapFrom<Product>, IMapTo<Product>
+    public class ProductServiceModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 
@@ -14,13 +14,13 @@ namespace SwimmingClubApp.Services.Products.Models
         [Display(Name= "Image URL")]
         public string Image { get; set; } = null!;
         public decimal Price { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [Display(Name = "Category")]
         public int ProductCategoryId { get; set; }
         public ProductCategoryServiceModel ProductCategory { get; set; } = null!;
 
-        public List<ProductSizeServiceModel> SizesList { get; set; } = new List<ProductSizeServiceModel>();
+        public List<ProductSizeServiceModel> Sizes { get; set; } = new List<ProductSizeServiceModel>();
 
     }
 }

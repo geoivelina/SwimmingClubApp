@@ -1,28 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Areas.Admin.Models.User;
-using SwimmingClubApp.Data;
+using SwimmingClubApp.Services.Users;
 
 namespace SwimmingClubApp.Areas.Admin.Controllers
 {
     public class UserController : AdminController
     {
-        private readonly SwimmingClubDbContext data;
+        private readonly IUserService users;
 
-        public UserController(SwimmingClubDbContext data)
+        public UserController(IUserService users)
         {
-            this.data = data;
+            this.users = users;
         }
 
-        public IEnumerable<UserDetailsViewModel> AllUsers()
-        {
-            var users = this.data.Users.Select(u => new UserDetailsViewModel
-            {
-                 Id = u.Id,
-                 UserFullName = u.UserName,
-                 Email = u.Email
-            }).ToList();
-
-            return users;
-        }
+        public IActionResult AllUsers()=> View(this.users.AllUsers());
+        
     }
 }

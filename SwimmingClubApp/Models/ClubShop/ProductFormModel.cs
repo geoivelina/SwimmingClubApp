@@ -29,8 +29,7 @@ namespace SwimmingClubApp.Models.ClubShop
         public int ProductCategoryId { get; set; }
         public IEnumerable<ProductCategoryServiceModel> ProductCategories { get; set; } = new List<ProductCategoryServiceModel>();
 
-        public IEnumerable<int> SizesList { get; set; } = new List<int>();
-
+        public IEnumerable<ProductSizeServiceModel> Sizes { get; set; } = new List<ProductSizeServiceModel>();
         public List<ProductSizeServiceModel> AllSizes { get; set; } = new List<ProductSizeServiceModel>();
 
 

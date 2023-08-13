@@ -88,7 +88,7 @@ namespace SwimmingClubApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(ProductFormModel product)
+        public IActionResult AddProduct(ProductFormModel product, List<int> sizes)
         {
             if (!this.products.ProductCategoriesExist(product.ProductCategoryId))
             {
@@ -110,8 +110,7 @@ namespace SwimmingClubApp.Controllers
                 return View(product);
             }
 
-
-            this.products.CreateProduct(product.Name, product.Image, product.Price, product.ProductCategoryId, product.AllSizes);
+            this.products.CreateProduct(product, sizes);
 
             return RedirectToAction(nameof(AllProducts));
         }

@@ -13,7 +13,28 @@ namespace SwimmingClubApp.Areas.Admin.Services.Swimmers
             this.data = data;
         }
 
+
         public IEnumerable<SwimmerDetailsServiceModel> AllSwimmers()
+        {
+            return this.data.Swimmers
+                .Select(s => new SwimmerDetailsServiceModel
+                {
+                    Id = s.Id,
+                    FullName = s.FullName,
+                    Age = s.Age,
+                    Address = s.Address,
+                    ContactPersonName = s.ContactPersonName,
+                    Email = s.Email,
+                    MedicalDatails = s.MedicalDatails,
+                    PhoneNumber = s.PhoneNumber,
+                    RelationshipToSwimmer = s.RelationshipToSwimmer,
+                    SquadId = s.SquadId,
+                    SquadName = s.Squad.SquadName,
+                    SwimmingExperience = s.SwimmingExperience,
+                    IsApproved = s.IsApproved
+                });
+        }
+        public IEnumerable<SwimmerDetailsServiceModel> AllApprovedSwimmers()
         {
             return this.data.Swimmers
                 .Where(s => s.IsApproved == true)
@@ -35,26 +56,27 @@ namespace SwimmingClubApp.Areas.Admin.Services.Swimmers
                 });
         }
 
-        public IEnumerable<SwimmerDetailsServiceModel> SwimmersToApprove()
+
+        public IEnumerable<SwimmerDetailsServiceModel> AllDiaspprovedSwimmers()
         {
-            return this.data
-                .Swimmers
-                .Where(s => s.IsApproved == false)
-                .Select(s => new SwimmerDetailsServiceModel
-                {
-                    Id = s.Id,
-                    Address = s.Address,
-                    Age = s.Age,
-                    FullName = s.FullName,
-                    PhoneNumber = s.PhoneNumber,
-                    Email = s.Email,
-                    ContactPersonName = s.ContactPersonName,
-                    RelationshipToSwimmer = s.RelationshipToSwimmer,
-                    MedicalDatails = s.MedicalDatails,
-                    SwimmingExperience = s.SwimmingExperience,
-                    SquadId = s.SquadId,
-                    SquadName = s.Squad.SquadName
-                });
+            return this.data.Swimmers
+                 .Where(s => s.IsApproved == false)
+                 .Select(s => new SwimmerDetailsServiceModel
+                 {
+                     Id = s.Id,
+                     FullName = s.FullName,
+                     Age = s.Age,
+                     Address = s.Address,
+                     ContactPersonName = s.ContactPersonName,
+                     Email = s.Email,
+                     MedicalDatails = s.MedicalDatails,
+                     PhoneNumber = s.PhoneNumber,
+                     RelationshipToSwimmer = s.RelationshipToSwimmer,
+                     SquadId = s.SquadId,
+                     SquadName = s.Squad.SquadName,
+                     SwimmingExperience = s.SwimmingExperience,
+                     IsApproved = s.IsApproved
+                 });
         }
 
         public void Approve(int id)
@@ -138,5 +160,6 @@ namespace SwimmingClubApp.Areas.Admin.Services.Swimmers
                     SquadName = s.SquadName
                 });
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SwimmingClubApp.Areas.Admin.Models.User;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Models.ClubShop;
 using SwimmingClubApp.Models.Invoice;
@@ -25,7 +26,7 @@ namespace SwimmingClubApp.Infrastructure.Mapping
             CreateMap<Coach, CoachListingServiceModel>()
                 .ForMember(c => c.Squad, cfg => cfg.MapFrom(s => s.Squad.SquadName));
 
-            CreateMap<ProductSize, ProductSizeServiceModel>().ReverseMap();
+            CreateMap<SizeOption, ProductSizeServiceModel>();
 
             CreateMap<Invoice, InvoiceServiceModel>();
             CreateMap<InvoiceServiceModel, InvoiceDetailsViewModel>()
@@ -40,8 +41,11 @@ namespace SwimmingClubApp.Infrastructure.Mapping
             CreateMap<OrderStatus, OrderStatusServiceModel>();
 
             CreateMap<User, UserServiceModel>();
-
+            CreateMap<ProductSize, ProductSizeServiceModel>()
+                .ForMember(des => des.Description, cfg => cfg.MapFrom(o => o.SizeOption.Description));
             CreateMap<Product, ProductServiceModel>();
+
+            CreateMap<ProductFormModel, ProductServiceModel>();
             CreateMap<ProductCategory, ProductCategoryServiceModel>();
             CreateMap<ProductOrderInputModel, OrderServiceModel>();
 
@@ -50,6 +54,7 @@ namespace SwimmingClubApp.Infrastructure.Mapping
             CreateMap<News, NewsServiceModel>();
             CreateMap<Sponsor, SponsorServiceModel>();
 
+            CreateMap<User, UserDetailsViewModel>();
         }
     }
 }
