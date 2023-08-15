@@ -39,31 +39,47 @@
                             }
                             else
                             {
-                                <form asp-area="" asp-controller="Clubshop" asp-action="Order" asp-route-id="@Model.Id" method="post">
-                                    <div class="form-group">
-                                        <label for="quantity" class="col-form-label">Quantity</label>
-                                        <input type="number" class="form-control" id="quantity" name="quantity">
-                                    </div>
-
-                                    <span asp-validation-for="SizesList" class="small text-danger"></span>
-                                    <input type="hidden" value="@sizeId" name="sizeId" />
-                                    <input type="hidden" value="@Model.Id" name="productId" />
-
-                                    @if (Model.SizesList.Count > 0)
-                                    {
-                                        <div class="mb-3 form-group ">
-                                            <label asp-for="@Model.Id">Size Options</label>
-                                            <select asp-for="@Model.Id" class=" form-control">
-                                                @foreach (var size in Model.SizesList)
-                                                {
-                                                    <option value="@size.Id">@size.Description</option>
-                                                    sizeId = @size.Id;
-                                                }
-                                            </select>
+                                @if (this.User.Identity.IsAuthenticated)
+                                {
+                                    <form asp-area="" asp-controller="Clubshop" asp-action="Order" asp-route-id="@Model.Id" method="post">
+                                        <div class="form-group">
+                                            <label for="quantity" class="col-form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="quantity" name="quantity">
                                         </div>
-                                    }
-                                    <button type="submit" class="btn btn-dark mt-2 mb-2"> Buy </button>
-                                </form>
+
+                                        <span asp-validation-for="SizesList" class="small text-danger"></span>
+                                        <input type="hidden" value="@sizeId" name="sizeId" />
+                                        <input type="hidden" value="@Model.Id" name="productId" />
+
+                                        @if (Model.SizesList.Count > 0)
+                                        {
+                                            <div class="mb-3 form-group ">
+                                                <label asp-for="@Model.Id">Size Options</label>
+                                                <select asp-for="@Model.Id" class=" form-control">
+                                                    @foreach (var size in Model.SizesList)
+                                                    {
+                                                        <option value="@size.Id">@size.Description</option>
+                                                        sizeId = @size.Id;
+                                                    }
+                                                </select>
+                                            </div>
+                                        }
+                                        <button type="submit" class="btn btn-dark mt-2 mb-2"> Buy </button>
+                                    </form>
+                                }
+                                else
+                                {
+
+                                    <h4 class="text-center">
+                                        To start shoping you need to login:
+                                        <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Login">Login Now</a>
+                                    </h4>
+                                    <h4 class="text-center">
+                                        If you don`t have registratios:
+                                        <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Register">Register Here</a>
+                                    </h4>
+                                    <hr class="hr-2 bg-dark mt-4" />
+                                }
                             }
                         </div>
                 </div>

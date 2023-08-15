@@ -1,0 +1,31 @@
+﻿@model IEnumerable<InvoiceServiceModel>
+
+@{
+    ViewBag.Title = "All Invoices By Users";
+}
+
+<h1 class="text-center">@ViewBag.Title</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th class="text-center">Invoice Id</th>
+            <th >Client Name</th>
+            <th >Issued On</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td class="text-center">@invoice.Id</td>
+                <td >@invoice.Client.UserFullName</td>
+                <td >@invoice.IssuedOn</td>
+
+                <td scope="col">
+                    <a asp-area="" asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

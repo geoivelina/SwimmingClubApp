@@ -18,13 +18,19 @@ namespace SwimmingClubApp.Services.Users
             this.mapper = mapper;
         }
 
+
         public string UserFullName(string userId)
         {
             var user = this.data.Users.Find(userId);
+            
+            if (user == null)
+            {
+                throw new NullReferenceException("User does not exsist.");
+            }
 
             if (string.IsNullOrEmpty(user.UserFullName))
             {
-                return null;
+                throw new NullReferenceException("UserFullName does not exsist.");
             }
 
             return user.UserFullName;
@@ -34,12 +40,6 @@ namespace SwimmingClubApp.Services.Users
         {
             return this.data.Users
                 .ProjectTo<UserDetailsViewModel>(this.mapper.ConfigurationProvider)
-                //.Select(u => new UserDetailsViewModel
-                //{
-                //    Id = u.Id,
-                //    UserFullName = this.UserFullName(u.Id),
-                //    Email = u.Email
-                //})
                 .ToList();
         }
     }

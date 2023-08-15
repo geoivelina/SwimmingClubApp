@@ -56,11 +56,11 @@ namespace SwimmingClubApp.Controllers
             {
                 this.ModelState.AddModelError(nameof(coach.SquadId), "Squad does not exist");
             }
+
             if (!ModelState.IsValid)
             {
                 coach.Squads = this.coaches.AllSquads();
                 return View(coach);
-
             }
 
             this.coaches.CreateCoach(coach.FullName, coach.Image, coach.Email, coach.SquadId, coach.JobPosition);

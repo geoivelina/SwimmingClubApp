@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Authorization;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Infrastructure.Mapping;
 using SwimmingClubApp.Services.Coaches.Models;
-using SwimmingClubApp.Services.Data.Models;
 
 namespace SwimmingClubApp.Services.Coaches
 {
+    [Authorize]
     public class CoachService : ICoachService
     {
 
@@ -21,6 +22,7 @@ namespace SwimmingClubApp.Services.Coaches
         }
 
         //Kenov: Do Not Use AutoMapper for Create & Edit Methods
+
 
         public int CreateCoach(string fullName, string image, string email, int squadId, string jobPosition)
         {
@@ -67,13 +69,16 @@ namespace SwimmingClubApp.Services.Coaches
                  .To<CoachDetailsServiceModel>()
                  .FirstOrDefault();
         }
+
+        [AllowAnonymous]
         public IEnumerable<CoachListingServiceModel> AllCoaches()
         {
-            return this.data
+            var coaches = this.data
                   .Coaches
                   .Where(c => c.IsAvtive)
                   .ProjectTo<CoachListingServiceModel>(this.mapper.ConfigurationProvider)
                   .ToList();
+            return coaches;
         }
 
         public IEnumerable<CoachSquadServiceModel> AllSquads()

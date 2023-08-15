@@ -38,7 +38,7 @@ namespace SwimmingClubApp.Controllers
         {
             var order = this.mapper.Map<OrderServiceModel>(product);
             order.IssuerId = this.User.GetId();
-
+            
             this.orders.CreateOrder(order);
             return this.Redirect("/ClubShop/AllProducts");
         }

@@ -32,9 +32,12 @@
                                     <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="Fundrising">Fundrising</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Schedule">Schedule</a>
-                            </li>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Schedule">Schedule</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="More">More Information</a>
                             </li>
@@ -79,10 +82,10 @@
                                         <a class="nav-link active" asp-area="Admin" asp-controller="Swimmer" asp-action="AllEntries">All Swimmers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active"  asp-area="Admin" asp-controller="Swimmer" asp-action="AllSwimmers">Approved Swimmers</a>
+                                        <a class="nav-link active" asp-area="Admin" asp-controller="Swimmer" asp-action="AllSwimmers">Approved Swimmers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active"  asp-area="Admin" asp-controller="Swimmer" asp-action="AllDisapproved">Disapproved Swimmers</a>
+                                        <a class="nav-link active" asp-area="Admin" asp-controller="Swimmer" asp-action="AllDisapproved">Disapproved Swimmers</a>
                                     </li>
                                 </ul>
                             </li>
