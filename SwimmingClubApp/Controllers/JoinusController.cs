@@ -42,7 +42,17 @@ namespace SwimmingClubApp.Controllers
                 return View(swimmer);
             }
 
-            this.entries.CreateEntry(swimmer.FullName, swimmer.Age, swimmer.ContactPersonName, swimmer.RelationshipToSwimmer, swimmer.Address, swimmer.MedicalDatails, swimmer.SwimmingExperience, swimmer.SquadId);
+            this.entries.CreateEntry(
+                        swimmer.FullName, 
+                        swimmer.Age,
+                        swimmer.Email,
+                        swimmer.PhoneNumber,
+                        swimmer.ContactPersonName,
+                        swimmer.RelationshipToSwimmer, 
+                        swimmer.Address, 
+                        swimmer.MedicalDatails, 
+                        swimmer.SwimmingExperience, 
+                        swimmer.SquadId);
 
             return RedirectToAction(nameof(Thankyou));
         }

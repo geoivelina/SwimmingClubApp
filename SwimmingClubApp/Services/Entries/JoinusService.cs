@@ -19,7 +19,16 @@ namespace SwimmingClubApp.Services.Entries
             this.mapper = mapper;
         }
 
-        public int CreateEntry(string fullName, int age, string contactPersonName, string relationshipToSwimmer, string address, string? medicalDatails, string swimmingExperience, int squadId)
+        public int CreateEntry(string fullName,
+                int age,
+                string email,
+                string phoneNumber,
+                string contactPersonName,
+                string relationshipToSwimmer,
+                string address,
+                string? medicalDatails,
+                string swimmingExperience,
+                int squadId)
         {
             var newSwimmer = new Swimmer
             {
@@ -29,10 +38,11 @@ namespace SwimmingClubApp.Services.Entries
                 RelationshipToSwimmer = relationshipToSwimmer,
                 Address = address,
                 MedicalDatails = medicalDatails,
+                Email = email,
+                PhoneNumber = phoneNumber,
                 SwimmingExperience = swimmingExperience,
                 SquadId = squadId
             };
-
             this.data.Swimmers.Add(newSwimmer);
             this.data.SaveChanges();
 
@@ -94,7 +104,7 @@ namespace SwimmingClubApp.Services.Entries
         public int SwimmerById(int swimmerId)
         {
             return this.data.Swimmers
-                .Where(s => s.Id == swimmerId)
+                .Where(s => s.Id == swimmerId && s.IsActive)
                 .Select(s => s.Id)
                 .FirstOrDefault();
         }
@@ -105,23 +115,16 @@ namespace SwimmingClubApp.Services.Entries
             return this.data
                 .Squads
                 .ProjectTo<SwimmerSquadServiceModel>(this.mapper.ConfigurationProvider)
-                //.Select(s => new SwimmerSquadServiceModel
-                //{
-                //    Id = s.Id,
-                //    SquadName = s.SquadName
-                //})
                 .ToList();
         }
 
+
+        //TODO:  Menus for all Squads and their participants 
         public SwimmerSquadServiceModel SquadName(int id)
         {
             return this.data.Squads
                 .Where(s => s.Id == id)
                 .To<SwimmerSquadServiceModel>()
-                //.Select(s => new SwimmerSquadServiceModel
-                //{
-                //    SquadName = s.SquadName
-                //})
                 .FirstOrDefault();
         }
 

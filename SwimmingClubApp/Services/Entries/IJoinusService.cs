@@ -8,6 +8,8 @@ namespace SwimmingClubApp.Services.Entries
         bool SquadExists(int squadId);
         int CreateEntry(string fullName,
                 int age,
+                string email,
+                string phoneNumber,
                 string contactPersonName,
                 string relationshipToSwimmer,
                 string address,

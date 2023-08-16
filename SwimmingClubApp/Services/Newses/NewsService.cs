@@ -44,7 +44,6 @@ namespace SwimmingClubApp.Services.Newses
 
             this.data.SaveChanges();
         }
-
         public void DeleteNews(int id)
         {
             var toDelete = this.data.Newses.Find(id);
@@ -60,7 +59,6 @@ namespace SwimmingClubApp.Services.Newses
                .To<NewsDetailsServiceModel>()
                 .FirstOrDefault();
         }
-
         public bool NewsExists(int newsId)
         {
             return this.data.Newses.Any(c => c.Id == newsId);

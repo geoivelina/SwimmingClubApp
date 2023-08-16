@@ -64,21 +64,6 @@ namespace SwimmingClubApp.Services.Invoices.Models
             return this.data.Invoices
                  .Where(i => i.ClientId == clientId)
                  .ProjectTo<InvoiceServiceModel>(this.mapper.ConfigurationProvider);
-                 //.Select(i => new InvoiceServiceModel
-                 //{
-                 //    ClientId = i.ClientId,
-                 //    IssuedOn = i.IssuedOn,
-                 //    Orders = i.Orders.Select(o => new OrderServiceModel
-                 //    {
-                 //        Id = o.Id,
-                 //        IssuedOn = o.IssuedOn,
-                 //        IssuerId = o.IssuerId,
-                 //        ProductId = o.ProductId,
-                 //        Quantity = o.Quantity,
-                 //        SizeId = o.SizeId,
-                 //        StatusId = o.StatusId
-                 //    }).ToList()
-                 //});
         }
 
     }

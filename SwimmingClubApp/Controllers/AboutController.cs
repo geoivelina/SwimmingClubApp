@@ -115,7 +115,7 @@ namespace SwimmingClubApp.Controllers
                 return View(coach);
             }
 
-            this.coaches.Edit(id, coach);
+            this.coaches.EditCoach(id, coach);
 
             return RedirectToAction(nameof(AllCoaches));
         }
@@ -171,7 +171,7 @@ namespace SwimmingClubApp.Controllers
                 return View(coach);
             }
 
-            this.coaches.Delete(id);
+            this.coaches.DeleteCoach(id);
 
             return RedirectToAction(nameof(AllCoaches));
         }

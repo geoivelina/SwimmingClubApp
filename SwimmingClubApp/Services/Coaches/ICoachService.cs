@@ -9,8 +9,8 @@ namespace SwimmingClubApp.Services.Coaches
         bool CoachExists(int coachId);
         CoachDetailsServiceModel CoachDetails(int coachId);
         int CreateCoach(string fullName, string image, string email, int squadId, string jobPosition);
-        void Edit(int id, CoachFormModel coach);
-        void Delete(int coachId);
+        void EditCoach(int id, CoachFormModel coach);
+        void DeleteCoach(int coachId);
         IEnumerable<CoachListingServiceModel> AllCoaches();
         IEnumerable<CoachSquadServiceModel> AllSquads();
       

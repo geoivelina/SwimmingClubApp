@@ -18,12 +18,10 @@ namespace SwimmingClubApp.Data.Models
 
 
         [MaxLength(ContactPersonNameMaxLength)]
-
         public string ContactPersonName { get; set; } = null!;
 
 
         [MaxLength(ContactPersonNameMaxLength)]
-
         public string RelationshipToSwimmer { get; set; } = null!;
 
         [Required]

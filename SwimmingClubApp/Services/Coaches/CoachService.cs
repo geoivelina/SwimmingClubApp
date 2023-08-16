@@ -42,7 +42,7 @@ namespace SwimmingClubApp.Services.Coaches
             return newCoach.Id;
         }
 
-        public void Edit(int id, CoachFormModel coach)
+        public void EditCoach(int id, CoachFormModel coach)
         {
             var toEdit = this.data.Coaches.Find(id);
 
@@ -54,7 +54,7 @@ namespace SwimmingClubApp.Services.Coaches
 
             this.data.SaveChanges();
         }
-        public void Delete(int id)
+        public void DeleteCoach(int id)
         {
             var toDelete = this.data.Coaches.Find(id);
             toDelete.IsAvtive = false;
