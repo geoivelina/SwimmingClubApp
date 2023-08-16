@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingClubApp.Controllers;
 
-namespace SwimmingClubApp.Test.Controllers
+namespace SwimmingClubApp.Tests.Controllers
 {
     public class HomeControllerTests
     {

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SwimmingClubApp.Models;
-using System.Diagnostics;
 
 using static SwimmingClubApp.Areas.Admin.AdminConstants;
 

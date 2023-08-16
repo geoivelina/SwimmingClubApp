@@ -5,8 +5,9 @@ namespace SwimmingClubApp.Tests.Data
 {
     public static class Products
     {
-        public static IEnumerable<Product> ProductsData
-            => new List<Product>()
+        public static IEnumerable<Product> ProductsData()
+        {
+            var products = new List<Product>()
             {
                 new Product()
             {
@@ -43,6 +44,8 @@ namespace SwimmingClubApp.Tests.Data
                     }
                 }
             };
+            return products;
+        }
     }
 }
 

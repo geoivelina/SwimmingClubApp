@@ -25,10 +25,6 @@ namespace SwimmingClubApp.Tests.Services
         [Test]
         public void CreateCoachWithCorrectDataShouldCreateNewCoachCorrectly()
         {
-            
-            var coachService = new CoachService(data, mapper);
-
-
             var coachFullName = "Coach Name";
             var coachEmail = "coach@mail.com";
             var coachImage = "http://coachimg.com";

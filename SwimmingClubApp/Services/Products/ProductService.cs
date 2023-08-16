@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using SwimmingClubApp.Data;
 using SwimmingClubApp.Data.Models;
 using SwimmingClubApp.Infrastructure.Mapping;
@@ -22,12 +21,7 @@ namespace SwimmingClubApp.Services.Products
         }
 
         //Kenov:Do Not Use AutoMapper in Create& Edit Methods
-        public SizeOption SetSizeOptions(int id)
-        {
-            var size = this.data.SizeOptions.Where(s => s.Id == id).FirstOrDefault();
-            return size;
-
-        }
+       
 
         //TODO: ADDING SIZES IS BROKEN. WHY? ERROR: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_ProductSize_SizeOptions_SizeOptionId". The conflict occurred in database "SwimmingClubApp", table "dbo.SizeOptions", column 'Id'.
         public int CreateProduct(ProductFormModel input, List<int> sizes)
@@ -81,12 +75,12 @@ namespace SwimmingClubApp.Services.Products
             return product.Id;
         }
 
-        public ProductServiceModel ProductById(int id)
-        {
-            return this.data.Products
-                  .To<ProductServiceModel>()
-                  .SingleOrDefault(p => p.Id == id);
-        }
+        //public ProductServiceModel ProductById(int id)
+        //{
+        //    return this.data.Products
+        //          .To<ProductServiceModel>()
+        //          .SingleOrDefault(p => p.Id == id);
+        //}
 
         //TODO: FINISH MAPPING HERE
         public ProductDetailsServiceModel ProductDetails(int id)
@@ -148,18 +142,7 @@ namespace SwimmingClubApp.Services.Products
                .Skip((currentPage - 1) * productsPerPage)
                .Take(productsPerPage)
                .ProjectTo<ProductServiceModel>(this.mapper.ConfigurationProvider)
-               //.ProjectTo<ProductSizeServiceModel>(this.mapper.ConfigurationProvider)
-                //.Select(p => new ProductServiceModel
-                //{
-                //    Id = p.Id,
-                //    Image = p.Image,
-                //    Name = p.Name,
-                //    Price = p.Price,
-                //    ProductCategoryId = p.ProductCategoryId,
-                //    IsActive = p.IsAvtive,
-                //    Sizes = p.Sizes
-                //})
-                .ToList();
+               .ToList();
             
             var totalProducts = queryProduct.Count();
             return new ProductQueryServiceModel
@@ -168,28 +151,20 @@ namespace SwimmingClubApp.Services.Products
                 TotalProducts = totalProducts
             };
         }
-        public IEnumerable<ProductSize> AllSizes(List<int> sizeList)
-        {
-
-            var list = new List<ProductSize>();
-            foreach (var size in sizeList)
-            {
-                var sizeoption = this.data.SizeOptions.ToList().FirstOrDefault(s => s.Id == size);
-                list.Add(new ProductSize
-                {
-                    Id = sizeoption.Id,
-                });
-            }
-            return list;
-        }
-        public void SetSizesToProduct(Product product, int id)
-        {
-            //var list = this.data.SizeOptions.Where(s => s.Id == id).Select( x=> new )
-            //product.Sizes = .ToList();
-            //invoice.Orders = this.data.Orders
-            //    .Where(o => o.IssuerId == invoice.ClientId && o.StatusId == 1)
-            //    .ToList();
-        }
+        //public IEnumerable<ProductSize> AllSizes(List<int> sizeList)
+        //{
+        //    var list = new List<ProductSize>();
+        //    foreach (var size in sizeList)
+        //    {
+        //        var sizeoption = this.data.SizeOptions.ToList().FirstOrDefault(s => s.Id == size);
+        //        list.Add(new ProductSize
+        //        {
+        //            Id = sizeoption.Id,
+        //        });
+        //    }
+        //    return list;
+        //}
+        
         public IEnumerable<ProductCategoryServiceModel> AllProductCategories()
         {
             var productCat = this.data
